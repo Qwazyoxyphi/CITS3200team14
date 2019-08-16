@@ -1,14 +1,13 @@
 <template>
   <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">backendDemo</h1>
-      <h2 class="subtitle">My priceless Nuxt.js project</h2>
-      <div class="links">
-        <a href="https://nuxtjs.org/" target="_blank" class="button--green">Documentation</a>
-        <a href="https://github.com/nuxt/nuxt.js" target="_blank" class="button--grey">GitHub</a>
-      </div>
-    </div>
+    <form name="contact" action method="post">
+      <label class="form-label" for="user">User:</label>
+      <input class="form-field" name="user" id="user" />
+
+      <label class="form-label" for="password">Password:</label>
+      <textarea class="form-field" name="password" id="password"></textarea>
+      <input class="form-button" type="submit" value="Send message" />
+    </form>
   </div>
 </template>
 
@@ -16,9 +15,7 @@
 import Logo from "~/components/Logo.vue";
 
 export default {
-  components: {
-    Logo
-  }
+  components: {}
 };
 </script>
 
