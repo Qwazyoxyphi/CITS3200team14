@@ -1,8 +1,8 @@
 <template>
   <div>
     <AppSection
-      title="Cosines Angle Sum and Difference Identity"
-      color="green"
+      title="hello"
+      color="blue"
     >
 
       <AppModal :mini-player="true">
