@@ -9,11 +9,28 @@
     </div>
     <img src="@/static/masterlyLogo.png">
     <div class="spacer" />
-    <img
+    <!-- NAV LINKS -->
+    <nav class="navigation-items">
+      <ul class="nav-list">
+        <li class="nav-item">
+          <nuxt-link to="/">Home</nuxt-link>
+        </li>
+        <li class="nav-item">
+          <nuxt-link to="/signin-signup">Sign in / Sign up</nuxt-link>
+        </li>
+        <li 
+          v-show="false" 
+          class="nav-item">
+          <nuxt-link to="/logout">Log Out</nuxt-link>
+        </li>
+      </ul>
+    </nav>
+    <!-- end NAV LINKS -->
+    <!--<img
       src="@/assets/images/Icons/profileIcon.svg"
       class="profile-image"
       @click="toggleRightSidebar"
-    >
+    >-->
   </header>
 </template>
 
@@ -86,5 +103,58 @@ img {
   border-radius: 20px;
   cursor: pointer;
 }
+
+
+/* Nav-Links */
+.navigation-items {
+  display: none;
+}
+
+@media (min-width: 1000px) {
+  .navigation-items {
+    display: block;
+  }
+}
+
+.nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+/* Stylig and Animating nav-items */
+.nav-item a {
+  text-decoration: none;
+  color: rgb(54, 54, 54);
+}
+
+.nav-item {
+  margin: 0 10px;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.nav-item:hover {
+  cursor: pointer;
+}
+
+.nav-item::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #2caaca;
+  transition: width .3s;
+}
+
+.nav-item:hover::after {
+  width: 100%;
+}
+
+.nuxt-link-exact-active {
+  border-bottom: 3px solid #2caaca;
+}
+/* ----- nav-items ------ */
 
 </style>
