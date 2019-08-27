@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <p>this is text</p> 
+    <h1>This is the Folders Index Page</h1> 
     <FolderTile
       fullname="item.fullname"
       jobtitle="item.jobtitle" 
@@ -13,9 +13,9 @@
     <AppModal 
       v-if="folderFlag"
       @exitModal="toggleCreateFolder()">
-      <FolderForm />
-    </AppModal>
+      <FolderForm @FolderCreate="addFolder"/>
 
+    </AppModal>
 
   </div>
 </template>
@@ -27,6 +27,7 @@ import FolderTile from '@/components/FolderPage/FolderTile'
 import TheCreateFolder from '@/components/FolderPage/TheCreateFolder'
 import AppModal from '@/components/Utils/AppModal'
 import FolderForm from '@/components/FolderPage/CreateFolder/FolderForm'
+import axios from 'axios'
 
 export default {
   components: {
@@ -45,6 +46,15 @@ export default {
   methods: {
     toggleCreateFolder() {
       this.folderFlag = !this.folderFlag
+    },
+    addFolder(folderData) {
+      axios
+        .post(
+          'https://team-14-ontologies.firebaseio.com/folders.json',
+          folderData
+        )
+        .then(result => console.log(result))
+        .catch(e => console.log(e))
     }
   }
 }
