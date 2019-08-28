@@ -6,21 +6,24 @@
       <form 
         class="login-form" 
         method="post" 
-        novalidate>
+        novalidate
+        @submit.prevent="onSave">
         <div class="login-container">
           <h2>Sign up</h2>
           <b>Username.</b>
           <input 
+            v-model="userCredentials.username"
             type="text" 
             name="username">
           <b>Password.</b>
-          <input 
+          <input
+            v-model="userCredentials.password" 
             type="password" 
-            name="username">
+            name="password">
           <b>Confirm password.</b>
           <input 
             type="password" 
-            name="username">
+            name="password">
           <button 
             class="login-but"
             type="submit">Sign Up</button>
@@ -33,6 +36,33 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  props: {
+    user: {
+      default: null,
+      type: Object,
+      required: false
+    }
+  },
+  data() {
+    return {
+      userCredentials: this.user
+        ? { ...this.user }
+        : {
+            username: '',
+            password: ''
+          }
+    }
+  },
+  methods: {
+    onSave() {
+      this.$emit('submit', this.userCredentials)
+    }
+  }
+}
+</script>
 
 <style lang="Css" scoped>
 #login-box {

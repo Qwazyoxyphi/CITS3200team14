@@ -5,13 +5,15 @@
       @toggleRegistration="toggleRegister()" />
     <signupForm 
       v-if="!flag"
-      @toggleRegistration="toggleRegister()" />
+      @toggleRegistration="toggleRegister()" 
+      @submit="onSubmitted"/>
   </div>
 </template>
 
 <script>
 import signinForm from '@/components/signin-signup/signinForm'
 import signupForm from '@/components/signin-signup/signupForm'
+import axios from 'axios'
 
 export default {
   components: {
@@ -26,6 +28,15 @@ export default {
   methods: {
     toggleRegister() {
       this.flag = !this.flag
+    },
+    onSubmitted(userData) {
+      axios
+        .post(
+          'https://team-14-ontologies.firebaseio.com/NewUser.json',
+          userData
+        )
+        .then(result => console.log(result))
+        .catch(e => console.log(e))
     }
   }
 }
