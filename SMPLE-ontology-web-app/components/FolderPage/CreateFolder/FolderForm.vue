@@ -40,7 +40,6 @@ export default {
       type: Object,
       required: false,
       default: () => ({
-        //needed
         folderName: '',
         folderDesc: ''
       })
@@ -57,17 +56,17 @@ export default {
     }
   },
   computed: {
-    //with prop default to submit data out of comp
     afolder() {
       return { ...this.newFolder, ...this.folder }
     }
   },
   methods: {
     onFolderSubmit() {
-      this.$emit('FolderCreate', this.newFolder)
+      //on submit take the user into new folder
+      this.$router.push('/folders/' + this.newFolder.folderName)
     },
     onCancel() {
-      this.$router.push('/folders') //broken
+      this.$emit('exitModal')
     }
   }
 }

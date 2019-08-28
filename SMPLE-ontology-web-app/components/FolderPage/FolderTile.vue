@@ -21,7 +21,7 @@
         y="-20.57"/>
       <text 
         class="cls-2" 
-        transform="translate(2.19 17.76)">{{ fullname }}
+        transform="translate(2.19 17.76)">{{ folderName }}
       </text>
     </svg>
   
@@ -32,18 +32,18 @@
 export default {
   name: `FolderTile`,
   props: {
-    fullname: {
+    folderName: {
       type: String,
       required: true
     },
-    jobtitle: {
-      type: String,
-      required: true
-    },
-    imagelink: {
+    folderDesc: {
       type: String,
       required: true
     }
+    //imagelink: {
+    //type: String,
+    //required: true
+    //}
   }
 }
 </script>

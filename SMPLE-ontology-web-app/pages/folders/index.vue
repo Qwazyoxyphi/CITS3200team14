@@ -2,41 +2,47 @@
   <div>
 
     <h1>This is the Folders Index Page</h1> 
-    <FolderTile
-      fullname="item.fullname"
-      jobtitle="item.jobtitle" 
-      imagelink="" />
-
+    <FolderList :folders="loadFolders" />
     <TheCreateFolder @createFolder="toggleCreateFolder()" />
     <div v-if="folderFlag">hello world</div>
 
     <AppModal 
       v-if="folderFlag"
       @exitModal="toggleCreateFolder()">
-      <FolderForm @FolderCreate="addFolder"/>
-
+      <FolderForm 
+        @FolderCreate="addFolder"
+        @exitModal="toggleCreateFolder()"
+      />
     </AppModal>
 
   </div>
 </template>
 
 <script>
-import AppSection from '@/components/Utilities/AppSection'
-import AppSubtitle from '@/components/Utilities/AppSubtitle'
-import FolderTile from '@/components/FolderPage/FolderTile'
 import TheCreateFolder from '@/components/FolderPage/TheCreateFolder'
 import AppModal from '@/components/Utils/AppModal'
 import FolderForm from '@/components/FolderPage/CreateFolder/FolderForm'
+import FolderList from '@/components/FolderPage/FolderList'
+
 import axios from 'axios'
 
 export default {
+  asyncData(context) {
+    //load folders onto folderpage
+    return axios
+      .get('https://team-14-ontologies.firebaseio.com/folders.json')
+      .then(res => {
+        return {
+          loadFolders: res.data
+        }
+      })
+      .catch(e => context.log(e))
+  },
   components: {
-    AppSubtitle,
-    AppSection,
-    FolderTile,
     TheCreateFolder,
     AppModal,
-    FolderForm
+    FolderForm,
+    FolderList
   },
   data() {
     return {
@@ -48,6 +54,7 @@ export default {
       this.folderFlag = !this.folderFlag
     },
     addFolder(folderData) {
+      //add a new folder to the database
       axios
         .post(
           'https://team-14-ontologies.firebaseio.com/folders.json',
