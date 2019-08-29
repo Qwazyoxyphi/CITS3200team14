@@ -1,12 +1,12 @@
 <template>
   <div>
     <signinForm 
-      v-if="flag"
+      v-if="flag" 
       @toggleRegistration="toggleRegister()" />
     <signupForm 
-      v-if="!flag"
+      v-if="!flag" 
       @toggleRegistration="toggleRegister()" 
-      @submit="onSubmitted"/>
+      @submit="onSubmit" />
   </div>
 </template>
 
@@ -29,13 +29,15 @@ export default {
     toggleRegister() {
       this.flag = !this.flag
     },
-    onSubmitted(userData) {
-      axios
-        .post(
-          'https://team-14-ontologies.firebaseio.com/NewUser.json',
+    onSubmit(userData) {
+      this.$axios
+        .$post(
+          'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyD-Eq5EYc7CTwsnIncTCbMkGhtala1izMg',
           userData
         )
-        .then(result => console.log(result))
+        .then(result => {
+          console.log(result)
+        })
         .catch(e => console.log(e))
     }
   }
@@ -68,7 +70,8 @@ export default {
   align-content: center;
 }
 
-input[type=text], input[type=password] {
+input[type='text'],
+input[type='password'] {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -77,7 +80,8 @@ input[type=text], input[type=password] {
   box-sizing: border-box;
 }
 
-input[type=text]:focus, input[type=password]:focus {
+input[type='text']:focus,
+input[type='password']:focus {
   outline: none !important;
   border: 1px solid #2caaca;
   box-shadow: 0 0 3px rgba(44, 170, 202, 0.9);
@@ -105,7 +109,8 @@ button:hover {
   cursor: pointer;
 }
 
-.remember, .psw {
+.remember,
+.psw {
   color: #2caaca;
 }
 
@@ -119,6 +124,6 @@ button:hover {
 }
 
 .login-but {
-    font-size: 1.3em;
+  font-size: 1.3em;
 }
 </style>
