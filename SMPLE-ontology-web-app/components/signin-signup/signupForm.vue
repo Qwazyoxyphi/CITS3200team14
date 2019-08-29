@@ -10,12 +10,12 @@
         @submit.prevent="onSave">
         <div class="login-container">
           <h2>Sign up</h2>
-          <b>Username.</b>
+          <b>Email:</b>
           <input 
-            v-model="userCredentials.username"
+            v-model="userCredentials.email"
             type="text" 
-            name="username">
-          <b>Password.</b>
+            name="email">
+          <b>Password:</b>
           <input
             v-model="userCredentials.password" 
             type="password" 
@@ -51,8 +51,9 @@ export default {
       userCredentials: this.user
         ? { ...this.user }
         : {
-            username: '',
-            password: ''
+            email: '',
+            password: '',
+            returnSecureToken: true
           }
     }
   },
