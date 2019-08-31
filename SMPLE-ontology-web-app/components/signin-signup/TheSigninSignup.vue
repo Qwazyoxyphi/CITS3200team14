@@ -39,18 +39,11 @@ export default {
         .then(result => {
           console.log(result)
         })
-        .catch(e => console.log(e))
     },
     onSubmit2(userData) {
-      this.$axios
-        .$post(
-          'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyD-Eq5EYc7CTwsnIncTCbMkGhtala1izMg',
-          userData
-        )
-        .then(result => {
-          console.log(result)
-        })
-        .catch(e => console.log(e))
+      this.$store.dispatch('authenticateUser', userData).then(() => {
+        this.$router.push('/folders')
+      })
     }
   }
 }
