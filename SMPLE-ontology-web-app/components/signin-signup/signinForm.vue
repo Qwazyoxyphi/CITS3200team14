@@ -48,8 +48,7 @@ export default {
         ? { ...this.user }
         : {
             email: '',
-            password: '',
-            returnSecureToken: true
+            password: ''
           }
     }
   },
