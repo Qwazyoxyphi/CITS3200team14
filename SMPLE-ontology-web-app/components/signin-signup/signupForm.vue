@@ -18,7 +18,7 @@
           <b>Password:</b>
           <input
             v-model="userCredentials.password" 
-            type="password" 
+            type="password"
             name="password">
           <b>Confirm password.</b>
           <input 
@@ -66,6 +66,7 @@ export default {
 </script>
 
 <style lang="Css" scoped>
+
 #login-box {
   display: flex;
   justify-content: center;
