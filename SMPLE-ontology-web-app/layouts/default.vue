@@ -27,7 +27,7 @@ export default {
   },
   computed: {
     isLeftSidebar: function() {
-      return this.$store.getters.getLeftSidebar
+      return !this.$store.getters.getLeftSidebar
     },
     isRightSidebar: function() {
       return this.$store.getters.getRightSidebar
