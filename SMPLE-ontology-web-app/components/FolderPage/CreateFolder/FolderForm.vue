@@ -1,35 +1,76 @@
 <template>
   <div>
-    <form 
+    <form
       class="login-form" 
-      method="post" 
-      novalidate>
+      @submit.prevent="onFolderSubmit">
       <div class="login-container">
         <h2>Create Folder</h2>
-        <b>Folder Name.</b>
-        <input 
-          type="text" 
-          name="username" >
-        <b>Description.</b>
-        <input 
-          type="text"
-          name="username"
-        >
-        <textarea 
-          rows="4" 
-          cols="50">
-          At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies. 
-        </textarea>
-        <button 
+        <AppControlInput 
+          v-model="newFolder.folderName"
+          placeholder="FolderName"
+        ><b>Folder Name:</b><br> </AppControlInput>
+        <AppControlInput          
+          v-model="newFolder.folderDesc"
+          control-type="textarea"
+          placeholder="Description of Folder Contents"
+        ><b>Description:</b><br></AppControlInput>
+        <AppButton 
           class="login-but" 
-          type="submit">Create</button>
-        <button 
+          type="submit">Create</AppButton>
+        <AppButton 
           class="login-but" 
-          type="submit">Cancel</button>
+          type="button" 
+          @click="onCancel">Cancel</AppButton>
       </div>
     </form>
   </div>
 </template>
+
+<script>
+import AppControlInput from '@/components/Utils/AppControlInput'
+import AppButton from '@/components/Utils/AppButton'
+export default {
+  name: 'FolderForm',
+  components: {
+    AppButton,
+    AppControlInput
+  },
+  props: {
+    folder: {
+      type: Object,
+      required: false,
+      default: () => ({
+        folderName: '',
+        folderDesc: ''
+      })
+    }
+  },
+  data() {
+    return {
+      newFolder: this.folder
+        ? { ...this.folder }
+        : {
+            folderName: '',
+            folderDesc: ''
+          }
+    }
+  },
+  computed: {
+    afolder() {
+      return { ...this.newFolder, ...this.folder }
+    }
+  },
+  methods: {
+    onFolderSubmit() {
+      //on submit take the user into new folder
+      this.$router.push('/folders/' + this.newFolder.folderName)
+    },
+    onCancel() {
+      this.$emit('exitModal')
+    }
+  }
+}
+</script>
 
 <style lang="Css" scoped>
 #login-box {
@@ -54,6 +95,10 @@
   align-items: center;
   justify-content: center;
   align-content: center;
+}
+
+textarea{ 
+  resize:none;
 }
 
 input[type='text'],

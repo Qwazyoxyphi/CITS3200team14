@@ -4,7 +4,8 @@ const createStore = () => {
   return new Vuex.Store({
     state: {
       leftSidebar: true,
-      rightSidebar: false
+      rightSidebar: false,
+      token: null
     },
     mutations: {
       setLeftSidebar(state) {
@@ -12,6 +13,9 @@ const createStore = () => {
       },
       setRightSidebar(state) {
         state.rightSidebar = !state.rightSidebar
+      },
+      setToken(state, token) {
+        state.token = token
       }
     },
     actions: {
@@ -20,6 +24,25 @@ const createStore = () => {
       },
       toggleRightSidebar({ commit }) {
         commit('setRightSidebar')
+      },
+      authenticateUser(vuexContext, authData) {
+        return this.$axios
+          .$post(
+            'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyD-Eq5EYc7CTwsnIncTCbMkGhtala1izMg',
+            {
+              email: authData.email,
+              password: authData.password,
+              returnSecureToken: true
+            }
+          )
+          .then(result => {
+            console.log(result)
+            vuexContext.commit('setToken', result.idToken)
+          })
+          .catch(error => {
+            alert('Username or Password is incorrect.')
+            commit('SET_ERROR', error)
+          })
       }
     },
     getters: {

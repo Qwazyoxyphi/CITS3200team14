@@ -1,10 +1,12 @@
 <template>
   <div>
     <signinForm 
-      v-if="flag"
+      v-if="flag" 
+      @submit="onSubmit2"
       @toggleRegistration="toggleRegister()" />
     <signupForm 
-      v-if="!flag"
+      v-if="!flag" 
+      @submit="onSubmit"
       @toggleRegistration="toggleRegister()" />
   </div>
 </template>
@@ -12,6 +14,7 @@
 <script>
 import signinForm from '@/components/signin-signup/signinForm'
 import signupForm from '@/components/signin-signup/signupForm'
+import axios from 'axios'
 
 export default {
   components: {
@@ -26,6 +29,21 @@ export default {
   methods: {
     toggleRegister() {
       this.flag = !this.flag
+    },
+    onSubmit(userData) {
+      this.$axios
+        .$post(
+          'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyD-Eq5EYc7CTwsnIncTCbMkGhtala1izMg',
+          userData
+        )
+        .then(result => {
+          console.log(result)
+        })
+    },
+    onSubmit2(userData) {
+      this.$store.dispatch('authenticateUser', userData).then(() => {
+        this.$router.push('/folders')
+      })
     }
   }
 }
@@ -57,7 +75,8 @@ export default {
   align-content: center;
 }
 
-input[type=text], input[type=password] {
+input[type='text'],
+input[type='password'] {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -66,7 +85,8 @@ input[type=text], input[type=password] {
   box-sizing: border-box;
 }
 
-input[type=text]:focus, input[type=password]:focus {
+input[type='text']:focus,
+input[type='password']:focus {
   outline: none !important;
   border: 1px solid #2caaca;
   box-shadow: 0 0 3px rgba(44, 170, 202, 0.9);
@@ -94,7 +114,8 @@ button:hover {
   cursor: pointer;
 }
 
-.remember, .psw {
+.remember,
+.psw {
   color: #2caaca;
 }
 
@@ -108,6 +129,6 @@ button:hover {
 }
 
 .login-but {
-    font-size: 1.3em;
+  font-size: 1.3em;
 }
 </style>
