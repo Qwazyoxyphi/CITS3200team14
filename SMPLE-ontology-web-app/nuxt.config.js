@@ -61,7 +61,7 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    {src: '~plugins/core-components.js', ssr: true}
+    '~plugins/core-components.js'
   ],
 
   /*
