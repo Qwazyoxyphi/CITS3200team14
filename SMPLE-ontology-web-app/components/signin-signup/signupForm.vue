@@ -17,10 +17,15 @@
             name="email">
           <b>Password:</b>
           <input
+            v-validate=" 'min:5' "
             v-model="userCredentials.password" 
             type="password"
             name="password">
-          <b>Confirm password.</b>
+          <p 
+            v-if="errors.has('password')">
+            {{ errors.first('password') }}
+          </p>
+          <b>Confirm password:</b>
           <input 
             type="password" 
             name="password">
