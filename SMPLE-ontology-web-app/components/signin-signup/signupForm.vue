@@ -12,13 +12,17 @@
           <h2>Sign up</h2>
           <b>Email:</b>
           <input
-            v-validate="" 
+            v-validate="'email'" 
             v-model="userCredentials.email"
             type="text" 
             name="email">
+          <p 
+            v-if="errors.has('email')">
+            {{ errors.first('email') }}
+          </p>
           <b>Password:</b>
           <input
-            v-validate=" 'min:5' "
+            v-validate="'required|min:5|max:15' "
             v-model="userCredentials.password" 
             type="password"
             name="password">
@@ -27,9 +31,14 @@
             {{ errors.first('password') }}
           </p>
           <b>Confirm password:</b>
-          <input 
+          <input
+            v-validate=" 'required|confirmed:password'" 
             type="password" 
             name="password">
+          <p 
+            v-if="errors.has('password')">
+            {{ errors.first('password') }}
+          </p>
           <button 
             class="login-but"
             type="submit">Sign Up</button>
@@ -65,7 +74,12 @@ export default {
   },
   methods: {
     onSave() {
-      this.$emit('submit', this.userCredentials)
+      this.$validator.validateAll()
+      if (this.errors.any()) {
+        alert('Make sure all fields are valid')
+      } else {
+        this.$emit('submit', this.userCredentials)
+      }
     }
   }
 }
