@@ -81,6 +81,7 @@ module.exports = {
     '@nuxtjs/axios'
   ],
 
+
   axios: {
     baseURL:
       process.env.BASE_URL || 'https://team-14-ontologies.firebaseio.com/'
