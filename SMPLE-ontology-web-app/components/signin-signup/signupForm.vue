@@ -11,7 +11,8 @@
         <div class="login-container">
           <h2>Sign up</h2>
           <b>Email:</b>
-          <input 
+          <input
+            v-validate="" 
             v-model="userCredentials.email"
             type="text" 
             name="email">
