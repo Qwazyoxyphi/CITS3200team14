@@ -1,19 +1,16 @@
 <template>
   <div>
 
-    <h1>This is the Folders Index Page</h1> 
-    <FolderList :folders="loadedFolders" />
-    <TheCreateFolder @createFolder="toggleCreateFolder()" />
-    <div v-if="folderFlag">hello world</div>
+    <AppSection
+      title="hello"
+      color="blue"
+    >
 
-    <AppModal 
-      v-if="folderFlag"
-      @exitModal="toggleCreateFolder()">
-      <FolderForm 
-        @FolderCreate="addFolder"
-        @exitModal="toggleCreateFolder()"
-      />
-    </AppModal>
+      <h1>This is the Folders Index Page</h1> 
+      <FolderList :folders="loadedFolders" />
+      <!--<TheCreateFolder @createFolder="toggleCreateFolder()" />-->
+      <div>documents > biology</div>
+    </AppSection>
 
   </div>
 </template>
@@ -23,6 +20,7 @@ import TheCreateFolder from '@/components/FolderPage/TheCreateFolder'
 import AppModal from '@/components/Utils/AppModal'
 import FolderForm from '@/components/FolderPage/CreateFolder/FolderForm'
 import FolderList from '@/components/FolderPage/FolderList'
+import AppSection from '@/components/Utils/AppSection'
 
 import axios from 'axios'
 
@@ -42,7 +40,8 @@ export default {
     TheCreateFolder,
     AppModal,
     FolderForm,
-    FolderList
+    FolderList,
+    AppSection
   },
   data() {
     return {

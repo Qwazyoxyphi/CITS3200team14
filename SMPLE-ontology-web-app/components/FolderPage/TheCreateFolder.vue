@@ -1,12 +1,19 @@
 <template>
   <div 
     class="box"
-    @click="$emit('createFolder')" /> 
+    @click="$emit('createFolder')">
+    <add />
+  </div> 
 </template>
 
 <script>
+import add from '@/components/Utils/SVG/add'
+
 export default {
-  name: `TheCreateFolder`
+  name: `TheCreateFolder`,
+  components: {
+    add
+  }
 }
 </script>
 
@@ -17,16 +24,6 @@ export default {
   /*max-width: 100%;  so it doesnt scale up*/
   width: 100%;
   height: auto;
-}
-
-.box {
-  max-width: 320px;
-  width: 300px;
-  height: 200px;
-  background-color: red;
-  cursor: pointer;
-  position: relative;
-  border: solid 1px #efefef;
 }
 
 .flexcontainer {
