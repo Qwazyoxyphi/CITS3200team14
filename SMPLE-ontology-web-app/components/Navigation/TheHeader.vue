@@ -1,42 +1,50 @@
 <template>
-  <header>
-    <div
-      class="drawer-toggle"
-      @click="toggleLeftSidebar">
-      <div class="bar"/>
-      <div class="bar"/>
-      <div class="bar"/>
-    </div>
-    <img src="@/static/masterlyLogo.png">
-    <div class="spacer" />
-    <!-- NAV LINKS -->
-    <nav class="navigation-items">
-      <ul class="nav-list">
-        <li class="nav-item">
-          <nuxt-link to="/">Home</nuxt-link>
-        </li>
-        <li class="nav-item">
-          <nuxt-link to="/signin-signup">Sign in / Sign up</nuxt-link>
-        </li>
-        <li 
-          v-show="false" 
-          class="nav-item">
-          <nuxt-link to="/logout">Log Out</nuxt-link>
-        </li>
-      </ul>
-    </nav>
-    <!-- end NAV LINKS -->
-    <!--<img
+  <div>
+    <header>
+      <div 
+        class="drawer-toggle" 
+        @click="toggleLeftSidebar">
+        <div class="bar" />
+        <div class="bar" />
+        <div class="bar" />
+      </div>
+      <img src="@/static/masterlyLogo.png">
+      <div class="spacer" />
+      <!-- NAV LINKS -->
+      <nav class="navigation-items">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <nuxt-link to="/">Home</nuxt-link>
+          </li>
+          <li class="nav-item">
+            <nuxt-link to="/signin-signup">Sign in / Sign up</nuxt-link>
+          </li>
+          <li 
+            v-show="false" 
+            class="nav-item">
+            <nuxt-link to="/logout">Log Out</nuxt-link>
+          </li>
+        </ul>
+      </nav>
+      <!-- end NAV LINKS -->
+      <!--<img
       src="@/assets/images/Icons/profileIcon.svg"
       class="profile-image"
       @click="toggleRightSidebar"
-    >-->
-  </header>
+      >-->
+    </header>
+    <TheIndicator />
+  </div>
 </template>
 
 <script>
+import TheIndicator from '@/components/Navigation/TheIndicator'
+
 export default {
   name: 'TheHeader',
+  components: {
+    TheIndicator
+  },
   computed: {
     title: function() {
       return this.$store.state.selected.currentTopic.topic
@@ -54,7 +62,6 @@ export default {
 </script>
 
 <style lang="css" scoped>
-
 header {
   background-color: white;
   width: 100%;
@@ -104,7 +111,6 @@ img {
   cursor: pointer;
 }
 
-
 /* Nav-Links */
 .navigation-items {
   display: none;
@@ -145,7 +151,7 @@ img {
   width: 0;
   height: 2px;
   background: #2caaca;
-  transition: width .3s;
+  transition: width 0.3s;
 }
 
 .nav-item:hover::after {
@@ -156,5 +162,14 @@ img {
   border-bottom: 3px solid #2caaca;
 }
 /* ----- nav-items ------ */
-
+.header-background {
+  height: 70px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: white;
+  z-index: 0;
+  border-bottom: 1px solid #e5e5e5;
+}
 </style>
