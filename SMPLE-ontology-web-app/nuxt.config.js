@@ -76,8 +76,11 @@ module.exports = {
   /*
   ** Nuxt.js modules
   */
+ 
+  modules: [
+    '@nuxtjs/axios'
+  ],
 
-  modules: ['@nuxtjs/axios'],
 
   axios: {
     baseURL:
