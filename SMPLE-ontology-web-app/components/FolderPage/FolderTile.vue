@@ -88,7 +88,7 @@
           transform="translate(77.34 625.95)">
           {{ folderName }}
         </text>
-        <g @click="more()">
+        <g @click="more(id)">
           <path
             class="cls-2"
             d="M1132.34,411.35a1.17,1.17,0,1,0,1.17,1.17A1.17,1.17,0,0,0,1132.34,411.35Z"
@@ -152,6 +152,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: `FolderTile`,
   props: {
@@ -169,7 +170,17 @@ export default {
     }
   },
   methods: {
-    more() {
+    more(id) {
+      var folderdel = confirm(' Delete Folder? ')
+      if (folderdel == true) {
+        //delete folder
+        axios
+          .delete(
+            'https://team-14-ontologies.firebaseio.com/folders/' + id + '.json'
+          )
+          .then(result => console.log(result))
+          .catch(e => console.log(e))
+      }
       alert('hello')
     }
   }
