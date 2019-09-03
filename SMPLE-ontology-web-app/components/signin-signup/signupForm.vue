@@ -1,5 +1,9 @@
 <template>
   <div>
+    <header>
+      <script 
+        src = "https://www.google.com/recaptcha/api.js"/>
+    </header>
     <div 
       id="login-box" 
       class="questions-wrap flexbox box-active">
@@ -23,9 +27,11 @@
           <b>Password:</b>
           <input
             v-validate="'required|min:5|max:15' "
+            ref="password"
             v-model="userCredentials.password" 
             type="password"
-            name="password">
+            name="password"
+          >
           <p 
             v-if="errors.has('password')">
             {{ errors.first('password') }}
@@ -34,11 +40,16 @@
           <input
             v-validate=" 'required|confirmed:password'" 
             type="password" 
-            name="password">
+            name="confirmed_password"
+            data-vv-as="password"
+          >
           <p 
-            v-if="errors.has('password')">
-            {{ errors.first('password') }}
+            v-if="errors.has('confirmed_password')">
+            {{ errors.first('confirmed_password') }}
           </p>
+          <div 
+            class="g-recaptcha" 
+            data-sitekey="6LecTbYUAAAAABiiKGfi68gq_9qSi7P2dwt7_pB0"/>
           <button 
             class="login-but"
             type="submit">Sign Up</button>
@@ -77,6 +88,8 @@ export default {
       this.$validator.validateAll()
       if (this.errors.any()) {
         alert('Make sure all fields are valid')
+      } else if (grecaptcha.getResponse() == '') {
+        alert('Please fill in the recaptcha')
       } else {
         this.$emit('submit', this.userCredentials)
       }
