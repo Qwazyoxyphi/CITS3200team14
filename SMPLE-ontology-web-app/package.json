@@ -18,7 +18,7 @@
     "cross-env": "^5.2.0",
     "nuxt": "^2.8.1",
     "nuxt-validate": "^1.0.1",
-    "vee-validate": "^3.0.2"
+    "vee-validate": "^2.1.5"
   },
   "devDependencies": {
     "nodemon": "^1.11.0",
