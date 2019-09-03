@@ -61,14 +61,14 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '~plugins/core-components.js'
+    {src: '~plugins/core-components.js', ssr: true}
   ],
 
   /*
   ** Nuxt.js modules
   */
   modules: [
-    '@nuxtjs/axios',
+    '@nuxtjs/axios'
   ],
 
   axios: {
