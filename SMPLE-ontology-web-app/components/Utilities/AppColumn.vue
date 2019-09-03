@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: "AppColumn",
+  name: 'AppColumn',
   props: {
     align: {
       type: String,
@@ -23,15 +23,11 @@ export default {
     }
   },
   computed: {
-    style: function () {
+    style: function() {
       console.log(this.align)
       let align = this.align
-
-      if (align === 'start')
-        align = 'flex-start'
-      if (align === 'end')
-        align = 'flex-end'
-
+      if (align === 'start') align = 'flex-start'
+      if (align === 'end') align = 'flex-end'
       return {
         'align-self': align,
         'flex-basis': this.minWidth
@@ -42,11 +38,9 @@ export default {
 </script>
 
 <style scoped>
-
 .column {
   flex: 1 1;
   margin: 0 10px;
   flex-wrap: wrap;
 }
-
 </style>
