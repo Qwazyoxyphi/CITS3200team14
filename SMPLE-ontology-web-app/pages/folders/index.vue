@@ -2,7 +2,7 @@
   <div>
 
     <h1>This is the Folders Index Page</h1> 
-    <FolderList :folders="loadFolders" />
+    <FolderList :folders="loadedFolders" />
     <TheCreateFolder @createFolder="toggleCreateFolder()" />
     <div v-if="folderFlag">hello world</div>
 
@@ -27,17 +27,17 @@ import FolderList from '@/components/FolderPage/FolderList'
 import axios from 'axios'
 
 export default {
-  asyncData(context) {
-    //load folders onto folderpage
-    return axios
-      .get('https://team-14-ontologies.firebaseio.com/folders.json')
-      .then(res => {
-        return {
-          loadFolders: res.data
-        }
-      })
-      .catch(e => context.log(e))
-  },
+  //asyncData(context) {
+  //load folders onto folderpage
+  //  return axios
+  //    .get('https://team-14-ontologies.firebaseio.com/folders.json')
+  //    .then(res => {
+  //      return {
+  //        loadFolders: res.data
+  //      }
+  //    })
+  //    .catch(e => context.log(e))
+  //},
   components: {
     TheCreateFolder,
     AppModal,
@@ -47,6 +47,11 @@ export default {
   data() {
     return {
       folderFlag: false
+    }
+  },
+  computed: {
+    loadedFolders() {
+      return this.$store.getters.loadedFolders
     }
   },
   methods: {

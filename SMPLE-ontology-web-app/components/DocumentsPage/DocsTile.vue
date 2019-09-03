@@ -1,48 +1,42 @@
 <template>
-  <nuxt-link :to="'/folders/' + id"> <!--access individ folder contents-->
-    <div 
-      class="box"
-      @click="$emit('openModal')"> 
+  <div 
+    class="box"
+    @click="$emit('openModal')"> 
 
-      <svg 
-        id="Layer_1" 
-        data-name="Layer 1" 
-        xmlns="http://www.w3.org/2000/svg" 
-        viewBox="0 0 24 20">
-        <defs>
-          <style>.cls-1{fill-rule:evenodd;}.cls-2{font-size:2.76px;font-family:MyriadPro-Regular, Myriad Pro;}</style>
-        </defs>
-        <title>sample</title>
-        <path 
-          class="cls-1" 
-          d="M48.55,23.57h13v17h-24v-20h8Zm-10-2v18h22v-15H48.13l-3-3Z" 
-          transform="translate(-37.55 -20.57)"/>
-        <text 
-          x="-37.55" 
-          y="-20.57"/>
-        <text 
-          class="cls-2" 
-          transform="translate(2.19 17.76)">{{ folderName }}
-        </text>
-      </svg>
-    
-    </div>
-  </nuxt-link>
+    <svg 
+      id="Layer_1" 
+      data-name="Layer 1" 
+      xmlns="http://www.w3.org/2000/svg" 
+      viewBox="0 0 24 20">
+      <defs>
+        <style>.cls-1{fill-rule:evenodd;}.cls-2{font-size:2.76px;font-family:MyriadPro-Regular, Myriad Pro;}</style>
+      </defs>
+      <title>sample</title>
+      <path 
+        class="cls-1" 
+        d="M48.55,23.57h13v17h-24v-20h8Zm-10-2v18h22v-15H48.13l-3-3Z" 
+        transform="translate(-37.55 -20.57)"/>
+      <text 
+        x="-37.55" 
+        y="-20.57"/>
+      <text 
+        class="cls-2" 
+        transform="translate(2.19 17.76)">{{ documentName }}
+      </text>
+    </svg>
+  
+  </div>
 </template>
 
 <script>
 export default {
-  name: `FolderTile`,
+  name: `DocsTile`,
   props: {
-    id: {
+    documentName: {
       type: String,
       required: true
     },
-    folderName: {
-      type: String,
-      required: true
-    },
-    folderDesc: {
+    documentDesc: {
       type: String,
       required: true
     }

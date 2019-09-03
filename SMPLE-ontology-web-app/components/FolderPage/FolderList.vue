@@ -3,6 +3,7 @@
     <FolderTile
       v-for="folder in folders"
       :key="folder.id"
+      :id="folder.id"
       :folder-name="folder.folderName"
       :folder-desc="folder.folderDesc"/>
   </section>
@@ -17,7 +18,7 @@ export default {
   },
   props: {
     folders: {
-      type: Object,
+      type: Array,
       required: true
     }
   }

@@ -41,7 +41,8 @@ export default {
       required: false,
       default: () => ({
         folderName: '',
-        folderDesc: ''
+        folderDesc: '',
+        folderDocs: ''
       })
     }
   },
@@ -51,7 +52,8 @@ export default {
         ? { ...this.folder }
         : {
             folderName: '',
-            folderDesc: ''
+            folderDesc: '',
+            folderDocs: ''
           }
     }
   },
@@ -62,7 +64,7 @@ export default {
   },
   methods: {
     onFolderSubmit() {
-      //on submit take the user into new folder
+      //on submit take the user into new folder 'to change'
       this.$router.push('/folders/' + this.newFolder.folderName)
     },
     onCancel() {
