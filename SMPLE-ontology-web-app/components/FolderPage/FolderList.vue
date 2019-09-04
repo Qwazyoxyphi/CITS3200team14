@@ -22,14 +22,14 @@
 import axios from 'axios'
 import FolderTile from '@/components/FolderPage/FolderTile'
 import AppModal from '@/components/Utils/AppModal'
-import FolderForm from '@/components/FolderPage/CreateFolder/FolderForm'
+import TheFolderForm from '@/components/FolderPage/CreateFolder/TheFolderForm'
 import TheCreateFolder from '@/components/FolderPage/TheCreateFolder'
 
 export default {
   components: {
     FolderTile,
     AppModal,
-    FolderForm,
+    TheFolderForm,
     TheCreateFolder
   },
   props: {
