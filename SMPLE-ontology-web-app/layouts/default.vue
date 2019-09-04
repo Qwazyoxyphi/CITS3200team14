@@ -41,7 +41,7 @@ export default {
 
 <style>
 html {
-  font-family: 'Nunito', SansSerif;
+  font-family: 'Roboto', SansSerif;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
@@ -59,9 +59,11 @@ html {
 }
 
 body {
-  font-weight: 400;
-  line-height: 1.45;
-  color: #333;
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  font-weight: 100;
+  font-size: 12px;
+  line-height: 30px;
+  color: #777;
 }
 
 p {

@@ -10,8 +10,8 @@
     <AppModal 
       v-if="folderFlag"
       @exitModal="toggleCreateFolder()">
-      <FolderForm 
-        @FolderCreate="addFolder"
+      <TheFolderForm 
+        @submit="addFolder"
         @exitModal="toggleCreateFolder()"
       />
     </AppModal>
@@ -19,16 +19,17 @@
 </template>
 
 <script>
+import axios from 'axios'
 import FolderTile from '@/components/FolderPage/FolderTile'
 import AppModal from '@/components/Utils/AppModal'
-import FolderForm from '@/components/FolderPage/CreateFolder/FolderForm'
+import TheFolderForm from '@/components/FolderPage/CreateFolder/TheFolderForm'
 import TheCreateFolder from '@/components/FolderPage/TheCreateFolder'
 
 export default {
   components: {
     FolderTile,
     AppModal,
-    FolderForm,
+    TheFolderForm,
     TheCreateFolder
   },
   props: {
@@ -50,7 +51,9 @@ export default {
           'https://team-14-ontologies.firebaseio.com/folders.json',
           folderData
         )
-        .then(result => console.log(result))
+        .then(() => {
+          this.$router.push('/folders/' + this.newFolder.folderName)
+        })
         .catch(e => console.log(e))
     },
     toggleCreateFolder() {

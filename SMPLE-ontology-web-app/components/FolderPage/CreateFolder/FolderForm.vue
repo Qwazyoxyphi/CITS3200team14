@@ -1,19 +1,23 @@
 <template>
   <div>
-    <form
+    <form 
       class="login-form" 
       @submit.prevent="onFolderSubmit">
-      <div class="login-container">
+      <div 
+        class="login-container">
         <h2>Create Folder</h2>
         <AppControlInput 
-          v-model="newFolder.folderName"
-          placeholder="FolderName"
-        ><b>Folder Name:</b><br> </AppControlInput>
-        <AppControlInput          
+          v-model="newFolder.folderName" 
+          placeholder="FolderName">
+          <b>Folder Name:</b>
+        </AppControlInput>
+        <AppControlInput
           v-model="newFolder.folderDesc"
           control-type="textarea"
           placeholder="Description of Folder Contents"
-        ><b>Description:</b><br></AppControlInput>
+        >
+          <b>Description:</b>
+        </AppControlInput>
         <AppButton 
           class="login-but" 
           type="submit">Create</AppButton>
@@ -29,6 +33,7 @@
 <script>
 import AppControlInput from '@/components/Utils/AppControlInput'
 import AppButton from '@/components/Utils/AppButton'
+import axios from 'axios'
 export default {
   name: 'FolderForm',
   components: {
@@ -64,12 +69,13 @@ export default {
   },
   methods: {
     onFolderSubmit() {
-      //on submit take the user into new folder 'to change'
-      this.$router.push('/folders/' + this.newFolder.folderName)
-    },
-    onCancel() {
-      this.$emit('exitModal')
+      //add a new folder to the database
+      this.$emit('submit', this.newFolder)
     }
+    //on submit take the user into new folder 'to change'
+  },
+  onCancel() {
+    this.$emit('exitModal')
   }
 }
 </script>
@@ -99,8 +105,8 @@ export default {
   align-content: center;
 }
 
-textarea{ 
-  resize:none;
+textarea {
+  resize: none;
 }
 
 input[type='text'],
