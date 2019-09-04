@@ -123,4 +123,9 @@ small {
   background-color: #f4f5f7;
   padding: 0 20px 60px 20px;
 }
+
+.spacer {
+  flex: 1 1 auto;
+  text-align: center;
+}
 </style>
