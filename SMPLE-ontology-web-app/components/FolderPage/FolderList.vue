@@ -10,7 +10,7 @@
     <AppModal 
       v-if="folderFlag"
       @exitModal="toggleCreateFolder()">
-      <FolderForm 
+      <TheFolderForm 
         @submit="addFolder"
         @exitModal="toggleCreateFolder()"
       />

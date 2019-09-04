@@ -64,6 +64,8 @@ export default {
   methods: {
     onFolderSubmit() {
       //on submit take the user into new folder 'to change'
+            this.$emit('submit', this.newFolder)
+
       this.$router.push('/folders/' + this.newFolder.folderName)
     },
     onCancel() {
