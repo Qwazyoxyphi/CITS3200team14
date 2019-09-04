@@ -54,7 +54,8 @@ module.exports = {
         rel: 'stylesheet',
         href:
           'https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/1.3.5/jsxgraph.css'
-      }
+      },
+      { rel: 'stylesheet', https: 'https://fonts.googleapis.com/css?family=Roboto:400,300,600,400italic' }
     ]
   },
 
@@ -96,6 +97,7 @@ module.exports = {
     */
     extend(config, ctx) {
       // Run ESLint on save
+      /*
       if (ctx.isDev && ctx.isClient) {
         config.module.rules.push({
           enforce: 'pre',
@@ -103,7 +105,7 @@ module.exports = {
           loader: 'eslint-loader',
           exclude: /(node_modules)/
         })
-      }
+      }*/
     }
   }
 }

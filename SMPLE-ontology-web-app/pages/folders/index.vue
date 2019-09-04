@@ -2,14 +2,11 @@
   <div>
 
     <AppSection
-      title="hello"
+      title="documents > ____"
       color="blue"
     >
-
       <h1>This is the Folders Index Page</h1> 
       <FolderList :folders="loadedFolders" />
-      <!--<TheCreateFolder @createFolder="toggleCreateFolder()" />-->
-      <div>documents > biology</div>
     </AppSection>
 
   </div>
@@ -18,7 +15,7 @@
 <script>
 import TheCreateFolder from '@/components/FolderPage/TheCreateFolder'
 import AppModal from '@/components/Utils/AppModal'
-import FolderForm from '@/components/FolderPage/CreateFolder/FolderForm'
+import TheFolderForm from '@/components/FolderPage/CreateFolder/TheFolderForm'
 import FolderList from '@/components/FolderPage/FolderList'
 import AppSection from '@/components/Utils/AppSection'
 
@@ -39,7 +36,7 @@ export default {
   components: {
     TheCreateFolder,
     AppModal,
-    FolderForm,
+    TheFolderForm,
     FolderList,
     AppSection
   },
