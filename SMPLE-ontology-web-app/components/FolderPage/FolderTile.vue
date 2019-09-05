@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link :to="'/folders/' + id">
+ <!-- <nuxt-link :to="'/folders/' + id">-->
     <div 
       class="box"
       @click="$emit('openModal')"> 
@@ -9,7 +9,8 @@
         data-name="Layer 1"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 884 655.11"
-      >
+      >    
+      <nuxt-link :to="'/folders/' + id">
         <defs>
           <style>
             .cls-1 {
@@ -88,6 +89,7 @@
           transform="translate(77.34 625.95)">
           {{ folderName }}
         </text>
+        </nuxt-link>
         <g @click="more(id)">
           <path
             class="cls-2"
@@ -146,9 +148,8 @@
           />
         </g>
       </svg>
-    
     </div>
-  </nuxt-link>
+ <!-- </nuxt-link>-->
 </template>
 
 <script>

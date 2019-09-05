@@ -1,9 +1,7 @@
 <template>
   <div>
-
-    <h1>This is the Documents default Index Page {{ $route.params.documents }} </h1> 
+    <h1>This is the Documents default Index Page  </h1> <!--{{ $route.params.documents }}-->
     <DocList :documents="loadDocuments" />
-  
   </div>
 </template>
 
@@ -30,6 +28,16 @@ export default {
   components: {
     AppModal,
     DocList
+  },
+  data(){
+    return {
+      documentFlag: false
+    }
+  },
+  methods:{
+    toggleCreateDocument(){
+      this.documentFlag = !this.documentFlag
+    }
   }
 }
 </script>
