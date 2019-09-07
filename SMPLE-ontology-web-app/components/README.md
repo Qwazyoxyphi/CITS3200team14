@@ -1,10 +1,8 @@
 # COMPONENTS
 
-[toc]
+[TOC]
 
 > Web app for creating ontology diagrams
-
-## Build Setup
 
 ``` bash
 # install dependencies

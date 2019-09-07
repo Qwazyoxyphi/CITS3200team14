@@ -10,6 +10,8 @@
       </div>
       <img src="@/static/masterlyLogo.png">
       <div class="spacer" />
+      <div class="title">{{ getDocTitle }}</div>
+      <div class="spacer" />
       <!-- NAV LINKS -->
       <nav class="navigation-items">
         <ul class="nav-list">
@@ -46,8 +48,8 @@ export default {
     TheIndicator
   },
   computed: {
-    title: function() {
-      return this.$store.state.selected.currentTopic.topic
+    getDocTitle: function() {
+      return this.$store.getters.getDocTitle
     }
   },
   methods: {
@@ -72,6 +74,11 @@ header {
   top: 0;
   position: fixed;
   padding: 0 40px 0 20px;
+}
+
+.title {
+  font-weight: 400;
+  font-size: 16pt;
 }
 
 .drawer-toggle {

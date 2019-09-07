@@ -45,14 +45,14 @@ export default {
 
 <style scoped>
 .sidebar {
-  flex: 1 1 280px;
+  position: absolute;
   min-width: 280px;
   max-width: 280px;
   border-right: 1px solid #e5e5e5;
   background-color: white;
   height: 100%;
   overflow: scroll;
-  z-index: 1000;
+  z-index: 1;
 }
 
  a {

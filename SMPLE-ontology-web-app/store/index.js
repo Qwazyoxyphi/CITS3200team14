@@ -8,15 +8,21 @@ const createStore = () => {
       leftSidebar: true,
       rightSidebar: false,
       token: null,
-      loadedFolders: []
+      loadedFolders: [],
+      docTitle: 'sample document title'
     },
     mutations: {
+      /* sidebar mutations */
       setLeftSidebar(state) {
         state.leftSidebar = !state.leftSidebar
       },
       setRightSidebar(state) {
         state.rightSidebar = !state.rightSidebar
       },
+      setDocTitle(state, title) {
+        state.docTitle = title
+      },
+      /*        **         */
       setToken(state, token) {
         state.token = token
       },
@@ -28,12 +34,17 @@ const createStore = () => {
       }
     },
     actions: {
+      /* sidebar actions */
       toggleLeftSidebar({ commit }) {
         commit('setLeftSidebar')
       },
       toggleRightSidebar({ commit }) {
         commit('setRightSidebar')
       },
+      changeDocTitle({ commit }) {
+        commit('setDocTitle')
+      },
+      /*        **         */
       authenticateUser(vuexContext, authData) {
         return this.$axios
           .$post(
@@ -105,12 +116,17 @@ const createStore = () => {
       }
     },
     getters: {
+      /* sidebar getters */
       getLeftSidebar(state) {
         return state.leftSidebar
       },
       getRightSidebar(state) {
         return state.rightSidebar
       },
+      getDocTitle(state) {
+        return state.docTitle
+      },
+      /*        **         */
       loadedFolders(state) {
         return state.loadedFolders
       },
