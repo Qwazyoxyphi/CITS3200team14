@@ -49,7 +49,6 @@ export default {
      width: 279px;
 	 font-weight: 400;
 	 font-size: 1.2em;
-	 overflow: auto;
 	 padding-bottom: 6em;
 	 z-index: 0;
 	 overflow: hidden;

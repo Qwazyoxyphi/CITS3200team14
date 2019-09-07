@@ -1,6 +1,6 @@
 <template>
   <div>
-    <DiagramSidebar> hello there </DiagramSidebar>
+    <DiagramSidebar />
   </div>
 </template>
 
