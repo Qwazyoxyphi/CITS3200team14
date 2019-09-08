@@ -7,7 +7,18 @@
       @input="$emit('input', $event.target.value)"
       class="wrap-input1"
     >
-      <input class="input1" :placeholder="placeholder" type="text" tabindex="1" required />
+      <input class="input1" :placeholder="placeholder" type="text" tabindex="1" :name="name" required />
+      <span class="shadow-input1"></span>
+    </fieldset>
+
+    <fieldset
+      v-if="controlType === 'password'"
+      v-bind="$attrs"
+      :value="value"
+      @input="$emit('input', $event.target.value)"
+      class="wrap-input1"
+    >
+      <input class="input1" :placeholder="placeholder" type="password" tabindex="1" :name="name" required />
       <span class="shadow-input1"></span>
     </fieldset>
 
@@ -43,6 +54,14 @@ export default {
     placeholder: {
       type: String,
       default: ''
+    },
+    name: {
+      type: String,
+      required: false
+    },
+    reff: {
+      type: String,
+      required: false
     }
   }
 }
@@ -61,6 +80,7 @@ export default {
 }
 
 #contact input[type='text'],
+#contact input[type='password'],
 #contact input[type='email'],
 #contact input[type='tel'],
 #contact input[type='url'],
@@ -102,6 +122,7 @@ fieldset {
 #contact input[type='email'],
 #contact input[type='tel'],
 #contact input[type='url'],
+#contact input[type='password'],
 #contact textarea {
   width: 100%;
   border: 1px solid #ccc;
@@ -113,12 +134,18 @@ fieldset {
 #contact input[type='text']:hover,
 #contact input[type='email']:hover,
 #contact input[type='tel']:hover,
+#contact input[type='password']:hover,
 #contact input[type='url']:hover,
 #contact textarea:hover {
   -webkit-transition: border-color 0.3s ease-in-out;
   -moz-transition: border-color 0.3s ease-in-out;
   transition: border-color 0.3s ease-in-out;
   border: 1px solid #aaa;
+}
+
+textarea:focus,
+input:focus {
+  border-color: #1171ba !important;
 }
 
 #contact textarea {
@@ -175,46 +202,4 @@ fieldset {
 :-ms-input-placeholder {
   color: #888;
 }
-
-/*
-Shadow input animation
-*/
-/*---------------------------------------------*/
-/*.wrap-input1 {
-  position: relative;
-  width: 100%;
-  z-index: 1;
-  margin-bottom: 20px;
-}
-
-.shadow-input1 {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  z-index: -1;
-  width: 100%;
-  height: 100%;
-  box-shadow: 0px 0px 0px 0px;
-  color: #1171ba;
-}
-
-.input1:focus + .shadow-input1 {
-  -webkit-animation: anim-shadow 0.5s ease-in-out forwards;
-  animation: anim-shadow 0.5s ease-in-out forwards;
-}
-
-@-webkit-keyframes anim-shadow {
-  to {
-    box-shadow: 0px 0px 80px 30px;
-    opacity: 0;
-  }
-}
-
-@keyframes anim-shadow {
-  to {
-    box-shadow: 0px 0px 80px 30px;
-    opacity: 0;
-  }
-}*/
 </style>

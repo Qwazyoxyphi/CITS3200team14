@@ -1,62 +1,46 @@
 <template>
   <div>
     <header>
-      <script 
-        src = "https://www.google.com/recaptcha/api.js"/>
+      <script src="https://www.google.com/recaptcha/api.js" />
     </header>
-    <div 
-      id="login-box" 
-      class="questions-wrap flexbox box-active">
-      <form 
-        class="login-form" 
-        method="post" 
-        novalidate
-        @submit.prevent="onSave">
+    <div class="container">
+      <form id="contact" class="login-form" method="post" novalidate @submit.prevent="onSave">
         <div class="login-container">
           <h2>Sign up</h2>
-          <b>Email:</b>
-          <input
-            v-validate="'email'" 
+          <AppControlInput
+            v-validate="'email'"
+            name="email"
             v-model="userCredentials.email"
-            type="text" 
-            name="email">
-          <p 
-            v-if="errors.has('email')">
-            {{ errors.first('email') }}
-          </p>
-          <b>Password:</b>
-          <input
-            v-validate="'required|min:5|max:15' "
-            ref="password"
-            v-model="userCredentials.password" 
-            type="password"
+            placeholder="email"
+          >
+            <b>Email</b>
+          </AppControlInput>
+          <p v-if="errors.has('email')">{{ errors.first('email') }}</p>
+          <AppControlInput
             name="password"
+            reff="password"
+            v-validate="'required|min:5|max:15' "
+            controlType="password"
+            v-model="userCredentials.password"
+            placeholder="password"
           >
-          <p 
-            v-if="errors.has('password')">
-            {{ errors.first('password') }}
-          </p>
-          <b>Confirm password:</b>
-          <input
-            v-validate=" 'required|confirmed:password'" 
-            type="password" 
+            <b>Password</b>
+          </AppControlInput>
+
+          <p v-if="errors.has('password')">{{ errors.first('password') }}</p>
+          <AppControlInput
+            v-validate=" 'required|confirmed:password'"
             name="confirmed_password"
+            controlType="password"
             data-vv-as="password"
+            placeholder="confirm password"
           >
-          <p 
-            v-if="errors.has('confirmed_password')">
-            {{ errors.first('confirmed_password') }}
-          </p>
-          <div 
-            class="g-recaptcha" 
-            data-sitekey="6LecTbYUAAAAABiiKGfi68gq_9qSi7P2dwt7_pB0"/>
-          <button 
-            class="login-but"
-            type="submit">Sign Up</button>
-          <div
-            class="button"
-            @click="$emit('toggleRegistration')" 
-          >Sign in</div>
+            <b>Password</b>
+          </AppControlInput>
+          <p v-if="errors.has('confirmed_password')">{{ errors.first('confirmed_password') }}</p>
+          <div class="g-recaptcha" data-sitekey="6LecTbYUAAAAABiiKGfi68gq_9qSi7P2dwt7_pB0" />
+          <AppButton class="login-but" type="submit">Sign up</AppButton>
+          <div class="button" @click="$emit('toggleRegistration')">Sign in</div>
         </div>
       </form>
     </div>
@@ -64,7 +48,14 @@
 </template>
 
 <script>
+import AppControlInput from '@/components/Utils/AppControlInput'
+import AppButton from '@/components/Utils/AppButton'
+
 export default {
+  components: {
+    AppControlInput,
+    AppButton
+  },
   props: {
     user: {
       default: null,
@@ -99,54 +90,49 @@ export default {
 </script>
 
 <style lang="Css" scoped>
+/*
+    Form input styles
+*/
 
-#login-box {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.login-form {
-  border: 3px solid #f1f1f1;
+.container {
   max-width: 400px;
   width: 100%;
+  margin: 0 auto;
+  position: relative;
   background-color: white;
 }
 
-.questions-wrap {
-  margin: 20px;
+#contact {
+  background: #f9f9f9;
+  padding: 25px;
+  margin: 150px 0;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
-.flexcontainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  align-content: center;
+#contact h3 {
+  display: block;
+  font-size: 30px;
+  font-weight: 300;
+  margin-bottom: 10px;
 }
 
-input[type=text], input[type=password] {
+#contact h4 {
+  margin: 5px 0 15px;
+  display: block;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+fieldset {
+  border: medium none !important;
+  margin: 0 0 10px;
+  min-width: 100%;
+  padding: 0;
   width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
 }
 
-input[type=text]:focus, input[type=password]:focus {
-  outline: none !important;
-  border: 1px solid #2caaca;
-  box-shadow: 0 0 3px rgba(44, 170, 202, 0.9);
-}
-
-button {
-  background-color: #2caaca;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  width: 100%;
+.copyright {
+  text-align: center;
 }
 
 .button {
@@ -154,28 +140,10 @@ button {
 }
 
 .button:hover {
-  color: rgba(51, 51, 51, 0.7);
+  color: #1171ba;
 }
 
-button:hover {
-  opacity: 0.8;
-  cursor: pointer;
-}
-
-.remember, .psw {
-  color: #2caaca;
-}
-
-.login-form h2 {
-  font-weight: bold;
-  color: #2caaca;
-}
-
-.login-container {
-  padding: 16px;
-}
-
-.login-but {
-    font-size: 1.3em;
+.g-recaptcha {
+  padding-bottom: 10px;
 }
 </style>

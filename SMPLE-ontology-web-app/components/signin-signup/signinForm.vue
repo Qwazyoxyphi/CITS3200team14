@@ -1,40 +1,35 @@
 <template>
-  <div>
-    <div
-      id="login-box" 
-      class="questions-wrap flexbox box-active">
-      <form 
-        class="login-form" 
-        method="post" 
-        novalidate
-        @submit.prevent="onSave2">
-        <div class="login-container">
-          <h2>Sign in</h2>
-          <b>Email.</b>
-          <input 
-            v-model="userCredentials.email"
-            type="text" 
-            name="email">
-          <b>Password.</b>
-          <input 
-            v-model="userCredentials.password"
-            type="password" 
-            name="password">
-          <button 
-            class="login-but"
-            type="submit">Sign in</button>
-          <div
-            class="button"
-            @click="$emit('toggleRegistration')" 
-          >Sign Up</div>
-        </div>
-      </form>
-    </div>
+  <div class="container">
+    <form id="contact" class="login-form" method="post" novalidate @submit.prevent="onSave2">
+      <div class="login-container">
+        <h2>Sign in</h2>
+        <AppControlInput name="email" v-model="userCredentials.email" placeholder="email">
+          <b>Email</b>
+        </AppControlInput>
+        <AppControlInput
+          name="password"
+          controlType="password"
+          v-model="userCredentials.password"
+          placeholder="password"
+        >
+          <b>Password</b>
+        </AppControlInput>
+        <AppButton class="login-but" type="submit">Sign in</AppButton>
+        <div class="button" @click="$emit('toggleRegistration')">Sign up</div>
+      </div>
+    </form>
   </div>
 </template>
 
 <script>
+import AppControlInput from '@/components/Utils/AppControlInput'
+import AppButton from '@/components/Utils/AppButton'
+
 export default {
+  components: {
+    AppControlInput,
+    AppButton
+  },
   props: {
     user: {
       default: null,
@@ -62,82 +57,56 @@ export default {
 
 
 <style lang="Css" scoped>
-#login-box {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
+/*
+    Form input styles
+*/
 
-.login-form {
-  border: 3px solid #f1f1f1;
+.container {
   max-width: 400px;
   width: 100%;
+  margin: 0 auto;
+  position: relative;
   background-color: white;
 }
 
-.questions-wrap {
-  margin: 20px;
+#contact {
+  background: #f9f9f9;
+  padding: 25px;
+  margin: 150px 0;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
-.flexcontainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  align-content: center;
+#contact h3 {
+  display: block;
+  font-size: 30px;
+  font-weight: 300;
+  margin-bottom: 10px;
 }
 
-input[type=text], input[type=password] {
+#contact h4 {
+  margin: 5px 0 15px;
+  display: block;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+fieldset {
+  border: medium none !important;
+  margin: 0 0 10px;
+  min-width: 100%;
+  padding: 0;
   width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
 }
 
-input[type=text]:focus, input[type=password]:focus {
-  outline: none !important;
-  border: 1px solid #2caaca;
-  box-shadow: 0 0 3px rgba(44, 170, 202, 0.9);
+.copyright {
+  text-align: center;
 }
 
-button {
-  background-color: #2caaca;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  width: 100%;
+.button:hover {
+  color: #1171ba;
 }
 
 .button {
   cursor: pointer;
-}
-
-.button:hover {
-  color: rgba(51, 51, 51, 0.7);
-}
-
-button:hover {
-  opacity: 0.8;
-  cursor: pointer;
-}
-
-.remember, .psw {
-  color: #2caaca;
-}
-
-.login-form h2 {
-  font-weight: bold;
-  color: #2caaca;
-}
-
-.login-container {
-  padding: 16px;
-}
-
-.login-but {
-    font-size: 1.3em;
 }
 </style>

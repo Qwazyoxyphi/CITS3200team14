@@ -9,7 +9,6 @@ const createStore = () => {
       rightSidebar: false,
       token: null,
       loadedFolders: [],
-      docTitle: 'sample document title'
     },
     mutations: {
       /* sidebar mutations */
@@ -18,9 +17,6 @@ const createStore = () => {
       },
       setRightSidebar(state) {
         state.rightSidebar = !state.rightSidebar
-      },
-      setDocTitle(state, title) {
-        state.docTitle = title
       },
       /*        **         */
       setToken(state, token) {
@@ -40,9 +36,6 @@ const createStore = () => {
       },
       toggleRightSidebar({ commit }) {
         commit('setRightSidebar')
-      },
-      changeDocTitle({ commit }) {
-        commit('setDocTitle')
       },
       /*        **         */
       authenticateUser(vuexContext, authData) {
@@ -122,9 +115,6 @@ const createStore = () => {
       },
       getRightSidebar(state) {
         return state.rightSidebar
-      },
-      getDocTitle(state) {
-        return state.docTitle
       },
       /*        **         */
       loadedFolders(state) {

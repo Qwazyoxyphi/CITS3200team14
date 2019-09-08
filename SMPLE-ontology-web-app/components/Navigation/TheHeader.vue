@@ -1,34 +1,17 @@
 <template>
   <div>
     <header>
-      <div 
-        class="drawer-toggle" 
-        @click="toggleLeftSidebar">
+      <div class="drawer-toggle" @click="toggleLeftSidebar">
         <div class="bar" />
         <div class="bar" />
         <div class="bar" />
       </div>
-      <img src="@/static/masterlyLogo.png">
+      <img src="@/static/masterlyLogo.png" />
       <div class="spacer" />
-      <div class="title">{{ getDocTitle }}</div>
-      <div class="spacer" />
-      <!-- NAV LINKS -->
-      <nav class="navigation-items">
-        <ul class="nav-list">
-          <li class="nav-item">
-            <nuxt-link to="/">Home</nuxt-link>
-          </li>
-          <li class="nav-item">
-            <nuxt-link to="/signin-signup">Sign in / Sign up</nuxt-link>
-          </li>
-          <li 
-            v-show="false" 
-            class="nav-item">
-            <nuxt-link to="/logout">Log Out</nuxt-link>
-          </li>
-        </ul>
-      </nav>
-      <!-- end NAV LINKS -->
+      <LoggedInNavs v-show="false" class="navs" />
+      <!-- if user is logged in -->
+      <LoggedoutNavs v-show="true" class="navs" />
+      <!-- if user is logged out or needs to register -->
       <!--<img
       src="@/assets/images/Icons/profileIcon.svg"
       class="profile-image"
@@ -41,16 +24,15 @@
 
 <script>
 import TheIndicator from '@/components/Navigation/TheIndicator'
+import LoggedInNavs from '@/components/Navigation/LoggedInNavs'
+import LoggedoutNavs from '@/components/Navigation/LoggedoutNavs'
 
 export default {
   name: 'TheHeader',
   components: {
-    TheIndicator
-  },
-  computed: {
-    getDocTitle: function() {
-      return this.$store.getters.getDocTitle
-    }
+    TheIndicator,
+    LoggedInNavs,
+    LoggedoutNavs
   },
   methods: {
     toggleLeftSidebar() {
@@ -76,18 +58,14 @@ header {
   padding: 0 40px 0 20px;
 }
 
-.title {
-  font-weight: 400;
-  font-size: 16pt;
-}
-
 .drawer-toggle {
   margin-right: 17px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   height: 40%;
-  width: 26px;
+  width: 100%;
+  max-width: 26px;
   cursor: pointer;
   padding: 5px;
 }
@@ -107,6 +85,10 @@ img {
   width: 100%;
 }
 
+.logo {
+  padding: 10px;
+}
+
 .spacer {
   flex: 1 1 auto;
   text-align: center;
@@ -118,65 +100,18 @@ img {
   cursor: pointer;
 }
 
-/* Nav-Links */
-.navigation-items {
+.drawer-toggle {
   display: none;
 }
-
-@media (min-width: 1000px) {
-  .navigation-items {
-    display: block;
-  }
-}
-
-.nav-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-}
-
-/* Stylig and Animating nav-items */
-.nav-item a {
-  text-decoration: none;
-  color: rgb(54, 54, 54);
-}
-
-.nav-item {
-  margin: 0 10px;
-  display: inline-block;
-  text-decoration: none;
-}
-
-.nav-item:hover {
-  cursor: pointer;
-}
-
-.nav-item::after {
-  content: '';
+.navs {
   display: block;
-  width: 0;
-  height: 2px;
-  background: #2caaca;
-  transition: width 0.3s;
 }
-
-.nav-item:hover::after {
-  width: 100%;
-}
-
-.nuxt-link-exact-active {
-  border-bottom: 3px solid #2caaca;
-}
-/* ----- nav-items ------ */
-.header-background {
-  height: 70px;
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: white;
-  z-index: 0;
-  border-bottom: 1px solid #e5e5e5;
+@media only screen and (max-width: 900px) {
+  .drawer-toggle {
+    display: flex;
+  }
+  .navs {
+    display: none;
+  }
 }
 </style>
