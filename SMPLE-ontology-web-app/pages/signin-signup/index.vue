@@ -8,6 +8,7 @@
 import TheSigninSignup from '@/components/signin-signup/TheSigninSignup'
 
 export default {
+  middleware: ['check-auth','auth'],
   components: {
     TheSigninSignup
   }
