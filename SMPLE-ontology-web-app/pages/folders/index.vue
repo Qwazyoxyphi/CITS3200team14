@@ -15,6 +15,9 @@
 <script>
 import FolderList from '@/components/FolderPage/FolderList'
 import AppSection from '@/components/Utils/AppSection'
+import More from '@/components/FolderPage/More/More'
+import AppSelect from '@/components/FolderPage/More/AppSelect'
+
 import axios from 'axios'
 
 export default {
@@ -31,7 +34,9 @@ export default {
   //},
   components: {
     FolderList,
-    AppSection
+    AppSection,
+    More,
+    AppSelect
   },
   data() {
     return {
