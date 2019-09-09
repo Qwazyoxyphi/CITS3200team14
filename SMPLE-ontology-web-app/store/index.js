@@ -9,6 +9,7 @@ const createStore = () => {
       rightSidebar: false,
       token: null,
       loadedFolders: [],
+      getUserId: null,
     },
     mutations: {
       /* sidebar mutations */
@@ -27,6 +28,9 @@ const createStore = () => {
       },
       setFolders(state, folders) {
         state.loadedFolders = folders
+      },
+      setUserId(state, userId){
+        state.getUserId = userId
       }
     },
     actions: {
@@ -50,6 +54,8 @@ const createStore = () => {
           )
           .then(result => {
             console.log(result)
+            //console.log(result.localId)
+            vuexContext.commit('setUserId', result.localId)
             vuexContext.commit('setToken', result.idToken)
             localStorage.setItem("token", result.idToken)
             localStorage.setItem("tokenExpiration", new Date().getTime() + result.expiresIn * 1000)
@@ -122,6 +128,9 @@ const createStore = () => {
       },
       isAuthenticated(state){
         return state.token != null
+      },
+      getUserId(state){
+        return state.getUserId
       }
     }
   })

@@ -6,7 +6,9 @@
       color="blue"
     >
       <h1>This is the Folders Index Page</h1> 
+      <p>The Users id:{{getUserId}} </p>
       <FolderList :folders="loadedFolders" />
+      <!--<FolderList :folders="userFolders" /> -->
     </AppSection>
 
   </div>
@@ -21,17 +23,22 @@ import AppSelect from '@/components/FolderPage/More/AppSelect'
 import axios from 'axios'
 
 export default {
-  //asyncData(context) {
+  /*asyncData(context) { //example for getting folders using uid, same issue as previous> data type issue
   //load folders onto folderpage
-  //  return axios
-  //    .get('https://team-14-ontologies.firebaseio.com/folders.json')
-  //    .then(res => {
-  //      return {
-  //        loadFolders: res.data
-  //      }
-  //    })
-  //    .catch(e => context.log(e))
-  //},
+    return axios
+      .get('https://team-14-ontologies.firebaseio.com/NewUser/'+context.store.getters.getUserId+'/Folders.json')
+      .then(res => {
+        const userFolders = []
+        for (const key in res.data) {
+          userFolders.push({ ...res.data[key], id: key })
+        }
+        console.log(userFolders)
+        return {
+          userFolders
+        }
+      })
+     // .catch(e => context.log(e))
+  }, */
   components: {
     FolderList,
     AppSection,
@@ -46,7 +53,10 @@ export default {
   computed: {
     loadedFolders() {
       return this.$store.getters.loadedFolders
-    }
+    },
+    getUserId(){
+	    return this.$store.getters.getUserId
+	  }
   },
   methods: {
     toggleCreateFolder() {
