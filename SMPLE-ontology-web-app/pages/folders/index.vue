@@ -13,12 +13,8 @@
 </template>
 
 <script>
-import TheCreateFolder from '@/components/FolderPage/TheCreateFolder'
-import AppModal from '@/components/Utils/AppModal'
-import TheFolderForm from '@/components/FolderPage/CreateFolder/TheFolderForm'
 import FolderList from '@/components/FolderPage/FolderList'
 import AppSection from '@/components/Utils/AppSection'
-
 import axios from 'axios'
 
 export default {
@@ -34,9 +30,6 @@ export default {
   //    .catch(e => context.log(e))
   //},
   components: {
-    TheCreateFolder,
-    AppModal,
-    TheFolderForm,
     FolderList,
     AppSection
   },

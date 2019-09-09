@@ -1,4 +1,6 @@
 <template>
+<div>
+<buttonRack @createFolder="toggleCreateFolder()" @createDoc="toggleCreateFolder()" />
   <section class="folder-list">
     <FolderTile
       v-for="folder in folders"
@@ -16,6 +18,7 @@
       />
     </AppModal>
   </section>
+</div>
 </template>
 
 <script>
@@ -24,13 +27,15 @@ import FolderTile from '@/components/FolderPage/FolderTile'
 import AppModal from '@/components/Utils/AppModal'
 import TheFolderForm from '@/components/FolderPage/CreateFolder/TheFolderForm'
 import TheCreateFolder from '@/components/FolderPage/TheCreateFolder'
+import buttonRack from '@/components/FolderPage/NewDocFolderRack/buttonRack'
 
 export default {
   components: {
     FolderTile,
     AppModal,
     TheFolderForm,
-    TheCreateFolder
+    TheCreateFolder,
+    buttonRack
   },
   props: {
     folders: {
