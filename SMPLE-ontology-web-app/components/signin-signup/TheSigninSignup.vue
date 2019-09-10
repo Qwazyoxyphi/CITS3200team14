@@ -17,7 +17,6 @@ import signupForm from '@/components/signin-signup/signupForm'
 import axios from 'axios'
 
 export default {
-  middleware: ['check-auth','auth'],
   components: {
     signinForm,
     signupForm
