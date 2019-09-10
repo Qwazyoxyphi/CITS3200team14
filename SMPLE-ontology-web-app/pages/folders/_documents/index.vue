@@ -12,7 +12,11 @@ import DocList from '@/components/DocumentsPage/DocList'
 import axios from 'axios'
 
 export default {
+<<<<<<< Updated upstream
   middleware: ['check-auth','auth'],
+=======
+  middleware: [check-auth, auth],
+>>>>>>> Stashed changes
   asyncData(context) {
     return axios
       .get(
