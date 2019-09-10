@@ -62,6 +62,7 @@ const createStore = () => {
               'tokenExpiration',
               new Date().getTime() + Number.parseInt(result.expiresIn) * 1000
             )
+            localStorage.setItem('userId', result.localId)
             Cookie.set('userId', result.localId)
             Cookie.set('jwt', result.idToken)
             Cookie.set(
@@ -99,6 +100,10 @@ const createStore = () => {
             .split(';')
             .find(c => c.trim().startsWith('userId='))
             .split('=')[1]
+        } else {
+          token = localStorage.getItem('token')
+          expirationDate = localStorage.getItem('tokenExpiration')
+          userId = localStorage.getItem(userId)
         }
         /*if (new Date().getTime() > +expirationDate || !token) {
           console.log('No token or invalid token')
