@@ -108,7 +108,6 @@ const createStore = () => {
           if(new Date() > +expirationDate || !token) {
             return
           }
-
         }
         vuexContext.dispatch('setLogoutTimer', +expirationDate - new Date().getTime())
         vuexContext.commit("setToken", token);
