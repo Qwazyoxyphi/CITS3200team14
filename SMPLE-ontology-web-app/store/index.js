@@ -77,6 +77,7 @@ const createStore = () => {
       },
       initAuth(vuexContext, req) {
         let token
+        //let localId
         let expirationDate
         if (req) {
           if (!req.headers.cookie) {
@@ -97,12 +98,13 @@ const createStore = () => {
           token = localStorage.getItem('token')
           expirationDate = localStorage.getItem('tokenExpiration')
         }
-        if (new Date().getTime() > +expirationDate || !token) {
+        /*if (new Date().getTime() > +expirationDate || !token) {
           console.log('No token or invalid token')
           vuexContext.commit('clearToken')
           return
-        }
+        }*/
         vuexContext.commit('setToken', token)
+        //vuexContext.commit('setUserId', localId)
       }
     },
     nuxtServerInit(vuexContext, context) {

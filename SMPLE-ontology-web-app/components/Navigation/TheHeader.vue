@@ -8,7 +8,7 @@
       </div>
       <img src="@/static/masterlyLogo.png" />
       <div class="spacer" />
-      <LoggedInNavs v-show="false" class="navs" />
+      <LoggedInNavs  v-show="false" class="navs"  />
       <!-- if user is logged in -->
       <LoggedoutNavs v-show="true" class="navs" />
       <!-- if user is logged out or needs to register -->
