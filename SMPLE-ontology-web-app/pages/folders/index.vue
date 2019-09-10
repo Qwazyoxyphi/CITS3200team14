@@ -23,7 +23,7 @@ import AppSelect from '@/components/FolderPage/More/AppSelect'
 import axios from 'axios'
 
 export default {
-  middleware: ['auth', 'check-auth'],
+  middleware: ['check-auth','auth'],
   /*asyncData(context) { //example for getting folders using uid, same issue as previous> data type issue
   //load folders onto folderpage
     return axios
