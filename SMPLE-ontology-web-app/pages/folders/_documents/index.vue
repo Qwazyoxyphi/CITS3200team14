@@ -12,6 +12,7 @@ import DocList from '@/components/DocumentsPage/DocList'
 import axios from 'axios'
 
 export default {
+  middleware: ['check-auth','auth'],
   asyncData(context) {
     return axios
       .get(

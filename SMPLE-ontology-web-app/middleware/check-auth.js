@@ -1,4 +1,6 @@
 export default function (context) {
     console.log('[Middleware] Check Auth')
-    context.store.dispatch("initAuth", null)
+    if(process.client) {
+        context.store.dispatch("initAuth", null)
+    }
 }
