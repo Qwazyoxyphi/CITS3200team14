@@ -72,8 +72,8 @@ const createStore = () => {
           })
           .catch(error => {
             console.log(error)
-            //alert('Username or Password is incorrect.')
-            //commit('SET_ERROR', error)
+            alert('Username or Password is incorrect.')
+            commit('SET_ERROR', error)
           })
       },
       initAuth(vuexContext, req) {

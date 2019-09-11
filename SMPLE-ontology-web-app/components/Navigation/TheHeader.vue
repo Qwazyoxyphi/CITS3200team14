@@ -35,11 +35,6 @@ export default {
     }
   },
   name: 'TheHeader',
-  data() {
-    return {
-      authenticated: this.$store.getters.isAuthenticated
-    }
-  },
   components: {
     TheIndicator,
     LoggedInNavs,

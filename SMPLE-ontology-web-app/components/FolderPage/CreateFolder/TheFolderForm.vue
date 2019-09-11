@@ -41,7 +41,8 @@ export default {
       default: () => ({
         folderName: '',
         folderDesc: '',
-        folderDocs: ''
+        folderDocs: '',
+        userId: 'getUserID here'
       })
     }
   },
