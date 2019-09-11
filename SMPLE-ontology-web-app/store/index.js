@@ -60,14 +60,15 @@ const createStore = () => {
             localStorage.setItem('token', result.idToken)
             localStorage.setItem(
               'tokenExpiration',
-              new Date().getTime() + result.expiresIn * 1000
+              new Date().getTime() + Number.parseInt(result.expiresIn) * 1000
             )
+            localStorage.setItem('userId', result.localId)
+            Cookie.set('userId', result.localId)
             Cookie.set('jwt', result.idToken)
             Cookie.set(
               'expirationDate',
-              new Date().getTime() + result.expiresIn * 1000
+              new Date().getTime() + Number.parseInt(result.expiresIn) * 1000
             )
-            vuexContext.dispatch('setLogoutTimer', result.expiresIn * 1000)
           })
           .catch(error => {
             console.log(error)
@@ -77,6 +78,7 @@ const createStore = () => {
       },
       initAuth(vuexContext, req) {
         let token
+        let userId
         //let localId
         let expirationDate
         if (req) {
@@ -94,9 +96,14 @@ const createStore = () => {
             .split(';')
             .find(c => c.trim().startsWith('expirationDate='))
             .split('=')[1]
+          userId = req.headers.cookie
+            .split(';')
+            .find(c => c.trim().startsWith('userId='))
+            .split('=')[1]
         } else {
           token = localStorage.getItem('token')
           expirationDate = localStorage.getItem('tokenExpiration')
+          userId = localStorage.getItem(userId)
         }
         /*if (new Date().getTime() > +expirationDate || !token) {
           console.log('No token or invalid token')
@@ -104,6 +111,7 @@ const createStore = () => {
           return
         }*/
         vuexContext.commit('setToken', token)
+        vuexContext.commit('setUserId', userId)
         //vuexContext.commit('setUserId', localId)
       }
     },
@@ -121,11 +129,6 @@ const createStore = () => {
     },
     setFolders(vuexContext, folders) {
       vuexContext.commit('setFolders', folders)
-    },
-    setLogoutTimer(vuexContext, duration) {
-      setTimeout(() => {
-        vuexContext.commit('clearToken')
-      }, duration)
     },
 
     getters: {
