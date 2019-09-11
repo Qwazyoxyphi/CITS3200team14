@@ -8,9 +8,9 @@
       </div>
       <img src="@/static/masterlyLogo.png" />
       <div class="spacer" />
-      <LoggedInNavs  v-show="false" class="navs"  />
+      <LoggedInNavs  v-show="true" v-if="isAuth" class="navs"  />
       <!-- if user is logged in -->
-      <LoggedoutNavs v-show="true" class="navs" />
+      <LoggedoutNavs v-show="true" v-if="isAuth == false" class="navs" />
       <!-- if user is logged out or needs to register -->
       <!--<img
       src="@/assets/images/Icons/profileIcon.svg"
@@ -26,9 +26,20 @@
 import TheIndicator from '@/components/Navigation/TheIndicator'
 import LoggedInNavs from '@/components/Navigation/LoggedInNavs'
 import LoggedoutNavs from '@/components/Navigation/LoggedoutNavs'
+import { mapGetters } from 'vuex'
 
 export default {
+  computed: {
+    isAuth(){
+      return this.$store.getters.isAuthenticated
+    }
+  },
   name: 'TheHeader',
+  data() {
+    return {
+      authenticated: this.$store.getters.isAuthenticated
+    }
+  },
   components: {
     TheIndicator,
     LoggedInNavs,
@@ -41,7 +52,7 @@ export default {
     toggleRightSidebar() {
       this.$store.dispatch('toggleRightSidebar')
     }
-  }
+  },
 }
 </script>
 
