@@ -42,7 +42,7 @@ export default {
         folderName: '',
         folderDesc: '',
         folderDocs: '',
-        userId: 'getUserID here'
+        userId: '',
       })
     }
   },
@@ -53,7 +53,8 @@ export default {
         : {
             folderName: '',
             folderDesc: '',
-            folderDocs: ''
+            folderDocs: '',
+            userId: '',
           }
     }
   },
@@ -65,8 +66,8 @@ export default {
   methods: {
     onFolderSubmit() {
       //on submit take the user into new folder 'to change'
-            this.$emit('submit', this.newFolder)
-
+      this.newFolder.userId = this.$store.getters.getUserId//add uid to payload
+      this.$emit('submit', this.newFolder)
       this.$router.push('/folders/' + this.newFolder.folderName)
     },
     onCancel() {

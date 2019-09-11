@@ -7,8 +7,8 @@
     >
       <h1>This is the Folders Index Page</h1> 
       <p>The Users id:{{getUserId}} </p>
-      <FolderList :folders="loadedFolders" />
-      <!--<FolderList :folders="userFolders" /> -->
+      <!--<FolderList :folders="loadedFolders" />-->
+      <FolderList :folders="userFolders" />
     </AppSection>
 
   </div>
@@ -24,22 +24,24 @@ import axios from 'axios'
 
 export default {
   middleware: ['check-auth', 'auth'],
-  /*asyncData(context) { //example for getting folders using uid, same issue as previous> data type issue
-  //load folders onto folderpage
+  asyncData(context) {//load user specific folders
     return axios
-      .get('https://team-14-ontologies.firebaseio.com/NewUser/'+context.store.getters.getUserId+'/Folders.json')
+      .get('https://team-14-ontologies.firebaseio.com/folders.json', {
+      })
       .then(res => {
-        const userFolders = []
+        const foldersArray = []
+        const currusrid = context.store.getters.getUserId;
         for (const key in res.data) {
-          userFolders.push({ ...res.data[key], id: key })
+          if (res.data[key].userId == currusrid){
+            foldersArray.push({ ...res.data[key], id: key })
+          }
         }
-        console.log(userFolders)
         return {
-          userFolders
+          userFolders :foldersArray
         }
       })
-     // .catch(e => context.log(e))
-  }, */
+      .catch(e => context.log(e))
+  },
   components: {
     FolderList,
     AppSection,

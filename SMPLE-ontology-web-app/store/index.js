@@ -102,8 +102,9 @@ const createStore = () => {
             .split('=')[1]
         } else {
           token = localStorage.getItem('token')
-          expirationDate = localStorage.getItem('tokenExpiration')
+          expirationDate = localStorage.getItem('tokenExpiration')   
           userId = localStorage.getItem(userId)
+          //\!! returns null after login, fixed w/ refresh maybe force autorefresh after login?(+saving code also wipes it out)
         }
         /*if (new Date().getTime() > +expirationDate || !token) {
           console.log('No token or invalid token')
