@@ -7,7 +7,7 @@
     >
       <h1>This is the Folders Index Page</h1> 
       <p>The Users id:{{getUserId}} </p>
-      <!--<FolderList :folders="loadedFolders" />-->
+      <FolderList :folders="getAllFolders"/>
       <FolderList :folders="userFolders" />
     </AppSection>
 
@@ -54,12 +54,12 @@ export default {
     }
   },
   computed: {
-    loadedFolders() {
-      return this.$store.getters.loadedFolders
-    },
     getUserId(){
 	    return this.$store.getters.getUserId
-	  }
+    },
+    getAllFolders(){//load all folders
+      return this.$store.getters.getAllFolders
+    }
   },
   methods: {
     toggleCreateFolder() {

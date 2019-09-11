@@ -8,7 +8,7 @@ const createStore = () => {
       leftSidebar: true,
       rightSidebar: false,
       token: null,
-      loadedFolders: [],
+      allFolders: [],
       getUserId: null
     },
     mutations: {
@@ -26,12 +26,14 @@ const createStore = () => {
       clearToken(state) {
         state.token = null
       },
-      setFolders(state, folders) {
-        state.loadedFolders = folders
+      //
+      setAllFolders(state, folders) {
+        state.allFolders = folders
       },
       setUserId(state, userId) {
         state.getUserId = userId
       }
+      //
     },
     actions: {
       /* sidebar actions */
@@ -54,7 +56,6 @@ const createStore = () => {
           )
           .then(result => {
             console.log(result)
-            //console.log(result.localId)
             vuexContext.commit('setUserId', result.localId)
             vuexContext.commit('setToken', result.idToken)
             localStorage.setItem('token', result.idToken)
@@ -114,24 +115,20 @@ const createStore = () => {
         vuexContext.commit('setToken', token)
         vuexContext.commit('setUserId', userId)
         //vuexContext.commit('setUserId', localId)
-      }
+      },
+      nuxtServerInit(vuexContext, context){//for slider
+        return axios
+          .get('https://team-14-ontologies.firebaseio.com/folders.json')
+          .then(res => {
+            const foldersArray = []
+            for (const key in res.data) {
+              foldersArray.push({ ...res.data[key], id: key })
+            }
+            vuexContext.commit('setAllFolders', foldersArray)
+          })
+          .catch(e => context.error(e))
+        },
     },
-    nuxtServerInit(vuexContext, context) {
-      return axios
-        .get('https://team-14-ontologies.firebaseio.com/folders.json')
-        .then(res => {
-          const foldersArray = []
-          for (const key in res.data) {
-            foldersArray.push({ ...res.data[key], id: key })
-          }
-          vuexContext.commit('setFolders', foldersArray)
-        })
-        .catch(e => context.error(e))
-    },
-    setFolders(vuexContext, folders) {
-      vuexContext.commit('setFolders', folders)
-    },
-
     getters: {
       /* sidebar getters */
       getLeftSidebar(state) {
@@ -141,8 +138,8 @@ const createStore = () => {
         return state.rightSidebar
       },
       /*        **         */
-      loadedFolders(state) {
-        return state.loadedFolders
+      getAllFolders(state){
+        return state.allFolders
       },
       isAuthenticated(state) {
         return state.token != null

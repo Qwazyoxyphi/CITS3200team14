@@ -50,14 +50,13 @@ export default {
   },
   methods: {
     addFolder(folderData) {
-      //add a new folder to the database
       axios
         .post(
           'https://team-14-ontologies.firebaseio.com/folders.json',
           folderData
         )
-        .then(() => {
-          this.$router.push('/folders/' + this.newFolder.folderName)
+        .then(res => {//when added route inside folder page (correct way)
+          this.$router.push('/folders/' + res.data.name)
         })
         .catch(e => console.log(e))
     },

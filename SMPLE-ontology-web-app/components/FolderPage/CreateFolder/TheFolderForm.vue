@@ -65,10 +65,9 @@ export default {
   },
   methods: {
     onFolderSubmit() {
-      //on submit take the user into new folder 'to change'
       this.newFolder.userId = this.$store.getters.getUserId//add uid to payload
       this.$emit('submit', this.newFolder)
-      this.$router.push('/folders/' + this.newFolder.folderName)
+      this.$emit('exitModal')
     },
     onCancel() {
       this.$emit('exitModal')

@@ -12,6 +12,9 @@
             <nuxt-link class="link" to="/rerout">Shared</nuxt-link>
           </li>
           <li class="nav-item">
+            <nuxt-link class="link" to="/folders" @click="getAllFolders">Folders</nuxt-link>
+          </li>
+          <li class="nav-item">
             <nuxt-link class="link" to="/rerout">Trash</nuxt-link>
           </li>
           <li class="nav-item">
@@ -23,7 +26,12 @@
 
 <script>
 export default {
-  name: 'LoggedInNavs'
+  name: 'LoggedInNavs',
+  computed:{
+    getAllFolders(){
+      return this.$store.dispatch('getAllFolders')
+    }
+  }
 }
 </script>
 
