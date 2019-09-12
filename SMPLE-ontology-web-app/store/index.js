@@ -103,7 +103,7 @@ const createStore = () => {
             .split('=')[1]
         } else {
           token = localStorage.getItem('token')
-          expirationDate = localStorage.getItem('tokenExpiration')   
+          expirationDate = localStorage.getItem('tokenExpiration')
           userId = localStorage.getItem(userId)
           //\!! returns null after login, fixed w/ refresh maybe force autorefresh after login?(+saving code also wipes it out)
         }
@@ -116,7 +116,18 @@ const createStore = () => {
         vuexContext.commit('setUserId', userId)
         //vuexContext.commit('setUserId', localId)
       },
-      nuxtServerInit(vuexContext, context){//for slider
+      logout(vuexContext) {
+        vuexContext.commit('clearToken')
+        Cookie.remove('jwt')
+        Cookie.remove('expirationDate')
+        Cookie.remove('userId')
+        if (process.client) {
+          localStorage.removeItem('token')
+          localStorage.removeItem('tokenExpiration')
+        }
+      },
+      nuxtServerInit(vuexContext, context) {
+        //for slider
         return axios
           .get('https://team-14-ontologies.firebaseio.com/folders.json')
           .then(res => {
@@ -127,7 +138,7 @@ const createStore = () => {
             vuexContext.commit('setAllFolders', foldersArray)
           })
           .catch(e => context.error(e))
-        },
+      }
     },
     getters: {
       /* sidebar getters */
@@ -138,7 +149,7 @@ const createStore = () => {
         return state.rightSidebar
       },
       /*        **         */
-      getAllFolders(state){
+      getAllFolders(state) {
         return state.allFolders
       },
       isAuthenticated(state) {

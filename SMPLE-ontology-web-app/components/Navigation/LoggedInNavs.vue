@@ -18,18 +18,25 @@
             <nuxt-link class="link" to="/rerout">Trash</nuxt-link>
           </li>
           <li class="nav-item">
-            <nuxt-link class="link" to="/rerout">Sign out</nuxt-link>
+            <AppButton @click="onClick" >Sign out</AppButton>
           </li>
         </ul>
       </nav>
 </template>
 
 <script>
+import AppButton from '@/components/Utils/AppButton'
 export default {
   name: 'LoggedInNavs',
   computed:{
     getAllFolders(){
       return this.$store.dispatch('getAllFolders')
+    }
+  },
+  methods: {
+    onClick(){
+      this.$store.dispatch('logout')
+      this.$router.push('signin-signup')
     }
   }
 }
