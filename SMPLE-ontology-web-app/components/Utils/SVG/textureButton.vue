@@ -1,5 +1,5 @@
 <template>
-  <div class="box">
+  <div @click="$emit('textureSelect')" class="box">
     <svg
       id="Capa_1"
       data-name="Capa 1"
