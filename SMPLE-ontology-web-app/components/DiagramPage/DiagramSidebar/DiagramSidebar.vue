@@ -4,13 +4,18 @@
         <header>TITLE</header>
         <nav class="sidebar-nav">
           <slot />
+		  <TwoButtons />
         </nav>
       </aside>
 </template>
 
 <script>
+import TwoButtons from '@/components/DiagramPage/DiagramSidebar/TwoButtons'
 export default {
-  name: 'TheSidebar'
+  name: 'TheSidebar',
+  components: {
+	  TwoButtons
+  }
 }
 </script>
 
