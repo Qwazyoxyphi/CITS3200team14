@@ -42,6 +42,7 @@ import grabBox from '@/components/Utils/SVG/grabBox'
 import svgFile from '@/components/Utils/SVG/svgFile'
 import pdfFile from '@/components/Utils/SVG/pdfFile'
 
+ 
 
 export default {
   components: {

@@ -6,6 +6,7 @@
 		</div>
 		<div v-show="minFlg" class="but-wrapper">MENU</div>
 	</header>
+	<TwoButtons />
     <nav v-show="minFlg" class="sidebar-nav">
       <slot />
     </nav>
@@ -14,11 +15,13 @@
 
 <script>
 import minimise from '@/components/Utils/SVG/minimise'
+import TwoButtons from '@/components/DiagramPage/DiagramSidebar/TwoButtons'
 
 export default {
   name: 'TheSidebar',
   components: {
-	  minimise
+	  minimise,
+	  TwoButtons
   },
   data() {
 	  return {
@@ -29,7 +32,7 @@ export default {
 	  toggleMinimise() {
 		  this.minFlg = !this.minFlg
 	  }
-  }
+}
 }
 </script>
 
