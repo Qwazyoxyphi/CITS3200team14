@@ -2,13 +2,13 @@
   <div>
     <h1>This is the Documents default Index Page  </h1> <!--{{ $route.params.documents }}-->
     <!--	<p>{{getUserId}} </p>-->
-    <DocList :documents="loadDocuments" />
+    <DocSlider :documents="loadDocuments" />
   </div>
 </template>
 
 <script>
 import AppModal from '@/components/Utils/AppModal'
-import DocList from '@/components/DocumentsPage/DocList'
+import DocSlider from '@/components/DocumentsPage/DocSlider'
 import axios from 'axios'
 
 export default {
@@ -29,7 +29,7 @@ export default {
   },
   components: {
     AppModal,
-    DocList
+    DocSlider
   },
   data(){
     return {
