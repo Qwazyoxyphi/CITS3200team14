@@ -1,6 +1,7 @@
 <template>
   <section class="document-slideshow">
     <vueper-slides
+      class="no-shadow"
       :visible-slides="3"
       :slide-ratio="1/5"
       :dragging-distance="200"
@@ -14,7 +15,7 @@
       :title="document.documentName"
       :content="document.documentDesc"
       :style="'background-color: #7FBFEC'"
-      link:=""
+      :link="'/folders'"
       />
     </vueper-slides>
     <TheCreateDocument @createDocument="toggleCreateDocument()" />
@@ -25,9 +26,6 @@
 </template>
 
 <script>
-if (process.client) {
-  require('vueperslides/dist/vueperslides.css')
-}
 import axios from 'axios'
 import AppModal from '@/components/Utils/AppModal'
 import TheDocumentForm from '@/components/DocumentsPage/TheDocumentForm'
