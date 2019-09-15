@@ -36,10 +36,17 @@
       </p>
 
     </AppSection>
+  <footer>
+    <no-ssr> 
+      <cookie-law theme="dark-lime"></cookie-law>
+    </no-ssr>
+    
+  </footer>
   </div>
 </template>
 
 <script>
+import CookieLaw from 'vue-cookie-law'
 import AppSection from '@/components/Utilities/AppSection'
 import AppSubtitle from '@/components/Utilities/AppSubtitle'
 import AppModal from '@/components/Utilities/AppModal'
@@ -54,8 +61,11 @@ export default {
     AppModal,
     AppVideo,
     AppImage,
-    AppBlockQuote
+    AppBlockQuote,
+    CookieLaw
   },
+ 
+  
   data() {
     return {
       flag: true,
