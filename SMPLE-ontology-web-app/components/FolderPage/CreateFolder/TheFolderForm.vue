@@ -41,7 +41,6 @@ export default {
       default: () => ({
         folderName: '',
         folderDesc: '',
-        folderDocs: '',
         userId: '',
       })
     }
@@ -53,7 +52,6 @@ export default {
         : {
             folderName: '',
             folderDesc: '',
-            folderDocs: '',
             userId: '',
           }
     }

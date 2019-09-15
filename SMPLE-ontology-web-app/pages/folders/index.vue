@@ -1,16 +1,11 @@
 <template>
   <div>
-
-    <AppSection
-      title="documents > ____"
-      color="blue"
-    >
-      <h1>This is the Folders Index Page</h1> 
-      <p>The Users id:{{getUserId}} </p>
-      <FolderList :folders="getAllFolders"/>
-      <FolderList :folders="userFolders" />
+    <AppSection title="documents > ____" color="blue">
+      <h1>This is the Folders Index Page</h1>
+      <!--<p>The Users id:{{getUserId}} </p>-->
+      <!--<FolderList :folders="getAllFolders"/>-->
+      <FolderList :folders="getUserFolders" />
     </AppSection>
-
   </div>
 </template>
 
@@ -24,24 +19,18 @@ import axios from 'axios'
 
 export default {
   middleware: ['check-auth', 'auth'],
-  asyncData(context) {//load user specific folders
-    return axios
-      .get('https://team-14-ontologies.firebaseio.com/folders.json', {
-      })
-      .then(res => {
-        const foldersArray = []
-        const currusrid = context.store.getters.getUserId;
-        for (const key in res.data) {
-          if (res.data[key].userId == currusrid){
-            foldersArray.push({ ...res.data[key], id: key })
-          }
-        }
-        return {
-          userFolders :foldersArray
-        }
-      })
-      .catch(e => context.log(e))
-  },
+ /* asyncData(context) {
+    //User Owned Folders
+    const currUsrId = context.store.getters.getUserId
+    const uFolderArr = []
+    const allFolders = context.store.getters.getAllFolders
+    for (const key in allFolders) {
+      if (allFolders[key].userId == currUsrId) {
+        uFolderArr.push(allFolders[key])
+      }
+    }
+    return { userFolders: uFolderArr }
+  },*/
   components: {
     FolderList,
     AppSection,
@@ -54,11 +43,15 @@ export default {
     }
   },
   computed: {
-    getUserId(){
-	    return this.$store.getters.getUserId
+    getUserId() {//Get User ID
+      return this.$store.getters.getUserId
     },
-    getAllFolders(){//load all folders
+    getAllFolders() {//Load All Folders
       return this.$store.getters.getAllFolders
+    },
+    getUserFolders(){//Load User's Folders
+     this.$store.dispatch('setUserFolders')
+     return this.$store.getters.getUserFolders
     }
   },
   methods: {

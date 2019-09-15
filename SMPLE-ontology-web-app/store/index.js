@@ -9,6 +9,7 @@ const createStore = () => {
       rightSidebar: false,
       token: null,
       allFolders: [],
+      userFolders: [],
       getUserId: null
     },
     mutations: {
@@ -26,20 +27,23 @@ const createStore = () => {
       clearToken(state) {
         state.token = null
       },
-      
+
       //////////Folders
       setAllFolders(state, folders) {
         state.allFolders = folders
       },
-      addFolder(state, folder){//attempt this
+      setUserFolders(state, ufolders) {
+        state.userFolders = ufolders
+      },
+      addFolder(state, folder) {
         state.allFolders.push(folder)
       },
-
-     deleteFolder(state, delFolder){
-        const folderidx = state.allFolders.findIndex(
-          folder => folder.id === delFolder.id//id match
-          );
-        state.allFolders.splice(state.allFolders.indexOf(folderidx),1) 
+      deleteFolder(state, delFolderId) {
+        const allFodidx = state.allFolders.findIndex(
+          folder => folder.id === delFolderId)//find id of folder in store
+        if (allFodidx != -1) {// if in store remove it
+          state.allFolders.splice(allFodidx, 1)
+        }
       },
       setUserId(state, userId) {
         state.getUserId = userId
@@ -67,7 +71,7 @@ const createStore = () => {
             }
           )
           .then(result => {
-            console.log(result)
+            //console.log(result)
             vuexContext.commit('setUserId', result.localId)
             vuexContext.commit('setToken', result.idToken)
             localStorage.setItem('token', result.idToken)
@@ -149,21 +153,40 @@ const createStore = () => {
           })
           .catch(e => context.error(e))
       },
-      addFolder(vuexContext, folder){
+      addFolder(vuexContext, folder) {
         return axios
-          .post(
-            'https://team-14-ontologies.firebaseio.com/folders.json', folder
-          )
+          .post('https://team-14-ontologies.firebaseio.com/folders.json', folder)
           .then(res => {
-            vuexContext.commit('addFolder', {...folder, id: res.data.name})
-            this.$router.push('/folders/' + res.data.name)//route off page for new data to appear
+            vuexContext.commit('addFolder', { ...folder, id: res.data.name })
+            this.$router.push('/folders/' + res.data.name)//route into folder
           })
           .catch(e => console.log(e))
-        },
-        setAllFolders(vuexContext, folders){
-          vuexContext.commit("setAllFolders", folders)
-        }
+      },
+      deleteFolder(vuexContext, folderid) {
+        axios.delete(
+          'https://team-14-ontologies.firebaseio.com/folders/' +
+          folderid + '.json'
+        )
+          .then(res => {
+            vuexContext.commit('deleteFolder', folderid)//update local store
+          })
+          .catch(e => console.log(e))
+      },
+      setAllFolders(vuexContext) {
+        vuexContext.commit("setAllFolders", folders)
+      },
+      setUserFolders(vuexContext) {
+        const allFolders = this.state.allFolders
+        const currUsrId = this.state.getUserId
+        const uFolderArr = []
 
+        for (const key in allFolders) {
+          if (allFolders[key].userId == currUsrId) {
+            uFolderArr.push(allFolders[key])
+          }
+        }
+        vuexContext.commit('setUserFolders', uFolderArr)
+      }
     },
     getters: {
       /* sidebar getters */
@@ -176,6 +199,9 @@ const createStore = () => {
       /*        **         */
       getAllFolders(state) {
         return state.allFolders
+      },
+      getUserFolders(state) {
+        return state.userFolders
       },
       isAuthenticated(state) {
         return state.token != null

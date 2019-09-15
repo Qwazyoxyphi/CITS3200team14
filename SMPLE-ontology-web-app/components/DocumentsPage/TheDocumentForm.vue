@@ -61,7 +61,6 @@ export default {
   },
   methods: {
     onDocumentSubmit() {
-      //on submit take the user into new document *'to change'
       this.$emit('submit', this.newDocument)
       this.$emit('exitModal')
     },

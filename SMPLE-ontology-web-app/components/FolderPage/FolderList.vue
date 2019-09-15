@@ -1,24 +1,21 @@
 <template>
-<div>
-<buttonRack @createFolder="toggleCreateFolder()" @createDoc="toggleCreateFolder()" />
-  <section class="folder-list">
-    <FolderTile
-      v-for="folder in folders"
-      :key="folder.id"
-      :id="folder.id"
-      :folder-name="folder.folderName"
-      :folder-desc="folder.folderDesc"/>
-    <TheCreateFolder @createFolder="toggleCreateFolder()" />
-    <AppModal 
-      v-if="folderFlag"
-      @exitModal="toggleCreateFolder()">
-      <TheFolderForm 
-        @submit="onSubmitted"
-        @exitModal="toggleCreateFolder()"
+  <div>
+    <buttonRack @createFolder="toggleCreateFolder()" @createDoc="toggleCreateFolder()" />
+    <section class="folder-list">
+      <FolderTile
+        v-for="folder in folders"
+        :key="folder.id"
+        :id="folder.id"
+        :folder-name="folder.folderName"
+        :folder-desc="folder.folderDesc"
+        :folder-docs="folder.folderDocs"
       />
-    </AppModal>
-  </section>
-</div>
+      <TheCreateFolder @createFolder="toggleCreateFolder()" />
+      <AppModal v-if="folderFlag" @exitModal="toggleCreateFolder()">
+        <TheFolderForm @submit="onSubmitted" @exitModal="toggleCreateFolder()" />
+      </AppModal>
+    </section>
+  </div>
 </template>
 
 <script>
@@ -49,15 +46,15 @@ export default {
     }
   },
   methods: {
-    onSubmitted(folderData) {//add folderData
+    onSubmitted(folderData) {
+      //add folderData
       this.$store.dispatch('addFolder', folderData).then(res => {
-     // this.$router.push('/folders/' + res.data.name)
+        // this.$router.push('/folders/' + res.data.name)
       })
     },
     toggleCreateFolder() {
       this.folderFlag = !this.folderFlag
     }
-    
   }
 }
 </script>
