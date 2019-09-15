@@ -38,7 +38,7 @@
     </AppSection>
   <footer>
     <no-ssr> 
-      <cookie-law theme="dark-lime"></cookie-law>
+      <cookie-law theme="blood-orange"></cookie-law>
     </no-ssr>
     
   </footer>
