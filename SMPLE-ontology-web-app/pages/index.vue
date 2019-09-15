@@ -1,10 +1,10 @@
 <template>
   <div>
     <AppSection 
-      title="Welcome to Ontology Visualisations" 
+      title="Welcome to Ontology Visualisations"
       color="blue"
     >
-      
+    <br>
       <AppModal :mini-player="true">
         <AppVideo 
           video-id="204135196" 
@@ -12,33 +12,44 @@
         />
       </AppModal>
 
-      <p class="intro-text">
-        <br>The study of “Ontology” concerns itself with questions relating to the nature of
-        existence, what properties can explain existence, and how these properties explain
-        the differences of existence between existing entities (etc.).
-        <br>
-        <br>This website allows for the creation of graphical ontological representations, consisting
-        of components that visualize the relationships between different “beings” of existence.
-        <br>
-        <br>It can visualize the individual members of certain sets (or classes) of objects, their
-        attributes (the characteristics of those objects), how these objects and classes are
-        related.
-        <br>
-        <br>It can also describe the nature of these relations by allowing for the
-        specification of any function terms relating to these relations, the relations’
-        restrictions, rules that can be logically expressed in these relations, any axioms of the
-        domain of a specific Ontology, and possible events that may affect the relations between
-        different objects and their state of “being”.
-        <br>
-        <br>( Dev Note: This is just some draft text. Changes can easily be made in the future, just be sure
-        to let me know.
-        <br>-Mitch )
-      </p>
+      <div class="intro-text">
+        <p class="paragraph-1">
+          <br>
+          The study of “Ontology” concerns itself with questions relating to the nature of
+          existence.
+          <ul>
+            <li>what properties can explain the existence of an object?</li>
+            <li>how can these properties explain the differences between existing objects?</li>
+          </ul>
+        </p>
+        <p class="paragraph-2">
+          This website allows for the creation of graphical representations of ontologies.
+          <br><br>
+          <img src="@/static/placeholder.png" class="ontologies-example" />
+          <br><br>
+          It can visualize the individual members of certain sets of objects, their
+          attributes (or characteristics), and how these objects and classes are
+          related.
+          <br>
+        </p>
+        <p class="paragraph-3">
+          It can also describe the nature of these relations by allowing you to:
+          <ul>
+            <li>specify the function terms relating to these relations,</li>
+            <li>detail any restrictions the relations have,</li>
+            <li>show rules for relations with logical expressions,</li>
+            <li>specify the axioms of a domain-specific ontology, and</li>
+            <li>describe possible events that may affect the relations between
+                different objects and their state of being.</li>
+          </ul>
+          <br>
+        </p>
+      </div>
 
     </AppSection>
   <footer>
     <no-ssr> 
-      <cookie-law theme="dark-lime"></cookie-law>
+      <cookie-law theme="blood-orange"></cookie-law>
     </no-ssr>
     
   </footer>
@@ -79,3 +90,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+p {
+  font-family: Arial, "Trebuchet MS", Verdana, sans-serif;
+  font-size: 1rem;
+}
+</style>

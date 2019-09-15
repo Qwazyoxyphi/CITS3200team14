@@ -68,4 +68,11 @@ export default {
   background-color: white;
 }
 
+h2 {
+  font-weight: bold;
+  font-size: 2.4rem;
+  text-decoration: underline;
+  text-align: center;
+}
+
 </style>
