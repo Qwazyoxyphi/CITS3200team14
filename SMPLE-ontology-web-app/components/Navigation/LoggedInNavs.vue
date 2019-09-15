@@ -30,13 +30,13 @@ export default {
   name: 'LoggedInNavs',
   computed:{
     getAllFolders(){
-      return this.$store.dispatch('getAllFolders')
+      //this.$router.push('folders')
     }
   },
   methods: {
     onClick(){
       this.$store.dispatch('logout')
-      this.$router.push('signin-signup')
+      //this.$router.push('signin-signup')
     }
   }
 }
