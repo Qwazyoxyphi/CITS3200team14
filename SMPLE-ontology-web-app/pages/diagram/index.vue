@@ -40,9 +40,7 @@ import arrowButton from '@/components/Utils/SVG/arrowButton'
 import textureButton from '@/components/Utils/SVG/textureButton'
 import grabBox from '@/components/Utils/SVG/grabBox'
 import svgFile from '@/components/Utils/SVG/svgFile'
-import pdfFile from '@/components/Utils/SVG/pdfFile'
-
- 
+import pdfFile from '@/components/Utils/SVG/pdfFile' 
 
 export default {
   components: {
@@ -63,6 +61,9 @@ export default {
 </script>
 
 <style scoped>
+.save {
+  width: 100% !important;
+}
 .but-wrapper {
     padding: 5px;
     width: 100%;

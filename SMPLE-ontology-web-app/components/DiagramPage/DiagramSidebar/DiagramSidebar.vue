@@ -1,15 +1,18 @@
 <template>
-  <aside class="sidebar">
-    <header> 
+  <aside class="flexbox">
+    <header class="side-header"> 
 		<div class="min">
 			<minimise @minimise="toggleMinimise()" /> 
 		</div>
-		<div v-show="minFlg" class="but-wrapper">MENU</div>
 	</header>
-	<TwoButtons />
+  <div class="sidebar">
     <nav v-show="minFlg" class="sidebar-nav">
       <slot />
+      <div class="flex">
+        <TwoButtons @save="alert()"/>
+      </div>
     </nav>
+  </div>
   </aside>
 </template>
 
@@ -21,7 +24,7 @@ export default {
   name: 'TheSidebar',
   components: {
 	  minimise,
-	  TwoButtons
+    TwoButtons
   },
   data() {
 	  return {
@@ -31,16 +34,33 @@ export default {
   methods: {
 	  toggleMinimise() {
 		  this.minFlg = !this.minFlg
-	  }
+    },
+    alert() {
+      alert("save clicked");
+    }
 }
 }
 </script>
 
 <style scoped>
+.hello {
+  float: left;
+}
+
+.side-header {
+  padding: 15px;
+  
+}
 
 .but-wrapper {
     padding: 5px;
     width: 100%;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .container-wrap {
@@ -51,14 +71,15 @@ export default {
   flex-direction: row;
 }
 
-
+.flexbox {
+  display: flex;
+  flex-direction: column;
+}
 
 .sidebar {
   flex: 1 1 280px;
   min-width: 280px;
   max-width: 280px;
-  border-right: 1px solid #e5e5e5;
-  background-color: white;
   height: 100%;
   overflow: scroll;
   z-index: 0;
@@ -70,7 +91,6 @@ a {
 /* ------------- Sidebar ----------------*/
 .sidebar header {
 	height: 70px;
-	background-color: #1171ba;
   width: 100%;
   display: block;
   padding: 0.75em 1em;
@@ -84,6 +104,7 @@ a {
   position: fixed;
   /*background-color: #19222a;*/
   background-color: white;
+    border-right: 1px solid #e5e5e5;
   height: 100%;
   width: 279px;
   font-weight: 400;
