@@ -64,12 +64,12 @@ export default {
     }
   },
   methods: {
-    onFolderSubmit() {
+    onFolderSubmit() {//Save folder
       this.newFolder.userId = this.$store.getters.getUserId//add uid to payload
       this.$emit('submit', this.newFolder)
       this.$emit('exitModal')
     },
-    onCancel() {
+    onCancel() {//exit folder form
       this.$emit('exitModal')
     }
   }

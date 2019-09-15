@@ -77,10 +77,9 @@ export default {
     }
   },
   methods: {
-    more(id) {
+      async more(id) {
       var folderdel = confirm(' Delete Folder? ')
       if (folderdel == true) {
-        //delete folder
         axios
           .delete(
             'https://team-14-ontologies.firebaseio.com/folders/' + id + '.json'
@@ -88,7 +87,6 @@ export default {
           .then(result => console.log(result))
           .catch(e => console.log(e))
       }
-      alert('hello')
     }
   }
 }

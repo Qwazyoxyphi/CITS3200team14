@@ -13,7 +13,7 @@
       v-if="folderFlag"
       @exitModal="toggleCreateFolder()">
       <TheFolderForm 
-        @submit="addFolder"
+        @submit="onSubmitted"
         @exitModal="toggleCreateFolder()"
       />
     </AppModal>
@@ -49,20 +49,15 @@ export default {
     }
   },
   methods: {
-    addFolder(folderData) {
-      axios
-        .post(
-          'https://team-14-ontologies.firebaseio.com/folders.json',
-          folderData
-        )
-        .then(res => {//when added route inside folder page (correct way)
-          this.$router.push('/folders/' + res.data.name)
-        })
-        .catch(e => console.log(e))
+    onSubmitted(folderData) {//add folderData
+      this.$store.dispatch('addFolder', folderData).then(res => {
+     // this.$router.push('/folders/' + res.data.name)
+      })
     },
     toggleCreateFolder() {
       this.folderFlag = !this.folderFlag
     }
+    
   }
 }
 </script>

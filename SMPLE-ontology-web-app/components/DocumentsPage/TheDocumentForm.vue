@@ -49,7 +49,7 @@ export default {
       newDocument: this.document
         ? { ...this.document }
         : {
-            Name: '',
+            documentName: '',
             documentDesc: '',
           }
     }
@@ -63,6 +63,7 @@ export default {
     onDocumentSubmit() {
       //on submit take the user into new document *'to change'
       this.$emit('submit', this.newDocument)
+      this.$emit('exitModal')
     },
     onCancel() {
       this.$emit('exitModal')

@@ -65,16 +65,6 @@ export default {
     toggleCreateFolder() {
       this.folderFlag = !this.folderFlag
     },
-    addFolder(folderData) {
-      //add a new folder to the database
-      axios
-        .post(
-          'https://team-14-ontologies.firebaseio.com/folders.json',
-          folderData
-        )
-        .then(result => console.log(result))
-        .catch(e => console.log(e))
-    }
   }
 }
 </script>

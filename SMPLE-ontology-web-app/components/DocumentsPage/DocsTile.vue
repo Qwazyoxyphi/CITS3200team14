@@ -1,8 +1,9 @@
 <template>
+  <nuxt-link :to="'/diagram/'"><!--defaul redirect-->
   <div 
     class="box"
     @click="$emit('openModal')"> 
-
+    
     <svg 
       id="Layer_1" 
       data-name="Layer 1" 
@@ -24,14 +25,19 @@
         transform="translate(2.19 17.76)">{{ documentName }}
       </text>
     </svg>
-  
   </div>
+    </nuxt-link>
+
 </template>
 
 <script>
 export default {
   name: `DocsTile`,
   props: {
+    id: {
+      type: String,
+      required: true
+    },
     documentName: {
       type: String,
       required: true
@@ -39,6 +45,19 @@ export default {
     documentDesc: {
       type: String,
       required: true
+    },
+    methods:{
+      more(id) {
+        var documentdel = confirm(' Delete Document? ')
+        if (documentdel == true) {
+          axios
+            .delete(
+              'https://team-14-ontologies.firebaseio.com/Documents/' + id + '.json'
+            )
+            .then(result => console.log(result))
+            .catch(e => console.log(e))
+        }
+      }
     }
   }
 }

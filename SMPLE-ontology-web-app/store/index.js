@@ -26,14 +26,26 @@ const createStore = () => {
       clearToken(state) {
         state.token = null
       },
-      //
+      
+      //////////Folders
       setAllFolders(state, folders) {
         state.allFolders = folders
       },
+      addFolder(state, folder){//attempt this
+        state.allFolders.push(folder)
+      },
+
+     //deleteFolder(state, delFolder){
+       // const folderidx = state.allFolders.findIndex(
+         // folder => folder.id === delFolder.id//id match
+         // );
+        //state.allFolders.splice(state.allFolders.indexOf(folderidx),1) 
+      //},
       setUserId(state, userId) {
         state.getUserId = userId
       }
-      //
+      ///////////Folders
+
     },
     actions: {
       /* sidebar actions */
@@ -127,8 +139,7 @@ const createStore = () => {
         }
       },
       nuxtServerInit(vuexContext, context) {
-        //for slider
-        return axios
+        return axios //return all folders no filter
           .get('https://team-14-ontologies.firebaseio.com/folders.json')
           .then(res => {
             const foldersArray = []
@@ -138,7 +149,23 @@ const createStore = () => {
             vuexContext.commit('setAllFolders', foldersArray)
           })
           .catch(e => context.error(e))
-      }
+      },
+      addFolder(vuexContext, folder){
+        return axios
+          .post(
+            'https://team-14-ontologies.firebaseio.com/folders.json', folder
+          )
+          .then(res => {
+            vuexContext.commit('addFolder', {...folder, id: res.data.name})
+           // location.reload(true)
+            this.$router.push('/folders/' + res.data.name)
+          })
+          .catch(e => console.log(e))
+        },
+        setAllFolders(vuexContext, folders){
+          vuexContext.commit("setAllFolders", folders)
+        }
+
     },
     getters: {
       /* sidebar getters */
