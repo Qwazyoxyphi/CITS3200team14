@@ -35,12 +35,12 @@ const createStore = () => {
         state.allFolders.push(folder)
       },
 
-     //deleteFolder(state, delFolder){
-       // const folderidx = state.allFolders.findIndex(
-         // folder => folder.id === delFolder.id//id match
-         // );
-        //state.allFolders.splice(state.allFolders.indexOf(folderidx),1) 
-      //},
+     deleteFolder(state, delFolder){
+        const folderidx = state.allFolders.findIndex(
+          folder => folder.id === delFolder.id//id match
+          );
+        state.allFolders.splice(state.allFolders.indexOf(folderidx),1) 
+      },
       setUserId(state, userId) {
         state.getUserId = userId
       }
@@ -116,8 +116,7 @@ const createStore = () => {
         } else {
           token = localStorage.getItem('token')
           expirationDate = localStorage.getItem('tokenExpiration')
-          userId = localStorage.getItem(userId)
-          //\!! returns null after login, fixed w/ refresh maybe force autorefresh after login?(+saving code also wipes it out)
+          userId = localStorage.getItem('userId')
         }
         /*if (new Date().getTime() > +expirationDate || !token) {
           console.log('No token or invalid token')
@@ -157,8 +156,7 @@ const createStore = () => {
           )
           .then(res => {
             vuexContext.commit('addFolder', {...folder, id: res.data.name})
-           // location.reload(true)
-            this.$router.push('/folders/' + res.data.name)
+            this.$router.push('/folders/' + res.data.name)//route off page for new data to appear
           })
           .catch(e => console.log(e))
         },
