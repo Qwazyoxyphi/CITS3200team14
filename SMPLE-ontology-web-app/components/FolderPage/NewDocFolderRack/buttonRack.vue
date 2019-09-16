@@ -6,11 +6,11 @@
         <div class="right">New Folder</div>
       </div>
     </div>
-    <div class="but-wrapper item">
+    <!-- <div class="but-wrapper item">
       <div @click="$emit('createDoc')" class="button ">
         <plus class="left" />
         <div class="right">New Document</div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
