@@ -37,6 +37,7 @@ export default {
           userData
         )
         .then(result => {
+          this.flag = !this.flag
           console.log(result)
         })
     },
