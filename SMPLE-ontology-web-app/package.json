@@ -14,6 +14,9 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.6.0",
+    "@syncfusion/ej2-vue-diagrams": "^17.2.51",
+    "@syncfusion/ej2-vue-inputs": "^17.2.51",
+    "@syncfusion/ej2-vue-navigations": "^17.2.49",
     "axios": "^0.19.0",
     "cross-env": "^5.2.0",
     "js-cookie": "^2.2.1",
@@ -22,6 +25,7 @@
     "recaptcha": "^1.2.1",
     "vee-validate": "^2.1.5",
     "vue-cookie-law": "^1.10.0",
+    "vue-movable": "0.0.4",
     "vueperslides": "^1.20.1"
   },
   "devDependencies": {
