@@ -5,9 +5,7 @@
           <li class="nav-item">
             <nuxt-link class="link" to="/">Home</nuxt-link>
           </li>
-          <li class="nav-item">
-            <nuxt-link class="link" to="/rerout">Documents</nuxt-link>
-          </li>
+          
           <li class="nav-item">
             <nuxt-link class="link" to="/rerout">Shared</nuxt-link>
           </li>
@@ -36,7 +34,7 @@ export default {
   methods: {
     onClick(){
       this.$store.dispatch('logout')
-      //this.$router.push('signin-signup')
+      this.$router.push('signin-signup')
     }
   }
 }

@@ -12,12 +12,12 @@
               <div class="nav-text">Home</div>
             </nuxt-link>
           </li>
-          <li>
+          <!--<li>
             <nuxt-link to="/rerout">
               <file class="icon" />
               <div class="nav-text">Documents</div>
-            </nuxt-link>
-          </li>
+            </nuxt-link> 
+          </li> -->
           <li>
             <nuxt-link to="/rerout">
               <network class="icon" />
@@ -30,11 +30,8 @@
               <div class="nav-text">Trash</div>
             </nuxt-link>
           </li>
-          <li>
-            <nuxt-link to="/rerout">
-              <logout class="icon" />
-              <div class="nav-text">Sign out</div>
-            </nuxt-link>
+          <li class="nav-item">
+            <AppButton @click="onClick" >Sign out</AppButton>
           </li>
         </ul>
       </nav>
@@ -84,6 +81,11 @@ export default {
     closeSidebar() {
       this.$store.dispatch('toggleLeftSidebar')
     },
+    onClick(){
+      this.$store.dispatch('logout')
+      //this.$router.push('signin-signup')
+    }
+  
   }
 }
 </script>

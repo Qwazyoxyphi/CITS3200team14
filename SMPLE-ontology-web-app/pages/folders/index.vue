@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AppSection title="documents > ____" color="blue">
+    <AppSection title="Home > Folders > ____" color="blue">
       <h1>This is the Folders Index Page</h1>
       <!--<p>The Users id:{{getUserId}} </p>-->
       <FolderSlider :documents="allDocs"/>
