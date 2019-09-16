@@ -5,9 +5,7 @@
           <li class="nav-item">
             <nuxt-link class="link" to="/">Home</nuxt-link>
           </li>
-          <li class="nav-item">
-            <nuxt-link class="link" to="/rerout">Documents</nuxt-link>
-          </li>
+          
           <li class="nav-item">
             <nuxt-link class="link" to="/rerout">Shared</nuxt-link>
           </li>
