@@ -6,7 +6,7 @@
         <div class="bar" />
         <div class="bar" />
       </div>
-      <img src="@/static/masterlyLogo.png" />
+      <img src="@/static/ontVisBetter.png" />
       <div class="spacer" />
       <LoggedInNavs  v-show="true" v-if="isAuth" class="navs"  />
       <!-- if user is logged in -->

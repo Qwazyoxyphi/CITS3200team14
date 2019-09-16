@@ -15,18 +15,16 @@
       <div class="intro-text">
         <p class="paragraph-1">
           <br>
-          The study of “Ontology” concerns itself with questions relating to the nature of
-          existence.
-          <ul>
-            <li>what properties can explain the existence of an object?</li>
-            <li>how can these properties explain the differences between existing objects?</li>
-          </ul>
+          In many contexts where the use of formal languages is needed (e.g., software
+          development, GUI implementation, ontology engineering), the adoption of an
+          appropriate graphical notation simplifies the design and property checking of a
+          system since it enables an overview of the system that is difficult to have using
+          textual syntaxes. Designing a graphical notation specific for OWL requires to consider
+          what are the appropriate requirements that such notation should address according to
+          different kinds of players coming from several academic and industrial contexts.
         </p>
         <p class="paragraph-2">
           This website allows for the creation of graphical representations of ontologies.
-          <br><br>
-          <img src="@/static/placeholder.png" class="ontologies-example" />
-          <br><br>
           It can visualize the individual members of certain sets of objects, their
           attributes (or characteristics), and how these objects and classes are
           related.
@@ -35,11 +33,11 @@
         <p class="paragraph-3">
           It can also describe the nature of these relations by allowing you to:
           <ul>
-            <li>specify the function terms relating to these relations,</li>
-            <li>detail any restrictions the relations have,</li>
-            <li>show rules for relations with logical expressions,</li>
-            <li>specify the axioms of a domain-specific ontology, and</li>
-            <li>describe possible events that may affect the relations between
+            <li>Specify the function terms relating to these relations,</li>
+            <li>Detail any restrictions the relations have,</li>
+            <li>Show rules for relations with logical expressions,</li>
+            <li>Specify the axioms of a domain-specific ontology, and</li>
+            <li>Describe possible events that may affect the relations between
                 different objects and their state of being.</li>
           </ul>
           <br>
