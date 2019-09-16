@@ -17,12 +17,8 @@
       :content="document.documentDesc"
       :style="'background-color: #7FBFEC'"
       :link="'/diagram'"
-      >hello world</vueper-slide>
+      />
     </vueper-slides>
-    <TheCreateDocument @createDocument="toggleCreateDocument()" />
-    <AppModal v-if="documentFlag" @exitModal="toggleCreateDocument()">
-      <TheDocumentForm @submit="addDocument" @exitModal="toggleCreateDocument()" />
-    </AppModal>
   </section>
 </template>
 
