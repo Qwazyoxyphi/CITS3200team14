@@ -47,10 +47,7 @@ export default {
   },
   methods: {
     onSubmitted(folderData) {
-      //add folderData
-      this.$store.dispatch('addFolder', folderData).then(res => {
-        // this.$router.push('/folders/' + res.data.name)
-      })
+      this.$store.dispatch('addFolder', folderData)
     },
     toggleCreateFolder() {
       this.folderFlag = !this.folderFlag

@@ -16,7 +16,7 @@
       :title="document.documentName"
       :content="document.documentDesc"
       :style="'background-color: #7FBFEC'"
-      :link="'/diagram'"
+      :link="'/diagram/'"
       />
     </vueper-slides>
   </section>
@@ -36,7 +36,7 @@ export default {
   },
   props: {
     documents: {
-      type: Object,
+      type: Array,
       required: true
     }
   },

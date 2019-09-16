@@ -1,36 +1,41 @@
 <template>
-  <nuxt-link :to="'/diagram/'"><!--defaul redirect-->
-  <div 
-    class="box"
-    @click="$emit('openModal')"> 
-    
-    <svg 
-      id="Layer_1" 
-      data-name="Layer 1" 
-      xmlns="http://www.w3.org/2000/svg" 
-      viewBox="0 0 24 20">
-      <defs>
-        <style>.cls-1{fill-rule:evenodd;}.cls-2{font-size:2.76px;font-family:MyriadPro-Regular, Myriad Pro;}</style>
-      </defs>
-      <title>sample</title>
-      <path 
-        class="cls-1" 
-        d="M48.55,23.57h13v17h-24v-20h8Zm-10-2v18h22v-15H48.13l-3-3Z" 
-        transform="translate(-37.55 -20.57)"/>
-      <text 
-        x="-37.55" 
-        y="-20.57"/>
-      <text 
-        class="cls-2" 
-        transform="translate(2.19 17.76)">{{ documentName }}
-      </text>
-    </svg>
-  </div>
+  <div class="box" @click="$emit('openModal')">
+    <nuxt-link :to="'/diagram/'">
+      <!--defaul redirect-->
+      <div class="box" @click="$emit('openModal')">
+        <svg
+          id="Layer_1"
+          data-name="Layer 1"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 20"
+        >
+          <defs>
+            <style>
+  .cls-1 {
+    fill-rule: evenodd;
+  }
+  .cls-2 {
+    font-size: 2.76px;
+    font-family: MyriadPro-Regular, Myriad Pro;
+  }
+            </style>
+          </defs>
+          <title>This Document</title>
+          <path
+            class="cls-1"
+            d="M48.55,23.57h13v17h-24v-20h8Zm-10-2v18h22v-15H48.13l-3-3Z"
+            transform="translate(-37.55 -20.57)"
+          />
+          <text x="-37.55" y="-20.57" />
+          <text class="cls-2" transform="translate(2.19 17.76)">{{ documentName }}</text>
+        </svg>
+      </div>
     </nuxt-link>
-
+  </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: `DocsTile`,
   props: {
@@ -46,15 +51,24 @@ export default {
       type: String,
       required: true
     },
-    methods:{
+    methods: {
       more(id) {
+        //need to sync to button
         var documentdel = confirm(' Delete Document? ')
         if (documentdel == true) {
           axios
             .delete(
-              'https://team-14-ontologies.firebaseio.com/Documents/' + id + '.json'
+              'https://team-14-ontologies.firebaseio.com/Folders/' +
+                this.$route.path +
+                '.json'
             )
-            .then(result => console.log(result))
+            .then(result => {
+              axios.delete(
+                'https://team-14-ontologies.firebaseio.com/Documents/' +
+                  id +
+                  '.json'
+              )
+            })
             .catch(e => console.log(e))
         }
       }
@@ -62,8 +76,6 @@ export default {
   }
 }
 </script>
-
-
 
 <style scoped>
 .responsive {
@@ -73,12 +85,10 @@ export default {
 }
 
 .box {
-  max-width: 320px;
   cursor: pointer;
   position: relative;
-  border: solid 1px #efefef;
-  width: 300px;
-  height: 200px;
+  padding: 10px;
+  width: 150px;
 }
 
 .flexcontainer {

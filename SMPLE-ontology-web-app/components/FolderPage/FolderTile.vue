@@ -1,5 +1,4 @@
 <template>
-  <!-- <nuxt-link :to="'/folders/' + id">-->
   <div class="box" @click="$emit('openModal')">
     <svg id="Capa_1" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 58 58">
       <nuxt-link :to="'/folders/' + id">
@@ -46,10 +45,9 @@
     </svg>
     <div class>
       <div class="name">{{ folderName }}</div>
-      <AppSelect @toggleDelete="more(id, folderDocs)" />
+      <AppSelect @toggleDelete="more(id)" />
     </div>
   </div>
-  <!-- </nuxt-link>-->
 </template>
 
 <script>
@@ -80,15 +78,9 @@ export default {
     }
   },
   methods: {
-    async more(id, folderDocs) {
+    async more(id) {
       var folderdel = confirm(' Delete Folder? ')
       if (folderdel == true) {
-        //if (!folderDocs){//if field doesnt exist no documents inside
-        //No documents in folder so safe to delete
-        //this.$store.dispatch('deleteFolder', id)//delete folder
-        // }else if (folderDocs){//if field exists has documents
-        //Documents in Folder, Delete those first
-        //}
         this.$store.dispatch('deleteFolder', id) //delete folder
       }
     }
