@@ -37,8 +37,14 @@ export default {
           userData
         )
         .then(result => {
+          this.flag = !this.flag
           console.log(result)
         })
+        .catch(error => {
+            console.log(error)
+            alert('This email is already registered')
+            commit('SET_ERROR', error)
+          })
     },
     onSubmit2(userData) {
       this.$store.dispatch('authenticateUser', userData).then(() => {
