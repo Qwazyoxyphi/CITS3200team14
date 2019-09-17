@@ -1,9 +1,8 @@
 <template>
+  <!-- <nuxt-link :to="'/folders/' + id">-->
   <div class="box" @click="$emit('openModal')">
-    <nuxt-link :to="'/diagram/'">
-      <!--defaul redirect-->
-      <div class="box" @click="$emit('openModal')">
-        <svg
+	  <nuxt-link :to="'/diagram/'">
+	<svg
       id="Capa_1"
       data-name="Capa 1"
       xmlns="http://www.w3.org/2000/svg"
@@ -48,24 +47,25 @@
       <path class="cls-4" d="M284.52,452h-90V422h90C304.32,422,304.32,452,284.52,452Z" />
       <path class="cls-4" d="M284.52,180h-90V150h90C304.32,150,304.32,180,284.52,180Z" />
     </svg>
-      </div>
-    </nuxt-link>
-     <div class>
-      <div class="name">{{ documentName }}</div>
-      <AppSelect @toggleDelete="moree(id)" />
+	</nuxt-link>
+    <div class>
+      <div class="name">{{ docName }}</div>
+      <AppSelect @toggleDelete="more(id, folderDocs)" />
     </div>
   </div>
+  <!-- </nuxt-link>-->
 </template>
 
 <script>
 import axios from 'axios'
 import AppSelect from '@/components/FolderPage/More/AppSelect'
+
 export default {
-  name: `DocsTile`,
+  name: FolderTile,
   components: {
     AppSelect
   },
-  props: {
+   props: {
     id: {
       type: String,
       required: true
@@ -78,16 +78,15 @@ export default {
       type: String,
       required: true
     },
-  },
-  methods: {
-      moree(id) {
+    methods: {
+      more(id) {
         //need to sync to button
         var documentdel = confirm(' Delete Document? ')
         if (documentdel == true) {
           axios
-            .delete(//todo test
+            .delete(
               'https://team-14-ontologies.firebaseio.com/Folders/' +
-                this.$route.path + '/folderDocs/' + id +
+                this.$route.path +
                 '.json'
             )
             .then(result => {
@@ -99,19 +98,13 @@ export default {
             })
             .catch(e => console.log(e))
         }
-      
+      }
     }
   }
 }
 </script>
 
 <style scoped>
-.responsive {
-  /*max-width: 100%;  so it doesnt scale up*/
-  width: 100%;
-  height: auto;
-}
-
 .box {
   cursor: pointer;
   position: relative;
@@ -125,103 +118,6 @@ export default {
   justify-content: center;
   flex-direction: row;
   flex-wrap: wrap;
-}
-
-.info {
-  border-top: 0;
-  padding: 7px 15px;
-
-  width: 100%;
-  align-self: flex-end;
-}
-
-.fullname {
-  margin: 1.414em 0 0;
-  padding-top: 10px;
-  font-weight: bolder;
-  line-height: 1.2;
-  color: white;
-
-  margin-top: 0;
-  font-size: 2.441em;
-
-  opacity: 1;
-}
-
-.jobtitle {
-  font-size: 1.43em;
-  font-weight: inherit;
-  line-height: 1.2;
-  color: white;
-
-  opacity: 1;
-}
-
-.image {
-  display: block;
-  width: 100%;
-  height: auto;
-  transition-timing-function: ease-in-out;
-  z-index: 0;
-  position: relative;
-}
-
-.box {
-  cursor: pointer;
-}
-
-.box .overbox {
-  position: absolute;
-  color: #fff;
-  z-index: 1;
-  transition: all 300ms ease-out;
-  opacity: 0;
-  width: 100%;
-  height: auto;
-  margin-top: -90px;
-}
-
-.box:hover .overbox {
-  opacity: 1;
-}
-
-.box .overtext {
-  transition: all 300ms ease-out;
-  transform: translateY(40px);
-}
-
-.box .title {
-  font-size: 1.43em;
-  text-transform: uppercase;
-  opacity: 0;
-  transition-delay: 0.1s;
-  transition-duration: 0.2s;
-
-  padding-left: 10px;
-}
-
-.box:hover .title,
-.box:focus .title {
-  opacity: 1;
-  transform: translateY(0px);
-}
-
-.box .tagline {
-  font-size: 0.8em;
-  opacity: 0;
-  transition-delay: 0.2s;
-  transition-duration: 0.2s;
-  padding-left: 10px;
-}
-
-.box:hover .tagline,
-.box:focus .tagline {
-  opacity: 1;
-  transform: translateX(0px);
-}
-
-.box:hover .image {
-  filter: sepia(50%) saturate(200%) brightness(70%) hue-rotate(180deg);
 }
 .name {
   float: right;

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>This is the Documents default Index Page</h1>
     <!--{{ $route.params.documents }}-->
     <!--<DocSlider :documents="loadDocuments" />-->
     <DocList :documents="loadDocuments" />
