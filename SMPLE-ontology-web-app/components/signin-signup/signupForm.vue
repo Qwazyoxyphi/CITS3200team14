@@ -18,7 +18,7 @@
           <p v-if="errors.has('email')">{{ errors.first('email') }}</p>
           <AppControlInput
             name="password"
-            reff="password"
+            ref="password"
             v-validate="'required|min:5|max:15' "
             controlType="password"
             v-model="userCredentials.password"

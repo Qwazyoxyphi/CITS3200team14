@@ -3,6 +3,7 @@
     <DocsTile
       v-for="document in documents"
       :key="document.id"
+      :id="document.id"
       :document-name="document.documentName"
       :document-desc="document.documentDesc"/>
       <TheCreateDocument @createDocument="toggleCreateDocument()" />
@@ -33,7 +34,7 @@ export default {
   },
   props: {
     documents: {
-      type: Object,
+      type: Array,
       required: true
     }
   },
@@ -43,19 +44,25 @@ export default {
     }
   },
   methods: {
-    addDocument(documentData){
-      //todo improve
+    addDocument(documentData) {
       axios
-        .post(
-          'https://team-14-ontologies.firebaseio.com/'+ this.$route.path + '/folderDocs.json',
+        .post(//add to folder
+          'https://team-14-ontologies.firebaseio.com/' +
+            this.$route.path +
+            '/folderDocs.json',
           documentData
         )
-        .then(() => { })
-        .catch(e => console.log(e))
+        .then(res => {
+          axios
+            .put(//add to document table
+              'https://team-14-ontologies.firebaseio.com/Documents/'+ res.data.name +'.json',
+              documentData
+            )
+          this.$router.push('/diagram/') //+ res.data.name)
+        }).catch(e => console.log(e))
     },
     toggleCreateDocument() {
       this.documentFlag = !this.documentFlag
-      
     }
   }
 }
