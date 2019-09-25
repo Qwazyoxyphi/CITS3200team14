@@ -50,11 +50,13 @@ export default {
       return this.$store.getters.getUserId
     },
     getAllFolders() {
-      //Load All Folders
-      return this.$store.getters.getAllFolders
+      //this.$store.dispatch('folders/setAllFolders')
+      //return this.$store.getters['folders/allFolders']
+      return this.$store.state.folders.allFolders
     },
     getUserFolders() {
-      //Load User's Folders
+      //this.$store.dispatch('folders/setUserFolders')
+      //return this.$store.getters['folders/userFolders']
       this.$store.dispatch('setUserFolders')
       return this.$store.getters.getUserFolders
     }
