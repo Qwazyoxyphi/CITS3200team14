@@ -1,15 +1,10 @@
 <template>
   <div class="container">
-    <form @submit.prevent="onFolderSubmit" id="contact" action method="post">
-      <h3>Create a Folder.</h3>
+    <form @submit.prevent="onInviteSubmit" id="contact" action method="post">
+      <h3>Send an invite</h3>
       <AppControlInput 
-          v-model="newFolder.folderName"
-          placeholder="Folder Name"
-      />
-      <AppControlInput 
-          controlType="textarea"
-          v-model="newFolder.folderDesc"
-          placeholder="Write a description..."
+          v-model="newInvite.email"
+          placeholder="Email of user you're sharing with..."
       />
 
       <AppButton 
@@ -29,42 +24,38 @@ import AppControlInput from '@/components/Utils/AppControlInput'
 import AppButton from '@/components/Utils/AppButton'
 
 export default {
-  name: "TheForm",
+  name: "TheInviteForm",
   components: {
     AppButton,
     AppControlInput
   },
    props: {
-    folder: {
+    invite: {
       type: Object,
       required: false,
       default: () => ({
-        folderName: '',
-        folderDesc: '',
-        userId: '',
+        email: '',
       })
     }
   },
   data() {
     return {
-      newFolder: this.folder
-        ? { ...this.folder }
+      newInvite: this.invite
+        ? { ...this.invite }
         : {
-            folderName: '',
-            folderDesc: '',
-            userId: '',
+            email: '',
+            
           }
     }
   },
   computed: {
-    afolder() {
-      return { ...this.newFolder, ...this.folder }
+    ainvite() {
+      return { ...this.newInvite, ...this.invite }
     }
   },
   methods: {
-    onFolderSubmit() {//Save folder
-      this.newFolder.userId = this.$store.getters.getUserId//add uid to payload
-      this.$emit('submit', this.newFolder)
+    onInviteSubmit() {//Save folder
+      this.$emit('submit', this.newInvite)
       this.$emit('exitModal')
     },
     onCancel() {//exit folder form

@@ -50,7 +50,9 @@
 	</nuxt-link>
     <div class>
       <div class="name">{{ docName }}</div>
-      <AppSelect @toggleDelete="more(id, folderDocs)" />
+      <AppSelect2 @toggleDelete="more(id, folderDocs)" 
+              @toggleInvite = "inviteUser()"
+      />
     </div>
   </div>
   <!-- </nuxt-link>-->
@@ -58,12 +60,12 @@
 
 <script>
 import axios from 'axios'
-import AppSelect from '@/components/FolderPage/More/AppSelect'
+import AppSelect2 from '@/components/DocumentsPage/AppSelect2'
 
 export default {
   name: FolderTile,
   components: {
-    AppSelect
+    AppSelect2
   },
    props: {
     id: {

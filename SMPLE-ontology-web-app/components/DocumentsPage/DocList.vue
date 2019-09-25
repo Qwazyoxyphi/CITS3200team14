@@ -15,6 +15,15 @@
         @exitModal="toggleCreateDocument()"
       /> 
     </AppModal>
+      <AppModal
+      v-if="inviteFlag"
+      @exitModal="toggleInviteFlag()">
+
+      <TheInviteForm
+        @toggleInvite="toggleInviteFlag()"
+        @exitModal="toggleInviteFlag()"
+      /> 
+    </AppModal>
   </section>
 </template>
 
@@ -24,13 +33,15 @@ import DocsTile from '@/components/DocumentsPage/DocsTile'
 import AppModal from '@/components/Utils/AppModal'
 import TheDocumentForm from '@/components/DocumentsPage/TheDocumentForm'
 import TheCreateDocument from '@/components/DocumentsPage/CreateDocument/TheCreateDocument'
+import TheInviteForm from '@/components/DocumentsPage/TheInviteForm'
 
 export default {
   components: {
     DocsTile,
     AppModal,
     TheDocumentForm,
-    TheCreateDocument
+    TheCreateDocument,
+    TheInviteForm
   },
   props: {
     documents: {
@@ -40,10 +51,14 @@ export default {
   },
   data(){
     return {
-      documentFlag: false
+      documentFlag: false,
+      inviteFlag: false
     }
   },
   methods: {
+    toggleInviteFlag() {
+        this.inviteFlag=!this.inviteFlag;
+      },
     addDocument(documentData) {
       axios
         .post(//add to folder

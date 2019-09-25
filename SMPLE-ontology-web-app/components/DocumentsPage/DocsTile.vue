@@ -52,18 +52,34 @@
     </nuxt-link>
      <div class>
       <div class="name">{{ documentName }}</div>
-      <AppSelect @toggleDelete="moree(id)" />
+      <AppSelect2 @toggleDelete="moree(id)" 
+        @toggleInvite ="toggleInviteFlag()"/>
+   
+    <AppModal v-if="inviteFlag" @exitModal="toggleInviteFlag()">
+        <TheInviteForm @submit="onSubmitted" @exitModal="toggleInviteFlag()" />
+      </AppModal>
     </div>
+    
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-import AppSelect from '@/components/FolderPage/More/AppSelect'
+import AppSelect2 from '@/components/DocumentsPage/AppSelect2'
+import AppModal from '@/components/Utils/AppModal'
+import TheInviteForm from '@/components/DocumentsPage/TheInviteForm'
+
 export default {
   name: `DocsTile`,
   components: {
-    AppSelect
+    AppSelect2,
+    TheInviteForm,
+    AppModal
+  },
+  data(){
+    return{
+      inviteFlag: false
+    }
   },
   props: {
     id: {
@@ -80,6 +96,10 @@ export default {
     },
   },
   methods: {
+      toggleInviteFlag() {
+        this.inviteFlag=!this.inviteFlag;
+      },
+      
       moree(id) {
         //need to sync to button
         var documentdel = confirm(' Delete Document? ')
