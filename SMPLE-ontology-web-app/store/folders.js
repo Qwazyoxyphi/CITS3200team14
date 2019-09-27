@@ -1,3 +1,4 @@
+//folders.js
 import axios from 'axios'
 
 export const state = () => ({
@@ -5,33 +6,34 @@ export const state = () => ({
     userFolders: [],
 })
 
-
 export const mutations = {
+/* Setters */  
     setAllFolders(state, allFolders) {
         state.allFolders = allFolders
     },
-    setUserFolders(state, ufolders) {
-        state.userFolders = ufolders
+    setUserFolders(state, userFolders) {
+        state.userFolders = userFolders
+    },
+/* Setters */
+
+/* Add Folder */
+    addFolder(state, folder) {//works
+        state.allFolders.push(folder)
+    },
+    
+    deleteFolder(state, delFolderId) {
+        const allFodidx = state.allFolders.findIndex(
+            folder => folder.id === delFolderId)//find id of folder in store
+        if (allFodidx != -1) {// if in store remove it
+            state.allFolders.splice(allFodidx, 1)
+        }
     },
 }
 
 export const actions = {
-
-    setAllFolders(VuexContext) {
-        return axios //return all folders no filter
-            .get('https://team-14-ontologies.firebaseio.com/folders.json')
-            .then(res => {
-                const foldersArray = []
-                for (const key in res.data) {
-                    foldersArray.push({ ...res.data[key], id: key })
-                }
-                VuexContext.commit('setAllFolders', foldersArray)
-            })
-            .catch(e => console.error(e))
-    },
-
+/* Setters */
     setUserFolders(vuexContext) {
-        const allFolders = this.state.allFolders
+        const allFolders = this.state.folders.allFolders
         const currUsrId = this.state.getUserId
         const uFolderArr = []
 
@@ -41,7 +43,31 @@ export const actions = {
             }
         }
         vuexContext.commit('setUserFolders', uFolderArr)
-    }
+    },
+/* Setters */
+
+    addFolder(vuexContext, folder) {
+        return axios
+        .post('https://team-14-ontologies.firebaseio.com/folders.json', folder)
+        .then(res => {
+            vuexContext.commit('addFolder', { ...folder, id: res.data.name })
+            this.$router.push('/folders/' + res.data.name)//route into folder
+        })
+        .catch(e => console.log(e))
+    },
+    
+    deleteFolder(vuexContext, folderid) {
+        axios.delete(
+        'https://team-14-ontologies.firebaseio.com/folders/' +
+        folderid + '.json'
+        )
+        .then(res => {
+            vuexContext.commit('deleteFolder', folderid)//update local store
+        })
+        .catch(e => console.log(e))
+    },
+
+
 }
 
 export const getters = {

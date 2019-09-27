@@ -81,7 +81,7 @@ export default {
     async more(id) {
       var folderdel = confirm(' Delete Folder? ')
       if (folderdel == true) {
-        this.$store.dispatch('deleteFolder', id) //delete folder
+        this.$store.dispatch('folders/deleteFolder', id)//Delete Folder
       }
     }
   }

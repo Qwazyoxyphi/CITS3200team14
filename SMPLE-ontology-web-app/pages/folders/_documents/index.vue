@@ -2,7 +2,8 @@
   <div>
     <!--{{ $route.params.documents }}-->
     <!--<DocSlider :documents="loadDocuments" />-->
-    <DocList :documents="loadDocuments" />
+   <!--<DocList :documents="loadDocuments" />-->
+    <DocList :documents="getUserDocs" /> 
   </div>
 </template>
 
@@ -14,7 +15,7 @@ import axios from 'axios'
 
 export default {
   middleware: ['check-auth', 'auth'],
-  asyncData(context) {
+/*  asyncData(context) {
     return axios
       .get(
         'https://team-14-ontologies.firebaseio.com/folders/' +
@@ -29,7 +30,7 @@ export default {
         return { loadDocuments: docArray }
       })
       .catch(e => context.error(e))
-  },
+  }, */
   components: {
     AppModal,
     DocSlider,
@@ -43,6 +44,10 @@ export default {
   computed: {
     getUserId() {
       return this.$store.getters.getUserId
+    },
+    getUserDocs(){//Get the Documents Inside the Folder
+      this.$store.dispatch('documents/setUserDocs', this.$route.params.documents)
+      return this.$store.getters['documents/userDocs']
     }
   },
   methods: {

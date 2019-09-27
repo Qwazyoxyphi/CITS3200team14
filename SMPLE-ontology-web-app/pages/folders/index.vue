@@ -2,8 +2,7 @@
   <div>
     <AppSection title="Home > Folders > ____" color="blue">
       <h1>This is the Folders Index Page</h1>
-      <!--<p>The Users id:{{getUserId}} </p>-->
-      <FolderSlider :documents="allDocs" />
+      <FolderSlider :documents="getAllDocuments" />
       <FolderList :folders="getUserFolders" />
     </AppSection>
   </div>
@@ -20,18 +19,7 @@ import axios from 'axios'
 
 export default {
   middleware: ['check-auth', 'auth'],
-  asyncData(context) {
-    return axios
-      .get('https://team-14-ontologies.firebaseio.com/Documents.json')
-      .then(res => {
-        const documentsArray = []
-        for (const key in res.data) {
-          documentsArray.push({ ...res.data[key], id: key })
-        }
-        return { allDocs: documentsArray }
-      })
-      .catch(e => context.error(e))
-  },
+
   components: {
     FolderList,
     AppSection,
@@ -45,20 +33,15 @@ export default {
     }
   },
   computed: {
-    getUserId() {
-      //Get User ID
+    getUserId() {//unused?
       return this.$store.getters.getUserId
     },
-    getAllFolders() {
-      //this.$store.dispatch('folders/setAllFolders')
-      //return this.$store.getters['folders/allFolders']
-      return this.$store.state.folders.allFolders
+    getUserFolders() {//display user's folders
+      this.$store.dispatch('folders/setUserFolders')
+      return this.$store.getters['folders/userFolders']
     },
-    getUserFolders() {
-      //this.$store.dispatch('folders/setUserFolders')
-      //return this.$store.getters['folders/userFolders']
-      this.$store.dispatch('setUserFolders')
-      return this.$store.getters.getUserFolders
+    getAllDocuments() {//display all Documents
+      return this.$store.getters['documents/allDocuments']
     }
   },
   methods: {
