@@ -5,7 +5,8 @@ export const state = () => ({
   leftSidebar: true,
   rightSidebar: false,
   token: null,
-  getUserId: null
+  getUserId: null,
+  getUserEmail: null
 })
 
 export const mutations = {
@@ -26,13 +27,18 @@ export const mutations = {
   setUserId(state, userId) {
     state.getUserId = userId
   },
+  setUserEmail(state, userEmail) {
+    state.getUserEmail = userEmail
+  },
 
-  setAllFolders(state, folders) {// init populate folder state
+  setAllFolders(state, folders) {
+    // init populate folder state
     this.state.folders.allFolders = folders
   },
-  setAllDocuments(state, documents) {// init populate folder state
+  setAllDocuments(state, documents) {
+    // init populate folder state
     this.state.documents.allDocuments = documents
-  },
+  }
 }
 export const actions = {
   /* sidebar actions */
@@ -43,6 +49,14 @@ export const actions = {
     commit('setRightSidebar')
   },
   /*        **         */
+  inviteUser(inviteData) {
+    //inviteData has email of invited user and document id
+    //need to use email to find user id assoc. with that email and then add doc into db for that user/that user id into doc in db
+    const thisFolder2 = this.state.folders.allFolders.find(
+      ({ userEmail }) => userEmail === inviteData.email
+    )
+    console.log(thisFolder2.userId)
+  },
   authenticateUser(vuexContext, authData) {
     return this.$axios
       .$post(
@@ -54,6 +68,7 @@ export const actions = {
         }
       )
       .then(result => {
+        vuexContext.commit('setUserEmail', result.email)
         vuexContext.commit('setUserId', result.localId)
         vuexContext.commit('setToken', result.idToken)
         localStorage.setItem('token', result.idToken)
@@ -62,6 +77,8 @@ export const actions = {
           new Date().getTime() + Number.parseInt(result.expiresIn) * 1000
         )
         localStorage.setItem('userId', result.localId)
+        localStorage.setItem('userEmail', result.email)
+        Cookie.set('userEmail', result.email)
         Cookie.set('userId', result.localId)
         Cookie.set('jwt', result.idToken)
         Cookie.set(
@@ -78,6 +95,7 @@ export const actions = {
   initAuth(vuexContext, req) {
     let token
     let userId
+    let userEmail
     let expirationDate
     if (req) {
       if (!req.headers.cookie) {
@@ -98,10 +116,15 @@ export const actions = {
         .split(';')
         .find(c => c.trim().startsWith('userId='))
         .split('=')[1]
+      userEmail = req.headers.cookie
+        .split(';')
+        .find(c => c.trim().startsWith('userEmail='))
+        .split('=')[1]
     } else {
       token = localStorage.getItem('token')
       expirationDate = localStorage.getItem('tokenExpiration')
       userId = localStorage.getItem('userId')
+      userEmail = localStorage.getItem('userEmail')
     }
     /*if (new Date().getTime() > +expirationDate || !token) {
       console.log('No token or invalid token')
@@ -110,12 +133,14 @@ export const actions = {
     }*/
     vuexContext.commit('setToken', token)
     vuexContext.commit('setUserId', userId)
+    vuexContext.commit('setUserEmail', userEmail)
   },
   logout(vuexContext) {
     vuexContext.commit('clearToken')
     Cookie.remove('jwt')
     Cookie.remove('expirationDate')
     Cookie.remove('userId')
+    Cookie.remove('userEmail')
     if (process.client) {
       localStorage.removeItem('token')
       localStorage.removeItem('tokenExpiration')
@@ -123,9 +148,14 @@ export const actions = {
   },
 
   /* Populate Folders & Documents when Server Starts */
-  async nuxtServerInit({ commit }) {//nuxtserverinit only in here.
-    const foldersdata = await axios.get('https://team-14-ontologies.firebaseio.com/folders.json')
-    const documentdata = await axios.get(('https://team-14-ontologies.firebaseio.com/Documents.json'))
+  async nuxtServerInit({ commit }) {
+    //nuxtserverinit only in here.
+    const foldersdata = await axios.get(
+      'https://team-14-ontologies.firebaseio.com/folders.json'
+    )
+    const documentdata = await axios.get(
+      'https://team-14-ontologies.firebaseio.com/Documents.json'
+    )
     const foldersArray = []
     const docsArray = []
     //console.log(foldersdata.data)
@@ -133,12 +163,12 @@ export const actions = {
       foldersArray.push({ ...foldersdata.data[key], id: key })
     }
     commit('setAllFolders', foldersArray)
-    
+
     for (const key in documentdata.data) {
       docsArray.push({ ...documentdata.data[key], id: key })
     }
     commit('setAllDocuments', docsArray)
-  },
+  }
   /* Populate Folders & Documents when Server Starts */
 }
 
@@ -157,5 +187,8 @@ export const getters = {
   },
   getUserId(state) {
     return state.getUserId
+  },
+  getUserEmail(state) {
+    return state.getUserEmail
   }
 }

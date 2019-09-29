@@ -13,13 +13,20 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
+    "@firebase/app": "^0.4.18",
     "@nuxtjs/axios": "^5.6.0",
     "axios": "^0.19.0",
+    "child_process": "^1.0.2",
     "cross-env": "^5.2.0",
+    "firebase-admin": "^8.6.0",
+    "fs": "0.0.1-security",
+    "http2": "^3.3.7",
     "js-cookie": "^2.2.1",
+    "net": "^1.0.2",
     "nuxt": "^2.8.1",
     "nuxt-validate": "^1.0.1",
     "recaptcha": "^1.2.1",
+    "tls": "0.0.1",
     "vee-validate": "^2.1.5",
     "vue-cookie-law": "^1.10.0",
     "vueperslides": "^1.20.1"

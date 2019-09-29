@@ -100,6 +100,9 @@ export default {
             })
             .catch(e => console.log(e))
         }
+      },
+      inviteUser(data){
+        console.log(admin.auth().getUserByEmail(data.email));
       }
     }
   }

@@ -42,6 +42,7 @@ export default {
         folderName: '',
         folderDesc: '',
         userId: '',
+        userEmail: ''
       })
     }
   },
@@ -53,6 +54,7 @@ export default {
             folderName: '',
             folderDesc: '',
             userId: '',
+            userEmail
           }
     }
   },
@@ -64,6 +66,7 @@ export default {
   methods: {
     onFolderSubmit() {//Save folder
       this.newFolder.userId = this.$store.getters.getUserId//add uid to payload
+      this.newFolder.userEmail = this.$store.getters.getUserEmail //add email to payload
       this.$emit('submit', this.newFolder)
       this.$emit('exitModal')
     },

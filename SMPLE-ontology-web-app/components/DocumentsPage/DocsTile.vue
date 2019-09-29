@@ -120,7 +120,16 @@ export default {
             .catch(e => console.log(e))
         }
       
-    }
+    },
+    onSubmitted(data){
+        /*console.log(this.id)
+        console.log(data.email)*/
+      
+        data.id=this.id
+        //console.log(data.id) 
+
+        this.$store.dispatch('inviteUser', data)
+      }
   }
 }
 </script>

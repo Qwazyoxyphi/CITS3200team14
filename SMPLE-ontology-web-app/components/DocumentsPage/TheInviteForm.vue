@@ -4,12 +4,12 @@
       <h3>Send an invite</h3>
       <AppControlInput 
           v-model="newInvite.email"
-          placeholder="Email of user you're sharing with..."
+          placeholder="Pleas enter users email..."
       />
 
       <AppButton 
           class="login-but" 
-          type="submit">Create</AppButton>
+          type="submit">Send</AppButton>
         <AppButton 
           class="login-but" 
           type="button" 
@@ -44,6 +44,7 @@ export default {
         ? { ...this.invite }
         : {
             email: '',
+            id: ''
             
           }
     }
