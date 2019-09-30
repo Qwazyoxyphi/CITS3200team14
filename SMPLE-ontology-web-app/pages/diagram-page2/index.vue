@@ -17,7 +17,6 @@
         <Canvas />
       </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -109,7 +108,6 @@ export default {
 
 .e-ddb-icons {
   font-family: 'e-ddb-icons';
-  speak: none;
   font-size: 16px;
   font-style: normal;
   font-weight: normal;
@@ -122,7 +120,6 @@ export default {
 
 .e-ddb-icons1 {
   font-family: 'e-ddb-icons1';
-  speak: none;
   font-size: 16px;
   font-style: normal;
   font-weight: normal;
