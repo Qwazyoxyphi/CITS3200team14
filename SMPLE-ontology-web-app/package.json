@@ -15,6 +15,7 @@
   "dependencies": {
     "@firebase/app": "^0.4.18",
     "@nuxtjs/axios": "^5.6.0",
+    "@syncfusion/ej2-base": "^17.2.49",
     "@syncfusion/ej2-vue-diagrams": "^17.2.51",
     "@syncfusion/ej2-vue-grids": "^17.2.51",
     "@syncfusion/ej2-vue-inputs": "^17.2.52",

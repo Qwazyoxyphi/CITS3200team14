@@ -38,6 +38,11 @@ export default {
         )
         .then(result => {
           this.flag = !this.flag
+        axios
+        .post('https://team-14-ontologies.firebaseio.com/users.json',{
+          userId: result.localId,
+          userEmail: result.email
+        })
           console.log(result)
         })
         .catch(error => {
@@ -45,7 +50,10 @@ export default {
             alert('This email is already registered')
             commit('SET_ERROR', error)
           })
+      
+        
     },
+     
     onSubmit2(userData) {
       this.$store.dispatch('authenticateUser', userData).then(() => {
         this.$router.push('/folders')

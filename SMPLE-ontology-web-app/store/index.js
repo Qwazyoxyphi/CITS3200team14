@@ -55,7 +55,7 @@ export const actions = {
     const thisFolder2 = this.state.folders.allFolders.find(
       ({ userEmail }) => userEmail === inviteData.email
     )
-    console.log(thisFolder2.userId)
+    console.log(thisFolder2.userEmail)
   },
   authenticateUser(vuexContext, authData) {
     return this.$axios

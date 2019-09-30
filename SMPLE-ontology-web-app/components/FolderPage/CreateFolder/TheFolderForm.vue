@@ -27,6 +27,7 @@
 <script>
 import AppControlInput from '@/components/Utils/AppControlInput'
 import AppButton from '@/components/Utils/AppButton'
+import axios from 'axios'
 
 export default {
   name: "TheForm",
@@ -41,7 +42,7 @@ export default {
       default: () => ({
         folderName: '',
         folderDesc: '',
-        userId: '',
+        //userId: '',
         userEmail: ''
       })
     }
@@ -53,7 +54,7 @@ export default {
         : {
             folderName: '',
             folderDesc: '',
-            userId: '',
+            //userId: '',
             userEmail
           }
     }
@@ -70,6 +71,7 @@ export default {
       this.$emit('submit', this.newFolder)
       this.$emit('exitModal')
     },
+
     onCancel() {//exit folder form
       this.$emit('exitModal')
     }
