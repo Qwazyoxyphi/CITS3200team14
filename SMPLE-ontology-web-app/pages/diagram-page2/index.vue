@@ -1,5 +1,10 @@
 <template>
-  
+  <div class="control-section">
+    <div
+      @click="download()"
+    >CLICK HERE TO SAVE ! - this should console.log the JSON to save in the DB</div>
+    <div @click="importt()">CLICK HERE TO IMPORT ! - get JSON from DB to load in here</div>
+    <div @click="exportt()">CLICK HERE TO EXPORT ! - as SVG but can change it</div>
     <div style="width:100%">
       <div class="sb-mobile-palette-bar">
         <div id="palette-icon" role="button" class="e-ddb-icons1 e-toggle-palette"></div>
@@ -16,17 +21,72 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import Canvas from '@/components/DiagramPage/Syncfusion/Canvas'
 import Pallette from '@/components/DiagramPage/Syncfusion/Pallette'
 import DiagramSidebar from '@/components/DiagramPage/DiagramSidebar/DiagramSidebar'
+import TheSaveButton from '@/components/DiagramPage/DiagramSidebar/TheSaveButton'
+import { Uploader, UploaderPlugin } from '@syncfusion/ej2-vue-inputs'
+import {
+  PrintAndExport,
+  IExportOptions,
+  BasicShapeModel,
+  DiagramPlugin,
+  Diagram,
+  NodeModel,
+  ConnectorModel,
+  FileFormats,
+  SnapConstraints
+} from '@syncfusion/ej2-vue-diagrams'
+import {
+  ToolbarPlugin,
+  Toolbar,
+  ClickEventArgs
+} from '@syncfusion/ej2-vue-navigations'
+Vue.use(UploaderPlugin)
+Vue.use(ToolbarPlugin)
 
 export default {
   components: {
     Canvas,
     Pallette,
-    DiagramSidebar
+    DiagramSidebar,
+    TheSaveButton
+  },
+  data() {
+    return {
+      saveData: ''
+    }
+  },
+  methods: {
+    download() {
+      let diagramObj = document.getElementById('diagram')
+      console.log(diagramObj)
+      let diagramInstance = diagramObj.ej2_instances[0]
+      //returns serialized string of the Diagram
+      this.saveData = diagramInstance.saveDiagram()
+      console.log(this.saveData)
+    },
+    importt() {
+      let diagramObj = document.getElementById('diagram')
+      let diagramInstance = diagramObj.ej2_instances[0]
+      //returns serialized string of the Diagram
+      console.log(this.saveData)
+      diagramInstance.loadDiagram(this.saveData)
+    },
+    exportt() {
+      let diagramObj = document.getElementById('diagram')
+      let diagramInstance = diagramObj.ej2_instances[0]
+      let exportOptions = {}
+      exportOptions.mode = 'Download'
+      exportOptions.format = 'SVG'
+      exportOptions.region = 'PageSettings'
+      exportOptions.fileName = 'Export'
+      exportOptions.pageHeight = 400
+      exportOptions.pageWidth = 400
+      diagramInstance.exportDiagram(exportOptions)
+    }
   }
-  
 }
 </script>
 
