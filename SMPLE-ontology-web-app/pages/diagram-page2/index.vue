@@ -17,6 +17,7 @@
         <Canvas />
       </div>
     </div>
+  </div>
 </template>
 
 <script>
