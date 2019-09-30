@@ -38,14 +38,6 @@ export const actions = {
       }
     }
     commit('setUserDocs', uDocsArr)
-  },
-  inviteUser(inviteData) {
-    //inviteData has email of invited user and document id
-    //need to use email to find user id assoc. with that email and then add doc into db for that user/that user id into doc in db
-    const thisFolder2 = this.state.folders.allFolders.find(
-      ({ userEmail }) => userEmail === inviteData.email
-    )
-    console.log(thisFolder2.userId)
   }
 }
 
