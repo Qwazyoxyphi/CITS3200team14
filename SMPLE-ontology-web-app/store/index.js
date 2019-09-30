@@ -154,11 +154,10 @@ export const actions = {
       'https://team-14-ontologies.firebaseio.com/folders.json'
     )
     const documentdata = await axios.get(
-      'https://team-14-ontologies.firebaseio.com/Documents.json'
+      'https://team-14-ontologies.firebaseio.com/documents.json'
     )
     const foldersArray = []
     const docsArray = []
-    //console.log(foldersdata.data)
     for (const key in foldersdata.data) {
       foldersArray.push({ ...foldersdata.data[key], id: key })
     }

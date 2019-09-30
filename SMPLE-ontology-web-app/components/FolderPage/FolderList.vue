@@ -8,7 +8,6 @@
         :id="folder.id"
         :folder-name="folder.folderName"
         :folder-desc="folder.folderDesc"
-        :folder-docs="folder.folderDocs"
       />
       <TheCreateFolder @createFolder="toggleCreateFolder()" />
       <AppModal v-if="folderFlag" @exitModal="toggleCreateFolder()">
@@ -46,7 +45,8 @@ export default {
     }
   },
   methods: {
-    onSubmitted(folderData) {//add Folder
+    onSubmitted(folderData) {
+      //add Folder
       this.$store.dispatch('folders/addFolder', folderData)
     },
     toggleCreateFolder() {
