@@ -51,17 +51,7 @@ export const actions = {
   /* Setters */
 
   addFolder(vuexContext, folder) {
-    const userids = {
-      id: this.state.getUserId
-    }
-    //folder.userids = userids
-
-    var tuserids = new Object()
-    tuserids[this.state.getUserId] = true
-    //folder.userids = tuserids
-    //folder.userids[this.state.getUserId] = true
-
-    folder.userids[this.state.getUserId] = true
+    folder.userIds = { [this.state.getUserId]: this.state.getUserId }//add userId as Object 
     return axios
       .post('https://team-14-ontologies.firebaseio.com/folders.json', folder)
       .then(res => {
@@ -70,14 +60,13 @@ export const actions = {
       })
       .catch(e => console.log(e))
   },
-  //addUser(id) {},
 
   deleteFolder(vuexContext, folderid) {
     axios
       .delete(
         'https://team-14-ontologies.firebaseio.com/folders/' +
-          folderid +
-          '.json'
+        folderid +
+        '.json'
       )
       .then(res => {
         vuexContext.commit('deleteFolder', folderid) //update local store
