@@ -74,7 +74,8 @@ module.exports = {
   */
   plugins: [
     { src: '~plugins/vee-validate.js', ssr: true },
-    { src: '~/plugins/vueperslides', ssr: false }
+    { src: '~/plugins/vueperslides', ssr: false },
+    //{ src: '~/plugins/diagram-tool.js', ssr: false}
   ],
 
   /*
