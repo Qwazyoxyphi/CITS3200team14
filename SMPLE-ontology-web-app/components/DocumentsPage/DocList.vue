@@ -5,24 +5,14 @@
       :key="document.id"
       :id="document.id"
       :document-name="document.documentName"
-      :document-desc="document.documentDesc"/>
-      <TheCreateDocument @createDocument="toggleCreateDocument()" />
-      <AppModal 
-      v-if="documentFlag"
-      @exitModal="toggleCreateDocument()">
-      <TheDocumentForm 
-        @submit="addDocument"
-        @exitModal="toggleCreateDocument()"
-      /> 
+      :document-desc="document.documentDesc"
+    />
+    <TheCreateDocument @createDocument="toggleCreateDocument()" />
+    <AppModal v-if="documentFlag" @exitModal="toggleCreateDocument()">
+      <TheDocumentForm @submit="onDocSubmitted" @exitModal="toggleCreateDocument()" />
     </AppModal>
-      <AppModal
-      v-if="inviteFlag"
-      @exitModal="toggleInviteFlag()">
-
-      <TheInviteForm
-        @toggleInvite="toggleInviteFlag()"
-        @exitModal="toggleInviteFlag()"
-      /> 
+    <AppModal v-if="inviteFlag" @exitModal="toggleInviteFlag()">
+      <TheInviteForm @toggleInvite="toggleInviteFlag()" @exitModal="toggleInviteFlag()" />
     </AppModal>
   </section>
 </template>
@@ -49,7 +39,7 @@ export default {
       required: true
     }
   },
-  data(){
+  data() {
     return {
       documentFlag: false,
       inviteFlag: false
@@ -57,24 +47,11 @@ export default {
   },
   methods: {
     toggleInviteFlag() {
-        this.inviteFlag=!this.inviteFlag;
-      },
-    addDocument(documentData) {
-      axios
-        .post(//add to folder
-          'https://team-14-ontologies.firebaseio.com/' +
-            this.$route.path +
-            '/folderDocs.json',
-          documentData
-        )
-        .then(res => {
-          axios
-            .put(//add to document table
-              'https://team-14-ontologies.firebaseio.com/Documents/'+ res.data.name +'.json',
-              documentData
-            )
-          this.$router.push('/diagram/') //+ res.data.name)
-        }).catch(e => console.log(e))
+      this.inviteFlag = !this.inviteFlag
+    },
+    onDocSubmitted(documentData) {
+      //add Document
+      this.$store.dispatch('documents/addDocument', documentData)
     },
     toggleCreateDocument() {
       this.documentFlag = !this.documentFlag

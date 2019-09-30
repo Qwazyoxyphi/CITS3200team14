@@ -6,9 +6,9 @@ export const state = () => ({
   userFolders: []
 })
 
+//TODO** if folder has no users, delete it from DB.
 export const mutations = {
   /* Setters */
-
   setAllFolders(state, allFolders) {
     state.allFolders = allFolders
   },
@@ -19,7 +19,6 @@ export const mutations = {
 
   /* Add Folder */
   addFolder(state, folder) {
-    //works
     state.allFolders.push(folder)
   },
 
@@ -41,15 +40,18 @@ export const actions = {
     const currUsrId = this.state.getUserId
     const uFolderArr = []
 
-    for (const key in allFolders) {
-      if (allFolders[key].userId == currUsrId) {
-        uFolderArr.push(allFolders[key])
+    for (const key in allFolders) {//all folders
+      //if (allFolders[key].userId == currUsrId)
+      for (const uid in allFolders[key].userIds){//all users in that folder
+        if (uid == currUsrId){
+          uFolderArr.push(allFolders[key])
+        }
       }
     }
     vuexContext.commit('setUserFolders', uFolderArr)
   },
   /* Setters */
-
+  //use axios.patch when adding more userids or will break it
   addFolder(vuexContext, folder) {
     folder.userIds = { [this.state.getUserId]: this.state.getUserId }//add userId as Object 
     return axios
@@ -61,17 +63,18 @@ export const actions = {
       .catch(e => console.log(e))
   },
 
-  deleteFolder(vuexContext, folderid) {
+  deleteFolder(vuexContext, folderid) {//remove user from folder
     axios
       .delete(
         'https://team-14-ontologies.firebaseio.com/folders/' +
-        folderid +
+        folderid +'/userIds/'+ this.state.getUserId +
         '.json'
       )
-      .then(res => {
+      .then(()=> {
         vuexContext.commit('deleteFolder', folderid) //update local store
       })
       .catch(e => console.log(e))
+
   }
 }
 

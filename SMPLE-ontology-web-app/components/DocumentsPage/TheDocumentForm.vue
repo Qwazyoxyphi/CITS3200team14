@@ -2,23 +2,15 @@
   <div class="container">
     <form @submit.prevent="onDocumentSubmit" id="contact" action method="post">
       <h3>Create a Document.</h3>
-      <AppControlInput 
-          v-model="newDocument.documentName"
-          placeholder="Document Name"
-      />
-      <AppControlInput 
-          controlType="textarea"
-          v-model="newDocument.documentDesc"
-          placeholder="Write a description..."
+      <AppControlInput v-model="newDocument.documentName" placeholder="Document Name" />
+      <AppControlInput
+        controlType="textarea"
+        v-model="newDocument.documentDesc"
+        placeholder="Write a description..."
       />
 
-      <AppButton 
-          class="login-but" 
-          type="submit">Create</AppButton>
-        <AppButton 
-          class="login-but" 
-          type="button" 
-          @click="onCancel">Cancel</AppButton>
+      <AppButton class="login-but" type="submit">Create</AppButton>
+      <AppButton class="login-but" type="button" @click="onCancel">Cancel</AppButton>
       <p class="copyright">We are UWA.</p>
     </form>
   </div>
@@ -29,18 +21,19 @@ import AppControlInput from '@/components/Utils/AppControlInput'
 import AppButton from '@/components/Utils/AppButton'
 
 export default {
-  name: "TheDocForm",
+  name: 'TheDocForm',
   components: {
     AppButton,
     AppControlInput
   },
-   props: {
+  props: {
     document: {
       type: Object,
       required: false,
       default: () => ({
         documentName: '',
         documentDesc: '',
+        docFolderId: ''
       })
     }
   },
@@ -51,6 +44,7 @@ export default {
         : {
             documentName: '',
             documentDesc: '',
+            docFolderId: ''
           }
     }
   },
@@ -61,6 +55,7 @@ export default {
   },
   methods: {
     onDocumentSubmit() {
+      this.newDocument.docFolderId = this.$route.params.documents //add folderid to document
       this.$emit('submit', this.newDocument)
       this.$emit('exitModal')
     },
@@ -115,5 +110,4 @@ fieldset {
 .copyright {
   text-align: center;
 }
-
 </style>
