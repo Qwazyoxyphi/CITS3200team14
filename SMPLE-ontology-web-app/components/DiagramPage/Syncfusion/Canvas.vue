@@ -1,7 +1,5 @@
 <template>
-  <div id="app">
     <ejs-diagram id="diagram" :width="width" :height="height" :nodes="nodes"></ejs-diagram>
-  </div>
 </template>
 <script>
 import Vue from 'vue'
@@ -34,3 +32,9 @@ export default {
   }
 }
 </script>
+
+<style lang="css" scoped>
+#diagram {
+  width: 550px !important;
+}
+</style>

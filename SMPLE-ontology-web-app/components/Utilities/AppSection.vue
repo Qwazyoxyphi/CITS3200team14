@@ -3,7 +3,6 @@
     :style="sectionStyle"
     class="section"
   >
-    <h2>{{ title }}</h2>
     <slot/>
   </section>
 </template>
@@ -45,13 +44,14 @@ export default {
           color = '#27c9b8'
           break
         case 'blue':
-          color = '#2caaca'
+          color = '#1171ba'
           break
       }
       return {
         'border-top-color': color,
         width: this.width,
-        'max-width': this.maxWidth
+        'max-width': this.maxWidth,
+        'padding-top': 50 + 'px'
       }
     }
   }
@@ -62,7 +62,7 @@ export default {
 
 .section {
   margin: 40px auto;
-  padding: 0 40px 20px 40px;
+  padding: 0 40px 20px 0px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
   border-top: 5px solid;
   background-color: white;

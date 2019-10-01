@@ -1,23 +1,43 @@
 <template>
-  <div class="control-section">
-    <div
-      @click="download()"
-    >CLICK HERE TO SAVE ! - this should console.log the JSON to save in the DB</div>
-    <div @click="importt()">CLICK HERE TO IMPORT ! - get JSON from DB to load in here</div>
-    <div @click="exportt()">CLICK HERE TO EXPORT ! - as SVG but can change it</div>
-    <div style="width:100%">
-      <div class="sb-mobile-palette-bar">
-        <div id="palette-icon" role="button" class="e-ddb-icons1 e-toggle-palette"></div>
+    <AppSection color="blue">
+      <!--<div @click="importt()">CLICK HERE TO IMPORT ! - get JSON from DB to load in here</div> -->         
+      <div class="flex">
+        <div class="smallitem">
+          <div class="flexx">
+            <TwoButtons @save="download()" /> 
+          </div>
+            <div class="sb-mobile-palette-bar">
+              <div id="palette-icon" role="button" class="e-ddb-icons1 e-toggle-palette"></div>
+            </div>
+             <!-- EXPORT OPTIONS -->
+            <div class="separator">
+              <div>Pallete options</div>
+            </div>
+            <div id="" class="">
+              <div class="flexx"><Pallette /></div>
+              <div>
+              <!-- EXPORT OPTIONS -->
+            <div class="separator">
+              <div>export options</div>
+            </div>
+            <div class="container-wrap flexbox">
+              <div class="but-wrapper itemm">
+                <svgFile @exportSVG="exportSVG()" />
+              </div>
+              <div class="but-wrapper itemm">
+                <pdfFile @exportPDF="exportPDF()" />
+              </div>
+          </div>
+            </div>
+            </div>
+        </div>
+        <div class="bigitem">
+          <div id="diagram-space" class="sb-mobile-diagram">
+            <Canvas />
+          </div>
+        </div>
       </div>
-      <div id="palette-space" class="sb-mobile-palette">
-        <Pallette />
-      </div>
-
-      <div id="diagram-space" class="sb-mobile-diagram">
-        <Canvas />
-      </div>
-    </div>
-  </div>
+    </AppSection>
 </template>
 
 <script>
@@ -43,6 +63,11 @@ import {
   Toolbar,
   ClickEventArgs
 } from '@syncfusion/ej2-vue-navigations'
+import AppSection from '@/components/Utilities/AppSection'
+import svgFile from '@/components/Utils/SVG/svgFile'
+import pdfFile from '@/components/Utils/SVG/pdfFile' 
+import TwoButtons from '@/components/DiagramPage/DiagramSidebar/TwoButtons'
+
 Vue.use(UploaderPlugin)
 Vue.use(ToolbarPlugin)
 
@@ -51,7 +76,11 @@ export default {
     Canvas,
     Pallette,
     DiagramSidebar,
-    TheSaveButton
+    TheSaveButton,
+    AppSection,
+    svgFile,
+    pdfFile,
+    TwoButtons
   },
   data() {
     return {
@@ -74,7 +103,19 @@ export default {
       console.log(this.saveData)
       diagramInstance.loadDiagram(this.saveData)
     },
-    exportt() {
+    exportPDF() {
+      let diagramObj = document.getElementById('diagram')
+      let diagramInstance = diagramObj.ej2_instances[0]
+      let exportOptions = {}
+      exportOptions.mode = 'Download'
+      exportOptions.format = 'PDF'
+      exportOptions.region = 'PageSettings'
+      exportOptions.fileName = 'Export'
+      exportOptions.pageHeight = 400
+      exportOptions.pageWidth = 400
+      diagramInstance.exportDiagram(exportOptions)
+    },
+    exportSVG() {
       let diagramObj = document.getElementById('diagram')
       let diagramInstance = diagramObj.ej2_instances[0]
       let exportOptions = {}
@@ -198,5 +239,60 @@ export default {
   position: absolute;
   display: block;
   right: 15px;
+}
+
+.bigitem {
+  /* This will be twice as */
+  /* big as the small item. */
+  flex: 2 0 0;
+  background-color: #efefef;
+  border-radius: 5px;
+  margin: 15px;
+  padding: 5px;
+}
+.smallitem {
+  flex: 1 0 0;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.but-wrapper {
+  padding: 5px;
+  width: 100%;
+}
+.itemm {
+  max-width: 80px;
+  flex: 1 1 80px;
+}
+.container-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.separator {
+  height: 50px;
+  background-color: #efefef;
+  display: flex;
+  align-items: center;
+}
+
+.separator div {
+  padding: 15px;
+  font-size: 16pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #19222a;
+}
+
+.flexx {
+  display: flex;
+  justify-content: center;
 }
 </style>

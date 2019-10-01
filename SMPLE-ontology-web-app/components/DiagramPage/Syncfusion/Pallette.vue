@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="pallete">
     <ejs-symbolpalette
       id="symbolpalette"
       :expandMode="expandMode"
@@ -244,3 +244,9 @@ export default {
   }
 }
 </script>
+
+<style lang="css" scoped>
+.pallete {
+  height: 300px;
+}
+</style>
