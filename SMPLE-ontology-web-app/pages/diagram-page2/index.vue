@@ -1,6 +1,6 @@
 <template>
     <AppSection color="blue">
-      <!--<div @click="importt()">CLICK HERE TO IMPORT ! - get JSON from DB to load in here</div> -->         
+      <!--<div @click="importt()">CLICK HERE TO IMPORT ! - get JSON from DB to load in here</div>-->  
       <div class="flex">
         <div class="smallitem">
           <div class="flexx">
@@ -41,6 +41,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Vue from 'vue'
 import Canvas from '@/components/DiagramPage/Syncfusion/Canvas'
 import Pallette from '@/components/DiagramPage/Syncfusion/Pallette'
@@ -88,13 +89,17 @@ export default {
     }
   },
   methods: {
+    onSubmit(){
+      axios.post('https://team-14-ontologies.firebaseio.com/diagrams2.json',this.saveData)
+    },
     download() {
       let diagramObj = document.getElementById('diagram')
-      console.log(diagramObj)
+      //console.log(diagramObj)
       let diagramInstance = diagramObj.ej2_instances[0]
       //returns serialized string of the Diagram
       this.saveData = diagramInstance.saveDiagram()
-      console.log(this.saveData)
+      //console.log(this.saveData)
+      this.onSubmit()
     },
     importt() {
       let diagramObj = document.getElementById('diagram')
