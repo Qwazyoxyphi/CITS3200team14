@@ -1,6 +1,7 @@
 <template>
   <div>
-    <AppSection title="Home > Folders > ____" color="blue">
+    <AppSection color="blue">
+      <h2>Home > Folders > ____</h2>
       <h1>This is the Folders Index Page</h1>
       <FolderSlider :documents="getAllDocuments" />
       <FolderList :folders="getUserFolders" />
@@ -51,3 +52,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+h2 {
+  font-size: 1.8rem;
+  text-align: center;
+}
+</style>

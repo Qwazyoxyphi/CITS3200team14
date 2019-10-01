@@ -3,7 +3,6 @@
     :style="sectionStyle"
     class="section"
   >
-    <h2>{{ title }}</h2>
     <slot/>
   </section>
 </template>
@@ -16,11 +15,6 @@ export default {
       type: String,
       required: false,
       default: 'white'
-    },
-    title: {
-      type: String,
-      required: false,
-      default: 'Title'
     },
     width: {
       type: String,
@@ -67,5 +61,9 @@ export default {
   border-top: 5px solid;
   background-color: white;
 }
-
+h2 {
+  font-weight: bold;
+  font-size: 2.4rem;
+  text-align: center;
+}
 </style>

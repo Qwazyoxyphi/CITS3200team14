@@ -16,11 +16,6 @@ export default {
       required: false,
       default: 'white'
     },
-    title: {
-      type: String,
-      required: false,
-      default: 'Title'
-    },
     width: {
       type: String,
       required: false,

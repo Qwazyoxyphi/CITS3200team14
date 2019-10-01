@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import AppModal from '@/components/Utils/AppModal'
+import AppModal from '@/components/Utilities/AppModal'
 import DocSlider from '@/components/DocumentsPage/DocSlider'
 import DocList from '@/components/DocumentsPage/DocList'
 import axios from 'axios'

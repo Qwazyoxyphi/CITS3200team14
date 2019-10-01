@@ -64,7 +64,7 @@ import {
   Toolbar,
   ClickEventArgs
 } from '@syncfusion/ej2-vue-navigations'
-import AppSection from '@/components/Utilities/AppSection'
+import AppSection from '@/components/Utils/AppSection'
 import svgFile from '@/components/Utils/SVG/svgFile'
 import pdfFile from '@/components/Utils/SVG/pdfFile' 
 import TwoButtons from '@/components/DiagramPage/DiagramSidebar/TwoButtons'
