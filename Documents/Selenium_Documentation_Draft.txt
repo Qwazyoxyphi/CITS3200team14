@@ -8,7 +8,7 @@ Why Use Selenium?
      o Windows, Linux, Mac.
  • Performs tests on any web browser.
  • Supports multiple programming languages.
-     o Java, C#, Ruby, Python, Perl, PHP.
+     o Java, C#, Ruby, Python, Perl, PHP, Javascript.
 
 What is Selenium?
  • An open-source tool that can automate almost any web browser.
@@ -66,3 +66,9 @@ How to Set Up Selenium:
      o If done without the VSCode terminal, then simply type “code .” to launch VSCode onto the folder as a project.
  • In the Selenium folder, create a file called ‘index.js’. Once created (and while in VSCode), type in “npm install selenium-webdriver”.
      o A new ‘node-modules’ folder should appear in the Selenium folder.
+
+For more details on the selenium-webdriver module, check out the Documentation on the SeleniumHQ website.
+https://www.seleniumhq.org/docs/
+
+Also check out the examples provided on the npm selenium-webdriver website.
+https://www.npmjs.com/package/selenium-webdriver
