@@ -64,7 +64,7 @@ export default {
               'https://team-14-ontologies.firebaseio.com/Documents/'+ res.data.name +'.json',
               documentData
             )
-          this.$router.push('/diagram/') //+ res.data.name)
+          this.$router.push('/diagram-page2/') //+ res.data.name)
         }).catch(e => console.log(e))
     
     },

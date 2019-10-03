@@ -48,6 +48,7 @@ export default {
     onSubmitted(folderData) {
       //add Folder
       this.$store.dispatch('folders/addFolder', folderData)
+      this.$store.dispatch('documents/addDiagram',folderData)
     },
     toggleCreateFolder() {
       this.folderFlag = !this.folderFlag

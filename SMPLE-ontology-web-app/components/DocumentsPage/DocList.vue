@@ -52,6 +52,7 @@ export default {
     onDocSubmitted(documentData) {
       //add Document
       this.$store.dispatch('documents/addDocument', documentData)
+      this.$store.dispatch('documents/addDiagram',documentData)
     },
     toggleCreateDocument() {
       this.documentFlag = !this.documentFlag

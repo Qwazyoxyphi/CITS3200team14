@@ -90,7 +90,8 @@ export default {
   },
   methods: {
     onSubmit(){
-      axios.post('https://team-14-ontologies.firebaseio.com/diagrams2.json',this.saveData)
+      const docDelPL = { docid: this.$route.params.diagrampage2, diagdata: this.saveData } //combine into object payload
+      this.$store.dispatch('documents/addDiagram',docDelPL)
     },
     download() {
             console.log(this.$route.params)

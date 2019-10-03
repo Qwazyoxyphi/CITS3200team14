@@ -1,6 +1,6 @@
 <template>
   <div class="box" @click="$emit('openModal')">
-    <nuxt-link :to="'/diagram/'">
+    <nuxt-link :to="'/folders/' + this.$route.params.documents + '/' + id ">
       <!--defaul redirect-->
       <div class="box" @click="$emit('openModal')">
         <svg
@@ -100,6 +100,7 @@ export default {
 
     moree(id) {
       //better name?
+      console.log(this.$route.params)
       var documentdel = confirm(' Delete Document? ')
       if (documentdel == true) {
         const docDelPL = { docid: id, folderid: this.$route.params.documents } //combine into object payload
