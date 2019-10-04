@@ -16,7 +16,7 @@
             <nuxt-link class="link" to="/rerout">Trash</nuxt-link>
           </li>
           <li class="nav-item">
-            <AppButton @click="onClick" >Sign out</AppButton>
+            <AppButton @click="onClick" id='signOut'>Sign out</AppButton>
           </li>
         </ul>
       </nav>

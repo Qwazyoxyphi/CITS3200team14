@@ -3,34 +3,32 @@
  * under the 'test@test.com' account. The "sign-out' demo functionality is still in progress...
  */
 
-const { Builder, By, Key, util } = require("selenium-webdriver"); // Pulls out functions from the selenium-websdriver module
+const { Builder, By, until,Key, util } = require("selenium-webdriver"); // Pulls out functions from the selenium-websdriver module
 
 async function demoFirefox() {
-  let driver = await new Builder().forBrowser('firefox').build();
-  driver.get('http://localhost:3000/');
+  let driver = await new Builder().forBrowser('firefox').build(); // Sets up the firefox browser for automation
+  driver.get('http://localhost:3000/');                           // Tells the browser what domain to visit (localHost for dev)
 
-  let signInElement = await driver.findElement(By.linkText('Sign in / Sign up'));
-  await signInElement.click();
+  let signInElement = await driver.findElement(By.linkText('Sign in / Sign up')); // Finds the sign-in/sign-up button
+  await signInElement.click();                                                    // Clicks the button to get to sign-in page
 
-  await driver.getTitle().then(function (title) {
-    console.log('Page title is: ' + title);
+  await driver.getTitle().then(function (title) { // Looks at page title
+    console.log('Page title is: ' + title);       // Should return the title of the page
   });
 
-  let emailElement = await driver.findElement(By.name('email'));
-  await emailElement.sendKeys('test@test.com');
-  let passwordElement = await driver.findElement(By.name('password'));
-  await passwordElement.sendKeys('tester');
-  let submitElement = await driver.findElement(By.id('contact-submit'));
-  await submitElement.click();
+  let emailElement = await driver.findElement(By.name('email'));            // Finds the email input
+  await emailElement.sendKeys('test@test.com');                             // Inputs the test account email
+  let passwordElement = await driver.findElement(By.name('password'));      // Finds the password input
+  await passwordElement.sendKeys('tester');                                 // Inputs the test account password
+  let submitElement = await driver.findElement(By.id('contact-submit'));    // Finds the submission button
+  await submitElement.click();                                              // Submits user details to login, with a click
 
-  //let signOutElement = element.findElement(findSignOutNav);   **IN PROGRESS**
+  await driver.wait(until.elementLocated(By.id(`signOut`)));                // Waits until the page has loaded and the sign-out element exists
+  //let navItems = await driver.findElements(By.className(`nav-item`));
+  //console.log(navItems);
 
-  //function findSignOutNav(element) {
-    //let navItems = element.findElements(By.className('nav-items'));
-    //return promise.filter(navItems, function (signOutElement) {
-      //return signOutElement.isDisplayed();
-    //});
-  //}
+  let signOutElement = await driver.findElement(By.id('signOut'));  // Finds the signOut element (by looking for its identity value)
+  await signOutElement.click();                                     // Signs out the test account
 }
 
 demoFirefox();
