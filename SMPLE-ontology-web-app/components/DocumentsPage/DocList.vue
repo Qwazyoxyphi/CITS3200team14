@@ -1,6 +1,7 @@
 <template>
   <section class="document-list">
     <DocsTile
+      @onClick="clicm()"
       v-for="document in documents"
       :key="document.id"
       :id="document.id"
@@ -46,13 +47,18 @@ export default {
     }
   },
   methods: {
+    clicm(){
+      console.log("fgdgdf")
+      this.$store.dispatch('documents/setUserDiagrams',documentData)
+    },
     toggleInviteFlag() {
       this.inviteFlag = !this.inviteFlag
     },
     onDocSubmitted(documentData) {
       //add Document
       this.$store.dispatch('documents/addDocument', documentData)
-      this.$store.dispatch('documents/addDiagram',documentData)
+      
+      //this.$store.dispatch('documents/addDiagram',documentData)
     },
     toggleCreateDocument() {
       this.documentFlag = !this.documentFlag

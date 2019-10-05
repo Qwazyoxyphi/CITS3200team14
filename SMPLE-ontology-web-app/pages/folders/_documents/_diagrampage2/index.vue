@@ -42,6 +42,7 @@
 
 <script>
 import axios from 'axios'
+import DocsTile from '@/components/DocumentsPage/DocsTile'
 import Vue from 'vue'
 import Canvas from '@/components/DiagramPage/Syncfusion/Canvas'
 import Pallette from '@/components/DiagramPage/Syncfusion/Pallette'
@@ -81,7 +82,8 @@ export default {
     AppSection,
     svgFile,
     pdfFile,
-    TwoButtons
+    TwoButtons,
+    DocsTile
   },
   data() {
     return {
@@ -89,8 +91,14 @@ export default {
     }
   },
   methods: {
+    load() {
+      axios.get('https://team-14-ontologies.firebaseio.com/folders/'+this.$route.params.documents+'/folderDocs/'+this.$route.params.diagrampage2+'/diagramData.json')
+    },
+    getUserDiagram() {
+      this.$store.dispatch('documents/setUserDiagrams',this.route.params.documents)
+    },
     onSubmit(){
-      const docDelPL = { docid: this.$route.params.diagrampage2, diagdata: this.saveData } //combine into object payload
+      const docDelPL = { folderid: this.$route.params.documents, docid: this.$route.params.diagrampage2, diagdata: this.saveData } //combine into object payload
       this.$store.dispatch('documents/addDiagram',docDelPL)
     },
     download() {

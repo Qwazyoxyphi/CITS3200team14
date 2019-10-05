@@ -30,6 +30,22 @@ export const mutations = {
 }
 
 export const actions = {
+  setUserDiagrams({ commit }, data) {
+    console.log(data)
+
+    /*let allDocuments = this.state.documents.allDocuments
+    const uDocsArr = [] //documents inside the folder
+
+    const thisDoc=this.state.allDocuments.find(
+      ({id}) => data.id
+    )
+    for(const key in allDocuments) {
+      
+      if(allDocuments[key] ==thisDoc.id){
+        
+      }
+    }*/
+  },
   setUserDocs({ commit }, folderid) {
     //display docs in that folder
     let allDocuments = this.state.documents.allDocuments
@@ -86,7 +102,9 @@ export const actions = {
   addDiagram({ commit }, payload) {
     axios
       .post(
-        'https://team-14-ontologies.firebaseio.com/documents/' +
+        'https://team-14-ontologies.firebaseio.com/folders/' +
+          payload.folderid +
+          '/folderDocs/' +
           payload.docid +
           '/diagramData.json',
         payload.diagdata

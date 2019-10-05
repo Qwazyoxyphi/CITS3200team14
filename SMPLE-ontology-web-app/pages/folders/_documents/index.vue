@@ -1,7 +1,8 @@
 <template>
   <div>
     <!--<DocSlider :documents="loadDocuments" />-->
-    <DocList :documents="getUserDocs" /> 
+    <DocList :documents="getUserDocs" 
+              @onClick="clicm()"/> 
   </div>
 </template>
 
@@ -21,6 +22,12 @@ export default {
   data() {
     return {
       documentFlag: false
+    }
+  },
+  methods: {
+    clicm(){
+      axios.get('https://team-14-ontologies.firebaseio.com/folders/'+this.$route.params.documents+'/-Lq1P9l0cOuydz6RRfYa/diagramData/-LqPDHXGDPA_vi3WhpKy.json')
+      this.$emit('loadDiagram',data)
     }
   },
   computed: {

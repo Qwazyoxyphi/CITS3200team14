@@ -1,6 +1,6 @@
 <template>
   <div class="box" @click="$emit('openModal')">
-    <nuxt-link :to="'/folders/' + this.$route.params.documents + '/' + id ">
+    <nuxt-link :to="'/folders/' + this.$route.params.documents + '/' + id">
       <!--defaul redirect-->
       <div class="box" @click="$emit('openModal')">
         <svg
@@ -94,6 +94,10 @@ export default {
     }
   },
   methods: {
+    onClick() {
+      console.log("sdffds")
+      //this.$store.dispatch('documents/setUserDiagram',documentData)
+    },
     toggleInviteFlag() {
       this.inviteFlag = !this.inviteFlag
     },
