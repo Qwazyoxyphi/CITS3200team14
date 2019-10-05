@@ -100,6 +100,7 @@ export const actions = {
       .catch(e => console.log(e))
   },
   addDiagram({ commit }, payload) {
+    let diagramData = ''
     axios
       .post(
         'https://team-14-ontologies.firebaseio.com/folders/' +

@@ -103,7 +103,7 @@ export default {
       //console.log(this.saveData)
       this.onSubmit()
     },
-    importt() {
+    importt(VuexContext,context) {
       let diagramObj = document.getElementById('diagram')
       let diagramInstance = diagramObj.ej2_instances[0]
       //returns serialized string of the Diagram

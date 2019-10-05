@@ -1,6 +1,6 @@
 <template>
     <AppSection color="blue">
-      <!--<div @click="importt()">CLICK HERE TO IMPORT ! - get JSON from DB to load in here</div>-->  
+      <div @click="importt()">CLICK HERE TO IMPORT ! - get JSON from DB to load in here</div>
       <div class="flex">
         <div class="smallitem">
           <div class="flexx">
@@ -112,12 +112,24 @@ export default {
       //console.log(this.saveData)
       this.onSubmit()
     },
-    importt() {
-      let diagramObj = document.getElementById('diagram')
-      let diagramInstance = diagramObj.ej2_instances[0]
+     importt() {
+      
+      axios.get('https://team-14-ontologies.firebaseio.com/folders/'+this.$route.params.documents+'/folderDocs/'+this.$route.params.diagrampage2+'/diagramData/-LqPDHXGDPA_vi3WhpKy.json').
+      then(resp => {
+          console.log(resp.data);
+          let diagramObj = document.getElementById('diagram')
+          let diagramInstance = diagramObj.ej2_instances[0]
+          diagramInstance.loadDiagram(resp.data)
+          
+      });
+      
+      //let diag=loadData.data
+     
       //returns serialized string of the Diagram
-      console.log(this.saveData)
-      diagramInstance.loadDiagram(this.saveData)
+     // console.log(loadData)
+     // console.log(loadData.data)
+      //console.log(context.route.params.id)
+      //
     },
     exportPDF() {
       let diagramObj = document.getElementById('diagram')
