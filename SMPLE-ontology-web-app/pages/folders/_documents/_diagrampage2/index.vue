@@ -74,6 +74,7 @@ Vue.use(UploaderPlugin)
 Vue.use(ToolbarPlugin)
 
 export default {
+  
   components: {
     Canvas,
     Pallette,
@@ -98,8 +99,20 @@ export default {
       this.$store.dispatch('documents/setUserDiagrams',this.route.params.documents)
     },
     onSubmit(){
+      console.log(this.saveData)
       const docDelPL = { folderid: this.$route.params.documents, docid: this.$route.params.diagrampage2, diagdata: this.saveData } //combine into object payload
-      this.$store.dispatch('documents/addDiagram',docDelPL)
+      //this.$store.dispatch('documents/addDiagram',docDelPL)
+      axios
+      .put(
+        'https://team-14-ontologies.firebaseio.com/folders/' +
+          this.$route.params.documents +
+          '/folderDocs/' +
+          this.$route.params.diagrampage2+'/diagramData.json',
+          this.saveData)
+      
+      .then(res => {
+        console.log(res.data)
+      })
     },
     download() {
             console.log(this.$route.params)
@@ -113,15 +126,20 @@ export default {
       this.onSubmit()
     },
      importt() {
-      
-      axios.get('https://team-14-ontologies.firebaseio.com/folders/'+this.$route.params.documents+'/folderDocs/'+this.$route.params.diagrampage2+'/diagramData/-LqPDHXGDPA_vi3WhpKy.json').
+        let diagramObj = document.getElementById('diagram')
+        let diagramInstance = diagramObj.ej2_instances[0]
+          //diagramInstance.loadDiagram(this.saveData)
+          console.log(this.saveData)
+      axios.get('https://team-14-ontologies.firebaseio.com/folders/'+this.$route.params.documents+'/folderDocs/'+this.$route.params.diagrampage2+'/diagramData.json').
       then(resp => {
-          console.log(resp.data);
-          let diagramObj = document.getElementById('diagram')
-          let diagramInstance = diagramObj.ej2_instances[0]
-          diagramInstance.loadDiagram(resp.data)
-          
+          //console.log(resp.data);
+         // console.log(this.saveData)
+         // let diagramObj = document.getElementById('diagram')
+          //let diagramInstance = diagramObj.ej2_instances[0]
+          var data=JSON.stringify(resp.data)
+          diagramInstance.loadDiagram(data)
       });
+      
       
       //let diag=loadData.data
      
