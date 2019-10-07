@@ -34,7 +34,7 @@ export default {
   methods: {
     onClick(){
       this.$store.dispatch('logout')
-      this.$router.push('signin-signup')
+      this.$router.push('/signin-signup')
     }
   }
 }
