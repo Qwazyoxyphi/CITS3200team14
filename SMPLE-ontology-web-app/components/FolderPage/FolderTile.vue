@@ -45,7 +45,10 @@
     </svg>
     <div class>
       <div class="name">{{ folderName }}</div>
-      <AppSelect @toggleDelete="more(id)" />
+     <AppSelect @toggleDelete="more(id)" @toggleInvite="toggleInviteFlag()"/>
+       <AppModal v-if="inviteFlag" @exitModal="toggleInviteFlag()">
+        <TheInviteForm @submit="onSubmitted" @exitModal="toggleInviteFlag()" />
+      </AppModal>
     </div>
   </div>
 </template>
@@ -53,11 +56,20 @@
 <script>
 import axios from 'axios'
 import AppSelect from '@/components/FolderPage/More/AppSelect'
+import TheInviteForm from '@/components/DocumentsPage/TheInviteForm'
+import AppSelect2 from '@/components/DocumentsPage/AppSelect2'
 
 export default {
   name: `FolderTile`,
   components: {
+    AppSelect2,
+    TheInviteForm,
     AppSelect
+  },
+  data() {
+    return {
+      inviteFlag: false
+    }
   },
   props: {
     id: {
@@ -83,7 +95,20 @@ export default {
       if (folderdel == true) {
         this.$store.dispatch('folders/deleteFolder', id)//Delete Folder
       }
+    },
+     toggleInviteFlag() {
+      this.inviteFlag = !this.inviteFlag
+    },
+    onSubmitted(data) {
+      /*console.log(this.id)
+        console.log(data.email)*/
+
+      data.id = this.id
+      //console.log(data.id)
+
+      this.$store.dispatch('inviteUser', data)
     }
+
   }
 }
 </script>

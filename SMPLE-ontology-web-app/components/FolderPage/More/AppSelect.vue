@@ -6,17 +6,24 @@
         <DownIcon class="select-box__icon" />
       </div>
       <ul class="select-box__list">
-        <li @click="$emit('toggleDelete')">
+        <li @click="$emit('toggleInvite')">
           <label
             class="select-box__option"
             for="1"
+            aria-hidden="aria-hidden"
+          >Invite</label>
+        </li>
+        <li @click="$emit('toggleDelete')">
+          <label
+            class="select-box__option"
+            for="2"
             aria-hidden="aria-hidden"
           >Delete</label>
         </li>
         <li @click="$emit('toggleEvent')"> <!-- create more buttons as required -->
           <label
             class="select-box__option"
-            for="2"
+            for="3"
             aria-hidden="aria-hidden"
           >Add More</label>
         </li>
