@@ -8,6 +8,7 @@
         :id="folder.id"
         :folder-name="folder.folderName"
         :folder-desc="folder.folderDesc"
+        :user-ids ="folder.userIds"
       />
       <TheCreateFolder @createFolder="toggleCreateFolder()" />
       <AppModal v-if="folderFlag" @exitModal="toggleCreateFolder()">

@@ -45,8 +45,8 @@
     </svg>
     <div class>
       <div class="name">{{ folderName }}</div>
-     <AppSelect @toggleDelete="more(id)" @toggleInvite="toggleInviteFlag()"/>
-       <AppModal v-if="inviteFlag" @exitModal="toggleInviteFlag()">
+      <AppSelect @toggleDelete="more(id,userIds)" @toggleInvite="toggleInviteFlag()" />
+      <AppModal v-if="inviteFlag" @exitModal="toggleInviteFlag()">
         <TheInviteForm @submit="onSubmitted" @exitModal="toggleInviteFlag()" />
       </AppModal>
     </div>
@@ -87,16 +87,21 @@ export default {
     folderDocs: {
       type: Object,
       required: false
+    },
+    userIds: {
+      type: Object,
+      required: true
     }
   },
   methods: {
-    async more(id) {
+    async more(id, userIds) {
       var folderdel = confirm(' Delete Folder? ')
       if (folderdel == true) {
-        this.$store.dispatch('folders/deleteFolder', id)//Delete Folder
+        const folderPL = { folderid: id, folderusers: userIds }
+        this.$store.dispatch('folders/deleteFolder', folderPL) //Delete Folder
       }
     },
-     toggleInviteFlag() {
+    toggleInviteFlag() {
       this.inviteFlag = !this.inviteFlag
     },
     onSubmitted(data) {
@@ -108,7 +113,6 @@ export default {
 
       this.$store.dispatch('inviteUser', data)
     }
-
   }
 }
 </script>

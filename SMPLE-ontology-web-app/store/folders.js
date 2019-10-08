@@ -42,8 +42,8 @@ export const actions = {
 
     for (const key in allFolders) {//all folders
       //if (allFolders[key].userId == currUsrId)
-      for (const uid in allFolders[key].userIds){//all users in that folder
-        if (uid == currUsrId){
+      for (const uid in allFolders[key].userIds) {//all users in that folder
+        if (uid == currUsrId) {
           uFolderArr.push(allFolders[key])
         }
       }
@@ -63,15 +63,18 @@ export const actions = {
       .catch(e => console.log(e))
   },
 
-  deleteFolder(vuexContext, folderid) {//remove user from folder
+  deleteFolder({ commit }, payload) {//remove user from folder
+    let delstring;
+    if (Object.keys(payload.folderusers).length == 1) {//if only one user left
+      delstring = ('https://team-14-ontologies.firebaseio.com/folders/' + payload.folderid + '.json');//delete entire folder
+    } else {
+      delstring = ('https://team-14-ontologies.firebaseio.com/folders/' +
+        payload.folderid + '/userIds/' + this.state.getUserId + '.json')//delete user from that folder
+    }
     axios
-      .delete(
-        'https://team-14-ontologies.firebaseio.com/folders/' +
-        folderid +'/userIds/'+ this.state.getUserId +
-        '.json'
-      )
-      .then(()=> {
-        vuexContext.commit('deleteFolder', folderid) //update local store
+      .delete(delstring)
+      .then(() => {
+        commit('deleteFolder', payload.folderid) //update local store
       })
       .catch(e => console.log(e))
 
