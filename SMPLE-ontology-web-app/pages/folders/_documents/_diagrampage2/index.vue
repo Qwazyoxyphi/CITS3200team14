@@ -1,22 +1,24 @@
 <template>
-    <AppSection color="blue">
-      <div @click="importt()">CLICK HERE TO IMPORT ! - get JSON from DB to load in here</div>
-      <div class="flex">
-        <div class="smallitem">
+  <AppSection color="blue">
+    <div @click="importt()">CLICK HERE TO IMPORT ! - get JSON from DB to load in here</div>
+    <div class="flex">
+      <div class="smallitem">
+        <div class="flexx">
+          <TwoButtons @save="download()" />
+        </div>
+        <div class="sb-mobile-palette-bar">
+          <div id="palette-icon" role="button" class="e-ddb-icons1 e-toggle-palette"></div>
+        </div>
+        <!-- EXPORT OPTIONS -->
+        <div class="separator">
+          <div>Pallete options</div>
+        </div>
+        <div id class>
           <div class="flexx">
-            <TwoButtons @save="download()" /> 
+            <Pallette />
           </div>
-            <div class="sb-mobile-palette-bar">
-              <div id="palette-icon" role="button" class="e-ddb-icons1 e-toggle-palette"></div>
-            </div>
-             <!-- EXPORT OPTIONS -->
-            <div class="separator">
-              <div>Pallete options</div>
-            </div>
-            <div id="" class="">
-              <div class="flexx"><Pallette /></div>
-              <div>
-              <!-- EXPORT OPTIONS -->
+          <div>
+            <!-- EXPORT OPTIONS -->
             <div class="separator">
               <div>export options</div>
             </div>
@@ -27,17 +29,17 @@
               <div class="but-wrapper itemm">
                 <pdfFile @exportPDF="exportPDF()" />
               </div>
-          </div>
             </div>
-            </div>
-        </div>
-        <div class="bigitem">
-          <div id="diagram-space" class="sb-mobile-diagram">
-            <Canvas />
           </div>
         </div>
       </div>
-    </AppSection>
+      <div class="bigitem">
+        <div id="diagram-space" class="sb-mobile-diagram">
+          <Canvas />
+        </div>
+      </div>
+    </div>
+  </AppSection>
 </template>
 
 <script>
@@ -67,14 +69,13 @@ import {
 } from '@syncfusion/ej2-vue-navigations'
 import AppSection from '@/components/Utils/AppSection'
 import svgFile from '@/components/Utils/SVG/svgFile'
-import pdfFile from '@/components/Utils/SVG/pdfFile' 
+import pdfFile from '@/components/Utils/SVG/pdfFile'
 import TwoButtons from '@/components/DiagramPage/DiagramSidebar/TwoButtons'
 
 Vue.use(UploaderPlugin)
 Vue.use(ToolbarPlugin)
 
 export default {
-  
   components: {
     Canvas,
     Pallette,
@@ -93,29 +94,44 @@ export default {
   },
   methods: {
     load() {
-      axios.get('https://team-14-ontologies.firebaseio.com/folders/'+this.$route.params.documents+'/folderDocs/'+this.$route.params.diagrampage2+'/diagramData.json')
-    },
-    getUserDiagram() {
-      this.$store.dispatch('documents/setUserDiagrams',this.route.params.documents)
-    },
-    onSubmit(){
-      console.log(this.saveData)
-      const docDelPL = { folderid: this.$route.params.documents, docid: this.$route.params.diagrampage2, diagdata: this.saveData } //combine into object payload
-      //this.$store.dispatch('documents/addDiagram',docDelPL)
-      axios
-      .put(
+      axios.get(
         'https://team-14-ontologies.firebaseio.com/folders/' +
           this.$route.params.documents +
           '/folderDocs/' +
-          this.$route.params.diagrampage2+'/diagramData.json',
-          this.saveData)
-      
-      .then(res => {
-        console.log(res.data)
-      })
+          this.$route.params.diagrampage2 +
+          '/diagramData.json'
+      )
+    },
+    getUserDiagram() {
+      this.$store.dispatch(
+        'documents/setUserDiagrams',
+        this.route.params.documents
+      )
+    },
+    onSubmit() {
+      console.log(this.saveData)
+      const docDelPL = {
+        folderid: this.$route.params.documents,
+        docid: this.$route.params.diagrampage2,
+        diagdata: this.saveData
+      } //combine into object payload
+      //this.$store.dispatch('documents/addDiagram',docDelPL)
+      axios
+        .put(
+          'https://team-14-ontologies.firebaseio.com/folders/' +
+            this.$route.params.documents +
+            '/folderDocs/' +
+            this.$route.params.diagrampage2 +
+            '/diagramData.json',
+          this.saveData
+        )
+
+        .then(res => {
+          console.log(res.data)
+        })
     },
     download() {
-            console.log(this.$route.params)
+      console.log(this.$route.params)
 
       let diagramObj = document.getElementById('diagram')
       //console.log(diagramObj)
@@ -125,27 +141,35 @@ export default {
       //console.log(this.saveData)
       this.onSubmit()
     },
-     importt() {
-        let diagramObj = document.getElementById('diagram')
-        let diagramInstance = diagramObj.ej2_instances[0]
-          //diagramInstance.loadDiagram(this.saveData)
-          console.log(this.saveData)
-      axios.get('https://team-14-ontologies.firebaseio.com/folders/'+this.$route.params.documents+'/folderDocs/'+this.$route.params.diagrampage2+'/diagramData.json').
-      then(resp => {
-          //console.log(resp.data);
-         // console.log(this.saveData)
-         // let diagramObj = document.getElementById('diagram')
-          //let diagramInstance = diagramObj.ej2_instances[0]
+    importt() {
+      let diagramObj = document.getElementById('diagram')
+      let diagramInstance = diagramObj.ej2_instances[0]
+
+      const diagPL = {
+        diagramObj: document.getElementById('diagram'),
+        docid: this.$route.params.diagrampage2
+      } //combine into object payload
+
+    //this.$store.dispatch('documents/setDiagram', diagPL)//here breaks
+     // let currDiag = this.$store.getters['documents/currDiag']
+     // diagramInstance.loadDiagram(currDiag)
+
+      axios
+        .get(
+          'https://team-14-ontologies.firebaseio.com/folders/' +
+            this.$route.params.documents +
+            '/folderDocs/' +
+            this.$route.params.diagrampage2 +
+            '/diagramData.json'
+        )
+        .then(resp => {
           var data=JSON.stringify(resp.data)
           diagramInstance.loadDiagram(data)
-      });
-      
-      
+        })
       //let diag=loadData.data
-     
       //returns serialized string of the Diagram
-     // console.log(loadData)
-     // console.log(loadData.data)
+      // console.log(loadData)
+      // console.log(loadData.data)
       //console.log(context.route.params.id)
       //
     },
@@ -172,6 +196,20 @@ export default {
       exportOptions.pageHeight = 400
       exportOptions.pageWidth = 400
       diagramInstance.exportDiagram(exportOptions)
+    }
+  },
+  computed: {
+    loadDiag() {
+      let diagramObj = document.getElementById('diagram')
+      let diagramInstance = diagramObj.ej2_instances[0]
+      console.log(this.saveData)
+      //console.log(resp.data);
+      // console.log(this.saveData)
+      // let diagramObj = document.getElementById('diagram')
+      //let diagramInstance = diagramObj.ej2_instances[0]
+      //  var data=JSON.stringify(response.data)
+      //   diagramInstance.loadDiagram(data)
+      //   return this.saveData
     }
   }
 }

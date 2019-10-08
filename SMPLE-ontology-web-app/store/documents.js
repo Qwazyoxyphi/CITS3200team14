@@ -4,7 +4,8 @@ import axios from 'axios'
 //work backwards, with code
 export const state = () => ({
   allDocuments: [], //all documents
-  userDocs: [] //documents inside that folder.
+  userDocs: [], //documents inside that folder.
+  currDiag: {}
 })
 
 export const mutations = {
@@ -26,7 +27,10 @@ export const mutations = {
       // if in store remove it
       state.allDocuments.splice(allDocidx, 1)
     }
-  }
+  }, 
+  setCurrDiag(state, diagram) {
+    state.currDiag = diagram
+  },
 }
 
 export const actions = {
@@ -46,6 +50,20 @@ export const actions = {
       }
     }*/
   },
+  setDiagram({commit}, payload){//doesnt get all data? different to in index but grabbs
+    //breaks when refresh
+    let retdiag = {};
+    let userDocs = this.state.documents.userDocs //get all the users docs
+    const thisDiag = this.state.documents.userDocs.find(
+      ({id}) => id === payload.docid//.docid
+    )
+    for (const key in thisDiag.diagramData){//has unique id this it to 'gopast' it
+      retdiag = thisDiag.diagramData[key]
+    }   
+    var retdata=JSON.stringify(retdiag)
+    commit("setCurrDiag", retdata)
+  },
+
   setUserDocs({ commit }, folderid) {
     //display docs in that folder
     let allDocuments = this.state.documents.allDocuments
@@ -145,5 +163,8 @@ export const getters = {
   },
   allDocuments(state) {
     return state.allDocuments
+  },
+  currDiag(state){
+    return state.currDiag
   }
 }
