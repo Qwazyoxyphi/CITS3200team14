@@ -55,7 +55,7 @@
       <AppSelect2 @toggleDelete="moree(id)" @toggleInvite="toggleInviteFlag()" />
 
       <AppModal v-if="inviteFlag" @exitModal="toggleInviteFlag()">
-        <TheInviteForm @submit="onSubmitted" @exitModal="toggleInviteFlag()" />
+      <!--  <TheInviteForm @submit="onSubmitted" @exitModal="toggleInviteFlag()" /> -->
       </AppModal>
     </div>
   </div>

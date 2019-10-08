@@ -58,17 +58,24 @@ import axios from 'axios'
 import AppSelect from '@/components/FolderPage/More/AppSelect'
 import TheInviteForm from '@/components/DocumentsPage/TheInviteForm'
 import AppSelect2 from '@/components/DocumentsPage/AppSelect2'
+import AppModal from '@/components/Utils/AppModal'
 
 export default {
   name: `FolderTile`,
   components: {
     AppSelect2,
     TheInviteForm,
-    AppSelect
+    AppSelect,
+    AppModal
   },
   data() {
     return {
-      inviteFlag: false
+      inviteFlag: false,
+
+      inviteData: {
+        email: '',
+        userId: ''
+      }
     }
   },
   props: {
@@ -100,13 +107,16 @@ export default {
       this.inviteFlag = !this.inviteFlag
     },
     onSubmitted(data) {
-      /*console.log(this.id)
-        console.log(data.email)*/
-
+     // console.log(this.id)
+      //console.log(data.email)
+      this.inviteData.email=data.email
+      this.inviteData.userId=this.id
+      //console.log(this.id)
       data.id = this.id
+     // console.log(this.$route.params)
       //console.log(data.id)
-
-      this.$store.dispatch('inviteUser', data)
+      console.log(this.inviteData)
+      this.$store.dispatch('folders/inviteUser', this.inviteData)
     }
 
   }

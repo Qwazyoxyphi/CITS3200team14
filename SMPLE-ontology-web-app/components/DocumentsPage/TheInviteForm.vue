@@ -44,8 +44,7 @@ export default {
         ? { ...this.invite }
         : {
             email: '',
-            id: ''
-            
+            id: '',
           }
     }
   },
@@ -56,6 +55,7 @@ export default {
   },
   methods: {
     onInviteSubmit() {//Save folder
+      console.log('here')
       this.$emit('submit', this.newInvite)
       this.$emit('exitModal')
     },
