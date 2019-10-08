@@ -3,7 +3,8 @@ import axios from 'axios'
 
 export const state = () => ({
   allFolders: [],
-  userFolders: []
+  userFolders: [],
+  users: []
 })
 
 //TODO** if folder has no users, delete it from DB.
@@ -14,6 +15,9 @@ export const mutations = {
   },
   setUserFolders(state, userFolders) {
     state.userFolders = userFolders
+  },
+  setUsers(state, users) {
+    state.users = users
   },
   /* Setters */
 
@@ -34,15 +38,52 @@ export const mutations = {
 }
 
 export const actions = {
+  inviteUser(state, inviteData) {
+    //console.log(inviteData.blue)
+    //inviteData has email of invited user and document id
+    //need to use email to find user id assoc. with that email and then add doc into db for that user/that user id into doc in db
+    console.log(inviteData.email)
+    console.log(inviteData.userId)
+    //const userFold = state.users
+    let grabbedUserid
+    axios
+      .get('https://team-14-ontologies.firebaseio.com/users.json')
+      .then(resp => {
+        //  userFold.push(resp.data)
+        for (const key in resp.data) {
+          if (resp.data[key].userEmail == inviteData.email) {
+            grabbedUserid = resp.data[key].userId
+          }
+        }
+        console.log(grabbedUserid)
+
+        // console.log(resp.data)
+        // console.log(users)
+      })
+
+    //this bit doesn't work
+    axios.patch(
+      'https://team-14-ontologies.firebaseio.com/folders/' +
+        inviteData.userId +
+        '/userIds.json',
+      grabbedUserid
+    )
+    //const thisFolder2 = this.state.folders.allFolders.find(
+    //({ userEmail }) => userEmail === inviteData.email
+    //)
+    //console.log(thisFolder2.userEmail)
+  },
   /* Setters */
   setUserFolders(vuexContext) {
     const allFolders = this.state.folders.allFolders
     const currUsrId = this.state.getUserId
     const uFolderArr = []
 
-    for (const key in allFolders) {//all folders
+    for (const key in allFolders) {
+      //all folders
       //if (allFolders[key].userId == currUsrId)
-      for (const uid in allFolders[key].userIds) {//all users in that folder
+      for (const uid in allFolders[key].userIds) {
+        //all users in that folder
         if (uid == currUsrId) {
           uFolderArr.push(allFolders[key])
         }
@@ -53,7 +94,7 @@ export const actions = {
   /* Setters */
   //use axios.patch when adding more userids or will break it
   addFolder(vuexContext, folder) {
-    folder.userIds = { [this.state.getUserId]: this.state.getUserId }//add userId as Object 
+    folder.userIds = { [this.state.getUserId]: this.state.getUserId } //add userId as Object
     return axios
       .post('https://team-14-ontologies.firebaseio.com/folders.json', folder)
       .then(res => {
@@ -77,7 +118,6 @@ export const actions = {
         commit('deleteFolder', payload.folderid) //update local store
       })
       .catch(e => console.log(e))
-
   }
 }
 
