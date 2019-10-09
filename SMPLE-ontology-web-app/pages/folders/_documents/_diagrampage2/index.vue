@@ -93,6 +93,7 @@ export default {
     }
   },
   methods: {
+    //data to load diagram + set needs to be different. conflicts. 
     load() {
       axios.get(
         'https://team-14-ontologies.firebaseio.com/folders/' +
@@ -108,7 +109,8 @@ export default {
         this.route.params.documents
       )
     },
-    onSubmit() {
+    onSubmit() {//IGNORED
+      /*console.log("thissavedata");
       console.log(this.saveData)
       const docDelPL = {
         folderid: this.$route.params.documents,
@@ -128,7 +130,7 @@ export default {
 
         .then(res => {
           console.log(res.data)
-        })
+        })*/
     },
     download() {
       console.log(this.$route.params)
@@ -138,8 +140,15 @@ export default {
       let diagramInstance = diagramObj.ej2_instances[0]
       //returns serialized string of the Diagram
       this.saveData = diagramInstance.saveDiagram()
+      
+      const docDelPL = {
+        docid: this.$route.params.diagrampage2,
+        diagdata: this.saveData
+      } 
+      this.$store.dispatch('diagram/storeDiagram', docDelPL)//send to store
+
       //console.log(this.saveData)
-      this.onSubmit()
+      //this.onSubmit()
     },
     importt() {
       let diagramObj = document.getElementById('diagram')
@@ -150,27 +159,26 @@ export default {
         docid: this.$route.params.diagrampage2
       } //combine into object payload
 
-    //this.$store.dispatch('documents/setDiagram', diagPL)//here breaks
-     // let currDiag = this.$store.getters['documents/currDiag']
-     // diagramInstance.loadDiagram(currDiag)
+////Code to store, to get diagram data from document, and show, refresh issues
+    this.$store.dispatch('diagram/setDiagram', diagPL)
+    let currDiag = this.$store.getters['diagram/currDiag']
+      diagramInstance.loadDiagram(currDiag)
+///
 
-      axios
-        .get(
-          'https://team-14-ontologies.firebaseio.com/folders/' +
-            this.$route.params.documents +
-            '/folderDocs/' +
-            this.$route.params.diagrampage2 +
-            '/diagramData.json'
-        )
-        .then(resp => {
-          var data=JSON.stringify(resp.data)
-          diagramInstance.loadDiagram(data)
-        })
+     // axios
+     //   .get(
+      ////    'https://team-14-ontologies.firebaseio.com/folders/' +
+       //     this.$route.params.documents +
+       //     '/folderDocs/' +
+       //     this.$route.params.diagrampage2 +
+       //     '/diagramData.json'
+       // )
+       // .then(resp => {
+       //   var data=JSON.stringify(resp.data)
+       //   diagramInstance.loadDiagram(data)
+       // })
       //let diag=loadData.data
       //returns serialized string of the Diagram
-      // console.log(loadData)
-      // console.log(loadData.data)
-      //console.log(context.route.params.id)
       //
     },
     exportPDF() {
@@ -199,17 +207,16 @@ export default {
     }
   },
   computed: {
-    loadDiag() {
+    loadDiag() {//work in progress
       let diagramObj = document.getElementById('diagram')
       let diagramInstance = diagramObj.ej2_instances[0]
-      console.log(this.saveData)
-      //console.log(resp.data);
-      // console.log(this.saveData)
-      // let diagramObj = document.getElementById('diagram')
-      //let diagramInstance = diagramObj.ej2_instances[0]
-      //  var data=JSON.stringify(response.data)
-      //   diagramInstance.loadDiagram(data)
-      //   return this.saveData
+      const diagPL = {
+        diagramObj: document.getElementById('diagram'),
+        docid: this.$route.params.diagrampage2
+      } //combine into object payload
+      //let currDiag = this.$store.getters['diagram/currDiag']
+     // diagramInstance.loadDiagram(currDiag)
+
     }
   }
 }

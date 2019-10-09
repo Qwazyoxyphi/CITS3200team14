@@ -5,7 +5,6 @@ import axios from 'axios'
 export const state = () => ({
   allDocuments: [], //all documents
   userDocs: [], //documents inside that folder.
-  currDiag: {}
 })
 
 export const mutations = {
@@ -49,19 +48,6 @@ export const actions = {
         
       }
     }*/
-  },
-  setDiagram({commit}, payload){//doesnt get all data? different to in index but grabbs
-    //breaks when refresh
-    let retdiag = {};
-    let userDocs = this.state.documents.userDocs //get all the users docs
-    const thisDiag = this.state.documents.userDocs.find(
-      ({id}) => id === payload.docid//.docid
-    )
-    for (const key in thisDiag.diagramData){//has unique id this it to 'gopast' it
-      retdiag = thisDiag.diagramData[key]
-    }   
-    var retdata=JSON.stringify(retdiag)
-    commit("setCurrDiag", retdata)
   },
 
   setUserDocs({ commit }, folderid) {
@@ -109,7 +95,7 @@ export const actions = {
           )
           .then(() => {
             commit('addDocument', { ...document, id: res.data.name })
-            console.log(this.$router.payload)
+            //console.log(this.$router.payload)
             this.$router.push(
               '/folders/' + this.$router.payload + '/' + res.data.name
             ) //+ res.data.name)//TODO add diagid to route to.
@@ -129,7 +115,7 @@ export const actions = {
         payload.diagdata
       )
       .then(res => {
-        console.log(res.data)
+        //console.log(res.data)
       })
   },
 
@@ -154,7 +140,7 @@ export const actions = {
           })
       })
       .catch(e => console.log(e))
-  }
+  },
 }
 
 export const getters = {
@@ -164,7 +150,5 @@ export const getters = {
   allDocuments(state) {
     return state.allDocuments
   },
-  currDiag(state){
-    return state.currDiag
-  }
+  
 }
