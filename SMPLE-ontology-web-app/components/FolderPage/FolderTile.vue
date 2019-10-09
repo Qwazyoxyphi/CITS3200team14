@@ -74,7 +74,7 @@ export default {
 
       inviteData: {
         email: '',
-        userId: ''
+        folderId: ''
       }
     }
   },
@@ -115,7 +115,7 @@ export default {
      // console.log(this.id)
       //console.log(data.email)
       this.inviteData.email=data.email
-      this.inviteData.userId=this.id
+      this.inviteData.folderId=this.id
       //console.log(this.id)
       data.id = this.id
      // console.log(this.$route.params)

@@ -58,7 +58,7 @@ export const actions = {
         axios
           .patch(
             'https://team-14-ontologies.firebaseio.com/folders/' +
-              inviteData.userId +
+              inviteData.folderId +
               '/userIds.json',
             { [grabbedUserid]: grabbedUserid }
           )
