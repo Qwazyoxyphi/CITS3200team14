@@ -42,8 +42,8 @@ export const actions = {
     //console.log(inviteData.blue)
     //inviteData has email of invited user and document id
     //need to use email to find user id assoc. with that email and then add doc into db for that user/that user id into doc in db
-    console.log(inviteData.email)
-    console.log(inviteData.userId)
+    //console.log(inviteData.email)
+    //console.log(inviteData.userId)
     //const userFold = state.users
     let grabbedUserid
     axios
@@ -55,23 +55,19 @@ export const actions = {
             grabbedUserid = resp.data[key].userId
           }
         }
-        console.log(grabbedUserid)
-
+        axios
+          .patch(
+            'https://team-14-ontologies.firebaseio.com/folders/' +
+              inviteData.userId +
+              '/userIds.json',
+            { [grabbedUserid]: grabbedUserid }
+          )
+          .then(result => {
+            console.log(result)
+          })
         // console.log(resp.data)
         // console.log(users)
       })
-
-    //this bit doesn't work
-    axios.patch(
-      'https://team-14-ontologies.firebaseio.com/folders/' +
-        inviteData.userId +
-        '/userIds.json',
-      grabbedUserid
-    )
-    //const thisFolder2 = this.state.folders.allFolders.find(
-    //({ userEmail }) => userEmail === inviteData.email
-    //)
-    //console.log(thisFolder2.userEmail)
   },
   /* Setters */
   setUserFolders(vuexContext) {
@@ -104,13 +100,22 @@ export const actions = {
       .catch(e => console.log(e))
   },
 
-  deleteFolder({ commit }, payload) {//remove user from folder
-    let delstring;
-    if (Object.keys(payload.folderusers).length == 1) {//if only one user left
-      delstring = ('https://team-14-ontologies.firebaseio.com/folders/' + payload.folderid + '.json');//delete entire folder
+  deleteFolder({ commit }, payload) {
+    //remove user from folder
+    let delstring
+    if (Object.keys(payload.folderusers).length == 1) {
+      //if only one user left
+      delstring =
+        'https://team-14-ontologies.firebaseio.com/folders/' +
+        payload.folderid +
+        '.json' //delete entire folder
     } else {
-      delstring = ('https://team-14-ontologies.firebaseio.com/folders/' +
-        payload.folderid + '/userIds/' + this.state.getUserId + '.json')//delete user from that folder
+      delstring =
+        'https://team-14-ontologies.firebaseio.com/folders/' +
+        payload.folderid +
+        '/userIds/' +
+        this.state.getUserId +
+        '.json' //delete user from that folder
     }
     axios
       .delete(delstring)
