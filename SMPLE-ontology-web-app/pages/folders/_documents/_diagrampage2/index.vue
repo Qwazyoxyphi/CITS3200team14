@@ -206,6 +206,14 @@ export default {
       diagramInstance.exportDiagram(exportOptions)
     }
   },
+  mounted: function() {
+    //For autosaving the diagram
+    //Currently saves every 30 seconds
+    window.setInterval(() => {
+      this.download()
+      console.log("Diagram auto-saved")
+    }, 30000);
+  }, 
   computed: {
     loadDiag() {//work in progress
       let diagramObj = document.getElementById('diagram')
