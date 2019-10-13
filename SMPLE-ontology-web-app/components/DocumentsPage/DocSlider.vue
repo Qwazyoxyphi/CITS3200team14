@@ -16,8 +16,7 @@
       :title="document.documentName"
       :content="document.documentDesc"
       :style="'background-color: #7FBFEC'"
-      :link="'/diagram/'"
-      >hello world</vueper-slide>
+      :link="'/'"/>
     </vueper-slides>
     <TheCreateDocument @createDocument="toggleCreateDocument()" />
     <AppModal v-if="documentFlag" @exitModal="toggleCreateDocument()">

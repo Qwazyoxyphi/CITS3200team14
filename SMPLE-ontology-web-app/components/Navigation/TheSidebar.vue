@@ -1,8 +1,7 @@
-
 <template>
   <aside class="sidebar">
     <header>Menu</header>
-    <!-- User has not logged in navs -->
+    <!-- User has logged in navs -->
     <section v-show="true">
       <nav class="sidebar-nav">
         <ul @click="closeSidebar()">
@@ -12,13 +11,13 @@
               <div class="nav-text">Home</div>
             </nuxt-link>
           </li>
-          <!--<li>
-            <nuxt-link to="/rerout">
-              <file class="icon" />
-              <div class="nav-text">Documents</div>
-            </nuxt-link> 
-          </li> -->
           <li>
+            <nuxt-link to="/folders">
+              <file class="icon" />
+              <div class="nav-text">Folders</div>
+            </nuxt-link> 
+          </li>
+          <!--<li>
             <nuxt-link to="/rerout">
               <network class="icon" />
               <div class="nav-text">Shared Documents</div>
@@ -29,7 +28,7 @@
               <trash class="icon" />
               <div class="nav-text">Trash</div>
             </nuxt-link>
-          </li>
+          </li>-->
           <li class="nav-item">
             <AppButton @click="onClick" >Sign out</AppButton>
           </li>

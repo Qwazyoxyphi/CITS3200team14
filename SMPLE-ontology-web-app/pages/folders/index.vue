@@ -1,8 +1,6 @@
 <template>
   <div>
     <AppSection color="blue">
-      <h2>Home > Folders > ____</h2>
-      <h1>This is the Folders Index Page</h1>
       <FolderSlider :documents="getAllDocuments" />
       <FolderList :folders="getUserFolders" />
     </AppSection>

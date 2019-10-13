@@ -6,15 +6,15 @@
             <nuxt-link class="link" to="/">Home</nuxt-link>
           </li>
           
-          <li class="nav-item">
+          <!--<li class="nav-item">
             <nuxt-link class="link" to="/rerout">Shared</nuxt-link>
-          </li>
+          </li>-->
           <li class="nav-item">
             <nuxt-link class="link" to="/folders" @click="getAllFolders">Folders</nuxt-link>
           </li>
-          <li class="nav-item">
+          <!--<li class="nav-item">
             <nuxt-link class="link" to="/rerout">Trash</nuxt-link>
-          </li>
+          </li>-->
           <li class="nav-item">
             <AppButton @click="onClick" id='signOut'>Sign out</AppButton>
           </li>

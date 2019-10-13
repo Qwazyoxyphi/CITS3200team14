@@ -16,7 +16,7 @@
       :title="document.documentName"
       :content="document.documentDesc"
       :style="'background-color: #7FBFEC'"
-      :link="'/diagram/'"
+      :link="'/'"
       />
     </vueper-slides>
   </section>

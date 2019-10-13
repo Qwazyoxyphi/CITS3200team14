@@ -59,7 +59,7 @@ justify-content: center;
 
 
 /* Location of the image */
-  background-image: url("../../assets/images/cover_dark.webp");
+  background-image: url("../../assets/images/The-Benefits-of-Using-Ontologies.png");
   
   /* Image is centered vertically and horizontally at all times */
   background-position: center center;

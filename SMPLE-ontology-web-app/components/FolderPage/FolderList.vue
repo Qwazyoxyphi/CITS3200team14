@@ -1,6 +1,5 @@
 <template>
   <div>
-    <buttonRack @createFolder="toggleCreateFolder()" @createDoc="toggleCreateFolder()" />
     <section class="folder-list">
       <FolderTile
         v-for="folder in folders"
