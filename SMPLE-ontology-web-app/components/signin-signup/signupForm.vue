@@ -4,7 +4,7 @@
       <script src="https://www.google.com/recaptcha/api.js" />
     </header>
     <div class="container">
-      <form id="contact" class="login-form" method="post" novalidate @submit.prevent="onSave">
+      <form id="contact" class="login-form" method="post" name="sign_up_form" novalidate @submit.prevent="onSave">
         <div class="login-container">
           <h2>Sign up</h2>
           <AppControlInput
@@ -40,7 +40,7 @@
           <p v-if="errors.has('confirmed_password')">{{ errors.first('confirmed_password') }}</p>
           <div class="g-recaptcha" data-sitekey="6LecTbYUAAAAABiiKGfi68gq_9qSi7P2dwt7_pB0" />
           <AppButton class="login-but" type="submit">Sign up</AppButton>
-          <div class="button" @click="$emit('toggleRegistration')">Sign in</div>
+          <div class="button" name="sign_in_toggle" @click="$emit('toggleRegistration')">Sign in</div>
         </div>
       </form>
     </div>

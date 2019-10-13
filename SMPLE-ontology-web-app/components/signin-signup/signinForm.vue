@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <form id="contact" class="login-form" method="post" novalidate @submit.prevent="onSave2">
+    <form id="contact" class="login-form" method="post" name="sign_in_form" novalidate @submit.prevent="onSave2">
       <div class="login-container">
         <h2>Sign in</h2>
         <AppControlInput name="email" v-model="userCredentials.email" placeholder="email">
@@ -15,7 +15,7 @@
           <b>Password</b>
         </AppControlInput>
         <AppButton class="login-but" type="submit">Sign in</AppButton>
-        <div class="button" @click="$emit('toggleRegistration')">Sign up</div>
+        <div class="button" name="sign_up_toggle" @click="$emit('toggleRegistration')">Sign up</div>
       </div>
     </form>
   </div>
