@@ -3,18 +3,18 @@
     <div class="eqi-container">
       <Icon 
         v-scroll-to="'#products'"
-        title="Our Products"
-        message="Manufactured in Australia." 
+        title="Creation"
+        message="Create your own ontology diagrams." 
       >
         <img 
           class="aus"
-          alt="Made in Australia"
-          src="@/assets/images/Home/aus.svg">
+          alt="creation"
+          src="@/assets/images/Home/structure.svg">
       </Icon>  
       <Icon 
         v-scroll-to="'#team'"
-        title="Our Team"
-        message="Driven and Innovative." 
+        title="Collaboration"
+        message="Collectively work on projects." 
       >
         <img 
           alt="Teamwork"
@@ -22,8 +22,8 @@
       </Icon> 
       <Icon 
         v-scroll-to="'#clients'"
-        title="Our Clients"
-        message="Our First Priority." 
+        title="Community"
+        message="Participate in growing community." 
       >
         <img 
           alt="Our Clients"
