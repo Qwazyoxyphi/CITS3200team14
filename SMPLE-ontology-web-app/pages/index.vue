@@ -5,11 +5,7 @@
 
     <div class="wr">
       <div class="home-1" style="max-width:800px">
-        <h1 class>Ontology Visualisation</h1>
-        <p class>
-          <i>Some catchy phrase</i>
-        </p>
-        <p class>
+        <p>
           Graphically represent ontologies. Visualize the individual members of certain sets of objects, their
           attributes (or characteristics), and how these objects and classes are
           related.
@@ -20,18 +16,15 @@
       </div>
     </div>
 
-    <AppSection color="blue">
-      <h2>Welcome to Ontology Visualisations</h2>
-      <br />
-      <AppModal :mini-player="true">
-        <AppVideo video-id="jfUPLuPL3Ho" />
-      </AppModal>
-    </AppSection>
-    <footer>
-      <no-ssr>
-        <cookie-law theme="blood-orange"></cookie-law>
-      </no-ssr>
-    </footer>
+    <HomeSection 
+      title="Try for yourself."
+      text="Test out our ontology diagram making tool with this demo.">
+      Add demo here
+    </HomeSection>
+    <HomeSection 
+      title="Try for yourself."
+      text="Test out our ontology diagram making tool with this demo." />
+
   </div>
 </template>
 
@@ -44,6 +37,7 @@ import AppVideo from '@/components/Utilities/AppVideo'
 import AppImage from '@/components/Utilities/AppImage'
 import AppBlockQuote from '@/components/Utilities/AppBlockQuote'
 import TheHome from '@/components/Home/TheHome'
+import HomeSection from '@/components/Utils/HomeSection'
 
 export default {
   components: {
@@ -54,7 +48,8 @@ export default {
     AppImage,
     AppBlockQuote,
     CookieLaw,
-    TheHome
+    TheHome,
+    HomeSection
   },
 
   data() {
@@ -95,7 +90,6 @@ p {
 
 h1 {
   color: rgb(41, 40, 40);
-  font-family: 'Helvetica Neue', sans-serif;
   font-size: 70px;
   font-weight: bold;
   letter-spacing: -1px;
