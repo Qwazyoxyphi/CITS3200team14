@@ -39,6 +39,10 @@ How to Set Up Selenium:
      o Go to the ‘npm’ website. Find it by searching for ‘selenium-webdrive’.
      o Scroll down until you find the list of web drivers.
      o Download any and all web drivers in the list by following the links to those drivers’ homepages’ and downloading the latest versions.
+        - Firefox webdriver uses geckodriver v0.26.0 which can be downloaded from https://github.com/mozilla/geckodriver/releases/
+            *extracted from "geckodriver-v0.26.0-win64.zip".
+        - Google Chrome webdriver uses ChromeDriver v77.0.3865.40 which can be downloaded from https://chromedriver.chromium.org/
+            *extracted from "chromedriver_win32.zip".
      o Extract the .exe files for the drivers into a single folder. This will be our web drivers’ path folder.
  • Make sure the file the web drivers are extracted into has its path on the system specified.
      o In Windows, in the search bar type ‘Edit the system environment variables’ and click on it.
