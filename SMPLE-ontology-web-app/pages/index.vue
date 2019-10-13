@@ -19,13 +19,8 @@
     <HomeSection 
       title="Try for yourself."
       text="Test out our ontology diagram making tool with this demo.">
-      <Demo/>
-      Add demo here
     </HomeSection>
-    <HomeSection 
-      title="Try for yourself."
-      text="Test out our ontology diagram making tool with this demo." />
-
+	<Demo/>
   </div>
 </template>
 

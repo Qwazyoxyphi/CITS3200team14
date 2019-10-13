@@ -1,35 +1,16 @@
 <template>
   <AppSection color="blue">
-    <div @click="importt()">CLICK HERE TO IMPORT ! - get JSON from DB to load in here</div>
     <div class="flex">
       <div class="smallitem">
-        <div class="flexx">
-          <TwoButtons @save="download()" />
-        </div>
         <div class="sb-mobile-palette-bar">
           <div id="palette-icon" role="button" class="e-ddb-icons1 e-toggle-palette"></div>
         </div>
-        <!-- EXPORT OPTIONS -->
         <div class="separator">
           <div>Pallete options</div>
         </div>
         <div id class>
           <div class="flexx">
             <Pallette />
-          </div>
-          <div>
-            <!-- EXPORT OPTIONS -->
-            <div class="separator">
-              <div>export options</div>
-            </div>
-            <div class="container-wrap flexbox">
-              <div class="but-wrapper itemm">
-                <svgFile @exportSVG="exportSVG()" />
-              </div>
-              <div class="but-wrapper itemm">
-                <pdfFile @exportPDF="exportPDF()" />
-              </div>
-            </div>
           </div>
         </div>
       </div>

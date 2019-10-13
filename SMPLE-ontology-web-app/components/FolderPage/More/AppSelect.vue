@@ -20,13 +20,13 @@
             aria-hidden="aria-hidden"
           >Delete</label>
         </li>
-        <li @click="$emit('toggleEvent')"> <!-- create more buttons as required -->
+        <!--<li @click="$emit('toggleEvent')">
           <label
             class="select-box__option"
             for="3"
             aria-hidden="aria-hidden"
           >Add More</label>
-        </li>
+        </li>-->
       </ul>
     </div>
     <!--  -->

@@ -2,7 +2,7 @@
   <aside class="sidebar">
     <header>Menu</header>
     <!-- User has logged in navs -->
-    <section v-show="true">
+    <section v-show="true" v-if ="isAuth">
       <nav class="sidebar-nav">
         <ul @click="closeSidebar()">
           <li>
@@ -29,25 +29,28 @@
               <div class="nav-text">Trash</div>
             </nuxt-link>
           </li>-->
-          <li class="nav-item">
-            <AppButton @click="onClick" >Sign out</AppButton>
+          <li @click="onClick()">
+            <nuxt-link to="/">
+              <login class="icon" />
+              <div class="nav-text">Sign out</div>
+            </nuxt-link>
           </li>
         </ul>
       </nav>
     </section>
 
     <!-- User has not logged in navs -->
-    <section v-show="false">
+    <section v-show="true" v-if ="isAuth == false">
       <nav class="sidebar-nav">
         <ul @click="closeSidebar()">
           <li>
-            <nuxt-link to="/rerout">
+            <nuxt-link to="/">
               <home class="icon" />
               <div class="nav-text">Home</div>
             </nuxt-link>
           </li>
           <li>
-            <nuxt-link to="/rerout">
+            <nuxt-link to="/signin-signup">
               <login class="icon" />
               <div class="nav-text">Sign in / Sign up</div>
             </nuxt-link>
@@ -76,6 +79,11 @@ export default {
     home,
     login
   },
+  computed: {
+	isAuth(){
+		return this.$store.getters.isAuthenticated
+	}
+  },
   methods: {
     closeSidebar() {
       this.$store.dispatch('toggleLeftSidebar')
@@ -98,7 +106,7 @@ export default {
   background-color: white;
   height: 100%;
   overflow: scroll;
-  z-index: 1;
+  z-index: 1000;
 }
 
 a {

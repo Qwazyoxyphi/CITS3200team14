@@ -5,8 +5,8 @@
         <img 
           src="@/static/ontVisBetter.png"
           alt="safeco">
-        <div style="padding: 10px;color: white; font-size:32pt; font-weight:bolder;">Ontology Visualisation</div>
-        <div style="padding:10px; color: white; width:400px; text-align:center; font-weight:bold; font-size:16pt;">A catchy phrase</div>
+        <div style="padding: 10px; font-size:32pt; font-weight:bolder;">Ontology Visualisation</div>
+        <div style="padding:10px; width:400px; text-align:center; font-weight:bold; font-size:16pt;">A catchy phrase</div>
       </div>
     </div>
     <div 

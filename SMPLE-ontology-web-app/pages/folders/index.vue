@@ -1,7 +1,7 @@
 <template>
   <div>
     <AppSection color="blue">
-      <FolderSlider :documents="getAllDocuments" />
+      <FolderSlider :documents="getAllDocuments" class="slider" />
       <FolderList :folders="getUserFolders" />
     </AppSection>
   </div>
@@ -55,5 +55,10 @@ export default {
 h2 {
   font-size: 1.8rem;
   text-align: center;
+}
+
+.slider {
+	padding: 10px;
+	z-index: 0;
 }
 </style>

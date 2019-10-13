@@ -1,13 +1,16 @@
 <template>
   <div>
     <!--<DocSlider :documents="loadDocuments" />-->
-    <DocList :documents="getUserDocs" 
+	<AppSection color = "blue">
+		<DocList :documents="getUserDocs" 
               @onClick="clicm()"/> 
+	</AppSection>
   </div>
 </template>
 
 <script>
 import AppModal from '@/components/Utilities/AppModal'
+import AppSection from '@/components/Utilities/AppSection'
 import DocSlider from '@/components/DocumentsPage/DocSlider'
 import DocList from '@/components/DocumentsPage/DocList'
 import axios from 'axios'
@@ -16,6 +19,7 @@ export default {
   middleware: ['check-auth', 'auth'],
   components: {
     AppModal,
+	AppSection,
     DocSlider,
     DocList
   },
