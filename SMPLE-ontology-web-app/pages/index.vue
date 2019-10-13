@@ -19,6 +19,7 @@
     <HomeSection 
       title="Try for yourself."
       text="Test out our ontology diagram making tool with this demo.">
+      <Demo/>
       Add demo here
     </HomeSection>
     <HomeSection 
@@ -38,6 +39,7 @@ import AppImage from '@/components/Utilities/AppImage'
 import AppBlockQuote from '@/components/Utilities/AppBlockQuote'
 import TheHome from '@/components/Home/TheHome'
 import HomeSection from '@/components/Utils/HomeSection'
+import Demo from '@/components/DiagramPage/Syncfusion/Demo'
 
 export default {
   components: {
@@ -49,7 +51,8 @@ export default {
     AppBlockQuote,
     CookieLaw,
     TheHome,
-    HomeSection
+    HomeSection,
+    Demo
   },
 
   data() {
