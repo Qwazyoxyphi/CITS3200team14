@@ -73,6 +73,7 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '~plugins/vue-scrollto.js',
     { src: '~plugins/vee-validate.js', ssr: true },
     { src: '~/plugins/vueperslides', ssr: false },
     //{ src: '~/plugins/diagram-tool.js', ssr: false}
