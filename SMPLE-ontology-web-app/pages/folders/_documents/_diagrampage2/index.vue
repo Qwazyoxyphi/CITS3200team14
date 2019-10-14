@@ -35,7 +35,8 @@
       </div>
       <div class="bigitem">
         <div id="diagram-space" class="sb-mobile-diagram">
-          <Canvas /> <!--thisn with diagramobj ref-->
+          <Canvas />
+          <!--thisn with diagramobj ref-->
         </div>
       </div>
     </div>
@@ -89,7 +90,7 @@ export default {
     }
   },
   methods: {
-    //data to load diagram + set needs to be different. conflicts. 
+    //data to load diagram + set needs to be different. conflicts.
     load() {
       axios.get(
         'https://team-14-ontologies.firebaseio.com/folders/' +
@@ -105,52 +106,45 @@ export default {
         this.route.params.documents
       )
     },
-    download() {//save
+    download() {
+      //save
       console.log(this.$route.params)
 
       let diagramObj = document.getElementById('diagram')
       let diagramInstance = diagramObj.ej2_instances[0]
       //returns serialized string of the Diagram
       this.saveData = diagramInstance.saveDiagram()
-      
+
       const docDelPL = {
         docid: this.$route.params.diagrampage2,
         diagdata: this.saveData
-      } 
+      }
 
-      this.$store.dispatch('diagram/saveDiagram', docDelPL)//send to store
-      
+      this.$store.dispatch('diagram/saveDiagram', docDelPL) //send to store
     },
 
-    loadDiag(){//auto load diag
+    loadDiag() {
+      //auto load diag
       let diagramObj = document.getElementById('diagram')
-      //console.log("diagramObj")
-      //console.log(diagramObj)
       let diagramInstance = diagramObj.ej2_instances[0]
-      //console.log("diagramInstance")
-      //console.log(diagramInstance)
 
-      this.$store.dispatch('diagram/setDiagram',this.$route.params.diagrampage2)
-      console.log("getters")
+      this.$store.dispatch(
+        'diagram/setDiagram',
+        this.$route.params.diagrampage2
+      )
       let getdiagdata = this.$store.getters['diagram/currDiag']
-      console.log(getdiagdata)
-     //if (getdiagdata != undefined){
-       // console.log(getdiagdata)
-      //  diagramInstance.loadDiagram(getdiagdata)
+      //console.log(getdiagdata)
+      // diagramInstance.loadDiagram(JSON.stringify(getdiagdata))
 
-    //  }
-
-  axios
+      axios
         .get(
           'https://team-14-ontologies.firebaseio.com/documents/' +
-            this.$route.params.diagrampage2 + '/diagramData.json')
-       .then(resp => {
-           console.log("resp.data")
-           console.log(resp.data)
-          var data=JSON.stringify(resp.data)
-          console.log("data")
-          console.log(data)
-          diagramInstance.loadDiagram(data)
+            this.$route.params.diagrampage2 +
+            '/diagramData.json'
+        )
+        .then(resp => {
+          var diagdata = JSON.stringify(resp.data)
+          diagramInstance.loadDiagram(diagdata)
         })
     },
 
@@ -180,16 +174,17 @@ export default {
     }
   },
   mounted: function() {
-
-    this.loadDiag()//run when page loaded
+    this.$nextTick(function() {
+      //this.$store.dispatch('diagram/setDiagram',this.$route.params.diagrampage2)
+      this.loadDiag() //run when page loaded
+    })
     //For autosaving the diagram
     //Currently saves every 30 seconds
     window.setInterval(() => {
       this.download()
-      console.log("Diagram auto-saved")
-    }, 30000);
-
-  },
+      console.log('Diagram auto-saved')
+    }, 30000)
+  }
 }
 </script>
 

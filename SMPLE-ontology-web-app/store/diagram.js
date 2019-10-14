@@ -36,17 +36,12 @@ export const actions = {
             }).catch(e => console.log(e))
     },
 
-    setDiagram({ commit }, docid) {//set state of current diagram
-        //console.log(docid)
+
+    setDiagram({ commit }, docid) {//out of action set state of current diagram
         const thisDiag = this.state.documents.userDocs.find(//get the document for that diagram
             ({ id }) => id === docid
         )
-        //console.log("thisDiag")
-        //console.log(thisDiag)
-        var retdiag = JSON.stringify(thisDiag.diagramData)
-        console.log("retdiag")
-        console.log(retdiag)
-        commit("setCurrDiag", retdiag)
+        commit("setCurrDiag", thisDiag.diagramData)
     },
 
 }
