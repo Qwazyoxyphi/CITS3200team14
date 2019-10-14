@@ -11,6 +11,7 @@
     ></ejs-symbolpalette>
   </div>
 </template>
+
 <script>
 import Vue from 'vue'
 import {

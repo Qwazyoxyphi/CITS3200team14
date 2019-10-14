@@ -6,11 +6,11 @@
           <div id="palette-icon" role="button" class="e-ddb-icons1 e-toggle-palette"></div>
         </div>
         <div class="separator">
-          <div>Pallete options</div>
+          <div>Palette options</div>
         </div>
         <div id class>
           <div class="flexx">
-            <Pallette />
+            <Palette />
           </div>
         </div>
       </div>
@@ -28,9 +28,7 @@ import axios from 'axios'
 import DocsTile from '@/components/DocumentsPage/DocsTile'
 import Vue from 'vue'
 import Canvas from '@/components/DiagramPage/Syncfusion/Canvas'
-import Pallette from '@/components/DiagramPage/Syncfusion/Pallette'
-import DiagramSidebar from '@/components/DiagramPage/DiagramSidebar/DiagramSidebar'
-import TheSaveButton from '@/components/DiagramPage/DiagramSidebar/TheSaveButton'
+import Palette from '@/components/DiagramPage/Syncfusion/Palette'
 import { Uploader, UploaderPlugin } from '@syncfusion/ej2-vue-inputs'
 import {
   PrintAndExport,
@@ -51,7 +49,6 @@ import {
 import AppSection from '@/components/Utils/AppSection'
 import svgFile from '@/components/Utils/SVG/svgFile'
 import pdfFile from '@/components/Utils/SVG/pdfFile'
-import TwoButtons from '@/components/DiagramPage/DiagramSidebar/TwoButtons'
 
 Vue.use(UploaderPlugin)
 Vue.use(ToolbarPlugin)
@@ -59,13 +56,10 @@ Vue.use(ToolbarPlugin)
 export default {
   components: {
     Canvas,
-    Pallette,
-    DiagramSidebar,
-    TheSaveButton,
+    Palette,
     AppSection,
     svgFile,
     pdfFile,
-    TwoButtons,
     DocsTile
   },
   data() {

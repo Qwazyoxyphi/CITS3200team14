@@ -4,18 +4,18 @@
     <div class="flex">
       <div class="smallitem">
         <div class="flexx">
-          <TwoButtons @save="download()" />
+          <TheSaveButton @save="download()" />
         </div>
         <div class="sb-mobile-palette-bar">
           <div id="palette-icon" role="button" class="e-ddb-icons1 e-toggle-palette"></div>
         </div>
         <!-- EXPORT OPTIONS -->
         <div class="separator">
-          <div>Pallete options</div>
+          <div>Palette options</div>
         </div>
         <div id class>
           <div class="flexx">
-            <Pallette />
+            <Palette />
           </div>
           <div>
             <!-- EXPORT OPTIONS -->
@@ -47,8 +47,7 @@ import axios from 'axios'
 import DocsTile from '@/components/DocumentsPage/DocsTile'
 import Vue from 'vue'
 import Canvas from '@/components/DiagramPage/Syncfusion/Canvas'
-import Pallette from '@/components/DiagramPage/Syncfusion/Pallette'
-import DiagramSidebar from '@/components/DiagramPage/DiagramSidebar/DiagramSidebar'
+import Palette from '@/components/DiagramPage/Syncfusion/Palette'
 import TheSaveButton from '@/components/DiagramPage/DiagramSidebar/TheSaveButton'
 import { Uploader, UploaderPlugin } from '@syncfusion/ej2-vue-inputs'
 import {
@@ -70,7 +69,6 @@ import {
 import AppSection from '@/components/Utils/AppSection'
 import svgFile from '@/components/Utils/SVG/svgFile'
 import pdfFile from '@/components/Utils/SVG/pdfFile'
-import TwoButtons from '@/components/DiagramPage/DiagramSidebar/TwoButtons'
 
 Vue.use(UploaderPlugin)
 Vue.use(ToolbarPlugin)
@@ -78,13 +76,11 @@ Vue.use(ToolbarPlugin)
 export default {
   components: {
     Canvas,
-    Pallette,
-    DiagramSidebar,
+    Palette,
     TheSaveButton,
     AppSection,
     svgFile,
     pdfFile,
-    TwoButtons,
     DocsTile
   },
   data() {

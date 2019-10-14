@@ -39,7 +39,7 @@ export default {
           color = '#27c9b8'
           break
         case 'blue':
-          color = '#2caaca'
+          color = '#1171ba'
           break
       }
       return {
