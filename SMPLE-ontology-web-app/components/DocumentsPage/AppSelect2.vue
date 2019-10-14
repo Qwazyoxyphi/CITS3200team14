@@ -6,17 +6,10 @@
         <DownIcon class="select-box__icon" />
       </div>
       <ul class="select-box__list">
-        <li @click="$emit('toggleInvite')">
-          <label
-            class="select-box__option"
-            for="1"
-            aria-hidden="aria-hidden"
-          >Invite</label>
-        </li>
         <li @click="$emit('toggleDelete')">
           <label
             class="select-box__option"
-            for="2"
+            for="1"
             aria-hidden="aria-hidden"
           >Delete</label>
         </li>

@@ -57,13 +57,11 @@
 import axios from 'axios'
 import AppSelect from '@/components/FolderPage/More/AppSelect'
 import TheInviteForm from '@/components/DocumentsPage/TheInviteForm'
-import AppSelect2 from '@/components/DocumentsPage/AppSelect2'
 import AppModal from '@/components/Utils/AppModal'
 
 export default {
   name: `FolderTile`,
   components: {
-    AppSelect2,
     TheInviteForm,
     AppSelect,
     AppModal
