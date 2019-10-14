@@ -10,7 +10,6 @@
 <script>
 import FolderList from '@/components/FolderPage/FolderList'
 import AppSection from '@/components/Utils/AppSection'
-import More from '@/components/FolderPage/More/More'
 import FolderSlider from '@/components/FolderPage/FolderSlider'
 
 import axios from 'axios'
@@ -21,7 +20,6 @@ export default {
   components: {
     FolderList,
     AppSection,
-    More,
     FolderSlider
   },
   data() {

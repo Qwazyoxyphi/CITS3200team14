@@ -1,60 +1,97 @@
-# DOCUMENT PAGE COMPONENTS
+# FOLDER PAGE COMPONENTS
 
 
 > Web app for creating ontology diagrams
 
-### DocList
+### FolderList
 
-This is component is a list of documents from a database, with the capability to add new documents and update the database. 
+This is component is a list of folders from a database, with the capability to add new documents and update the database, as well as delete. There is also the ability to share folders with other users.
 
 #### Properties
 
-| Name      | Required | Type  | Default | Description                |
-| --------- | -------- | ----- | ------- | -------------------------- |
-| documents | `true`   | Array | `[]`    | Pass in array of documents |
+| Name    | Required | Type  | Default | Description              |
+| ------- | -------- | ----- | ------- | ------------------------ |
+| folders | `true`   | Array | `[]`    | Pass in array of folders |
 
 #### Usage
 
 ```html
 <template>
   <div>
-		<DocList :documents="getUserDocs" 
-              @onClick="clicm()"/> 
+    <FolderList :folders="getUserFolders" />
   </div>
 </template>
 
 <script>
-import DocList from '@/components/DocumentsPage/DocList'
+import FolderList from '@/components/FolderPage/FolderList'
+import AppSection from '@/components/Utils/AppSection'
 import axios from 'axios'
 
 export default {
   middleware: ['check-auth', 'auth'],
+
   components: {
-    DocList
+    FolderList
   },
   data() {
     return {
-      documentFlag: false
-    }
-  },
-  methods: {
-    clicm(){
-      axios.get('https://team-14-ontologies.firebaseio.com/folders/'+this.$route.params.documents+'/-Lq1P9l0cOuydz6RRfYa/diagramData/-LqPDHXGDPA_vi3WhpKy.json')
-      this.$emit('loadDiagram',data)
+      folderFlag: false
     }
   },
   computed: {
-    getUserId() {
+    getUserId() {//unused?
       return this.$store.getters.getUserId
     },
-    getUserDocs(){//Get the Documents Inside the Folder
-      this.$store.dispatch('documents/setUserDocs', this.$route.params.documents)
-      return this.$store.getters['documents/userDocs']
+    getUserFolders() {//display user's folders
+      this.$store.dispatch('folders/setUserFolders')
+      return this.$store.getters['folders/userFolders']
     }
   },
   methods: {
-    toggleCreateDocument() {
-      this.documentFlag = !this.documentFlag
+    toggleCreateFolder() {
+      this.folderFlag = !this.folderFlag
+    }
+  }
+}
+</script>
+```
+### FolderSlider
+
+This is component is a slider that shows the most recent documents added to the database. 
+
+#### Properties
+
+| Name    | Required | Type  | Default | Description              |
+| ------- | -------- | ----- | ------- | ------------------------ |
+| documents | `true`   | Array | `[]`    | Pass in array of documents |
+
+#### Usage
+```html
+<template>
+  <div>
+    <FolderSlider :documents="getAllDocuments" class="slider" />
+  </div>
+</template>
+
+<script>
+import FolderSlider from '@/components/FolderPage/FolderSlider'
+
+import axios from 'axios'
+
+export default {
+  middleware: ['check-auth', 'auth'],
+
+  components: {
+    FolderSlider
+  },
+  data() {
+    return {
+      folderFlag: false
+    }
+  },
+  computed: {
+    getAllDocuments() {//display all Documents
+      return this.$store.getters['documents/allDocuments']
     }
   }
 }
