@@ -5,15 +5,8 @@
         <img 
           src="@/static/ontVisBetter.png"
           alt="safeco">
-        <div style="padding: 10px; font-size:32pt; font-weight:bolder;">Ontology Visualisation</div>
-        <div style="padding:10px; width:400px; text-align:center; font-weight:bold; font-size:16pt;">A catchy phrase</div>
+        
       </div>
-    </div>
-    <div 
-      v-scroll-to="'#start'"
-      class="bar"
-    >
-      <div class="click_me">Click to scroll.</div>
     </div>
   </div>
 </template>
@@ -46,6 +39,11 @@
   color: white;
 }
 
+.OVers {
+  color: #696969;
+  font-weight: bolder;
+}
+
 .fullscreen-banner {
 position: relative;
 z-index: 2;
@@ -55,7 +53,6 @@ margin-top: -70px;
 
 display: flex;
 justify-content: center;
-
 
 
 /* Location of the image */

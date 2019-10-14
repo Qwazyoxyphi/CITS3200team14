@@ -8,6 +8,8 @@
         class="content"
       >
         <nuxt/>
+
+        <TheFooter />
       </div>
       <TheProfileSidebar v-if="isRightSidebar"/>
     </div>
@@ -18,12 +20,14 @@
 import TheHeader from '@/components/Navigation/TheHeader'
 import TheSidebar from '@/components/Navigation/TheSidebar'
 import TheProfileSidebar from '@/components/Navigation/TheProfileSidebar'
+import TheFooter from '@/components/Navigation/TheFooter'
 
 export default {
   components: {
     TheProfileSidebar,
     TheSidebar,
-    TheHeader
+    TheHeader,
+    TheFooter
   },
   computed: {
     isLeftSidebar: function() {
@@ -128,4 +132,5 @@ small {
   flex: 1 1 auto;
   text-align: center;
 }
+
 </style>

@@ -21,6 +21,7 @@
       text="Test out our ontology diagram making tool with this demo.">
     </HomeSection>
 	<Demo/>
+  <br><br>
   </div>
 </template>
 
