@@ -8,7 +8,6 @@
         class="content"
       >
         <nuxt/>
-
         <TheFooter />
       </div>
     </div>

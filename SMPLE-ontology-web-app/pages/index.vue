@@ -28,23 +28,17 @@
 <script>
 import CookieLaw from 'vue-cookie-law'
 import AppSection from '@/components/Utils/AppSection'
-import AppSubtitle from '@/components/Utilities/AppSubtitle'
 import AppModal from '@/components/Utilities/AppModal'
 import AppVideo from '@/components/Utilities/AppVideo'
-import AppImage from '@/components/Utilities/AppImage'
-import AppBlockQuote from '@/components/Utilities/AppBlockQuote'
 import TheHome from '@/components/Home/TheHome'
 import HomeSection from '@/components/Utils/HomeSection'
 import Demo from '@/components/DiagramPage/Syncfusion/Demo'
 
 export default {
   components: {
-    AppSubtitle,
     AppSection,
     AppModal,
     AppVideo,
-    AppImage,
-    AppBlockQuote,
     CookieLaw,
     TheHome,
     HomeSection,

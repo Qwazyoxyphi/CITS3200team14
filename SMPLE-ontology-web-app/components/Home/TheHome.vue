@@ -28,7 +28,6 @@
 // Essential Components
 import AppSection from '@/components/Utils/AppSection'
 import HomeSection from '@/components/Utils/HomeSection'
-import AppFullWidthSection from '@/components/Utilities/AppFullWidthSection'
 import AppScrollTo from '@/components/Utilities/AppScrollTo'
 // Functionality Components
 import IconRack from '@/components/Home/AboutIconRack/IconRack'
@@ -39,7 +38,6 @@ export default {
     components: {
       // Essential Components
       AppSection,
-      AppFullWidthSection,
       AppScrollTo,
       // Functionality Components
       IconRack,
