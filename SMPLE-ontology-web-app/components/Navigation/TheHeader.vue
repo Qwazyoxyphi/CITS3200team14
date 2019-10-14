@@ -18,12 +18,10 @@
       @click="toggleRightSidebar"
       >-->
     </header>
-    <TheIndicator />
   </div>
 </template>
 
 <script>
-import TheIndicator from '@/components/Navigation/TheIndicator'
 import LoggedInNavs from '@/components/Navigation/LoggedInNavs'
 import LoggedoutNavs from '@/components/Navigation/LoggedoutNavs'
 import { mapGetters } from 'vuex'
@@ -36,7 +34,6 @@ export default {
   },
   name: 'TheHeader',
   components: {
-    TheIndicator,
     LoggedInNavs,
     LoggedoutNavs
   },
