@@ -18,12 +18,10 @@
 <script>
 import TheHeader from '@/components/Navigation/TheHeader'
 import TheSidebar from '@/components/Navigation/TheSidebar'
-import TheProfileSidebar from '@/components/Navigation/TheProfileSidebar'
 import TheFooter from '@/components/Navigation/TheFooter'
 
 export default {
   components: {
-    TheProfileSidebar,
     TheSidebar,
     TheHeader,
     TheFooter
