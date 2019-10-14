@@ -11,7 +11,6 @@
 import FolderList from '@/components/FolderPage/FolderList'
 import AppSection from '@/components/Utils/AppSection'
 import More from '@/components/FolderPage/More/More'
-import AppSelect from '@/components/FolderPage/More/AppSelect'
 import FolderSlider from '@/components/FolderPage/FolderSlider'
 
 import axios from 'axios'
@@ -23,7 +22,6 @@ export default {
     FolderList,
     AppSection,
     More,
-    AppSelect,
     FolderSlider
   },
   data() {

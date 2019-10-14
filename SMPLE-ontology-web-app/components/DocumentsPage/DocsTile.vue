@@ -52,11 +52,7 @@
     </nuxt-link>
     <div class>
       <div class="name">{{ documentName }}</div>
-      <AppSelect2 @toggleDelete="moree(id)" @toggleInvite="toggleInviteFlag()" />
-
-      <AppModal v-if="inviteFlag" @exitModal="toggleInviteFlag()">
-      <!--  <TheInviteForm @submit="onSubmitted" @exitModal="toggleInviteFlag()" /> -->
-      </AppModal>
+      <AppSelect2 @toggleDelete="moree(id)" />
     </div>
   </div>
 </template>
