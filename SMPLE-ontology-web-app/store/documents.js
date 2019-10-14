@@ -95,10 +95,9 @@ export const actions = {
           )
           .then(() => {
             commit('addDocument', { ...document, id: res.data.name })
-            //console.log(this.$router.payload)
             this.$router.push(
-              '/folders/' + this.$router.payload + '/' + res.data.name
-            ) //+ res.data.name)//TODO add diagid to route to.
+              '/folders/' + document.docFolderId+ '/' + res.data.name
+            )
           })
       })
       .catch(e => console.log(e))
