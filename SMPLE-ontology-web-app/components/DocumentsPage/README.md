@@ -1,23 +1,35 @@
+# DOCUMENT PAGE COMPONENTS
+
+
+> Web app for creating ontology diagrams
+
+### DocList
+
+This is component is a list of documents from a database, with the capability to add new documents and update the database. 
+
+#### Properties
+
+| Name      | Required | Type  | Default | Description                |
+| --------- | -------- | ----- | ------- | -------------------------- |
+| documents | `true`   | Array | `[]`    | Pass in array of documents |
+
+#### Usage
+
+```html
 <template>
   <div>
-	<AppSection color = "blue">
 		<DocList :documents="getUserDocs" 
               @onClick="clicm()"/> 
-	</AppSection>
   </div>
 </template>
 
 <script>
-import AppModal from '@/components/Utilities/AppModal'
-import AppSection from '@/components/Utilities/AppSection'
 import DocList from '@/components/DocumentsPage/DocList'
 import axios from 'axios'
 
 export default {
   middleware: ['check-auth', 'auth'],
   components: {
-    AppModal,
-	AppSection,
     DocList
   },
   data() {
@@ -47,3 +59,4 @@ export default {
   }
 }
 </script>
+```
