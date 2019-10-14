@@ -1,6 +1,5 @@
 # DIAGRAM PAGE COMPONENTS
 
-[TOC]
 
 > Web app for creating ontology diagrams
 
