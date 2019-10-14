@@ -11,7 +11,6 @@
 
         <TheFooter />
       </div>
-      <TheProfileSidebar v-if="isRightSidebar"/>
     </div>
   </div>
 </template>
