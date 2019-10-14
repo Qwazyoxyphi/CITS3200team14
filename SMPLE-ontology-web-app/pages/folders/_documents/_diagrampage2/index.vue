@@ -124,23 +124,16 @@ export default {
 
     loadDiag(){//auto load diag
       let diagramObj = document.getElementById('diagram')
-      //console.log("diagramObj")
-      //console.log(diagramObj)
       let diagramInstance = diagramObj.ej2_instances[0]
-      //console.log("diagramInstance")
-      //console.log(diagramInstance)
 
-      this.$store.dispatch('diagram/setDiagram',this.$route.params.diagrampage2)
+      //this.$store.dispatch('diagram/setDiagram',this.$route.params.diagrampage2)
       console.log("getters")
       let getdiagdata = this.$store.getters['diagram/currDiag']
       console.log(getdiagdata)
-     //if (getdiagdata != undefined){
-       // console.log(getdiagdata)
-      //  diagramInstance.loadDiagram(getdiagdata)
+      console.log(JSON.stringify(getdiagdata))//g
+      diagramInstance.loadDiagram(JSON.stringify(getdiagdata))//IF BROKE COMMENT THIS AND REPLACE WITH \/
 
-    //  }
-
-  axios
+  /*axios
         .get(
           'https://team-14-ontologies.firebaseio.com/documents/' +
             this.$route.params.diagrampage2 + '/diagramData.json')
@@ -151,7 +144,7 @@ export default {
           console.log("data")
           console.log(data)
           diagramInstance.loadDiagram(data)
-        })
+        })*/
     },
 
     exportPDF() {
@@ -180,8 +173,11 @@ export default {
     }
   },
   mounted: function() {
+    this.$nextTick(function(){
+            this.$store.dispatch('diagram/setDiagram',this.$route.params.diagrampage2)
 
-    this.loadDiag()//run when page loaded
+      this.loadDiag()//run when page loaded
+    })
     //For autosaving the diagram
     //Currently saves every 30 seconds
     window.setInterval(() => {
@@ -190,6 +186,7 @@ export default {
     }, 30000);
 
   },
+  
 }
 </script>
 

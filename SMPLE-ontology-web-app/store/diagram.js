@@ -43,10 +43,11 @@ export const actions = {
         )
         //console.log("thisDiag")
         //console.log(thisDiag)
-        var retdiag = JSON.stringify(thisDiag.diagramData)
-        console.log("retdiag")
-        console.log(retdiag)
-        commit("setCurrDiag", retdiag)
+        commit("setCurrDiag", thisDiag.diagramData)
+       // var retdiag = JSON.stringify(thisDiag.diagramData)
+       // console.log("retdiag")
+       // console.log(retdiag)
+       // commit("setCurrDiag", retdiag)
     },
 
 }
