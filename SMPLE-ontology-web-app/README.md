@@ -1,6 +1,3 @@
-# ontology-web-app
-
-> My cat&#39;s meow Nuxt.js project
 
 ## Build Setup
 
@@ -19,4 +16,9 @@ $ npm start
 $ npm run generate
 ```
 
-For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
+## Sources
+This is a `nuxt.js` web app. For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
+Youtube video on `Home Page` - `https://www.youtube.com/watch?v=jfUPLuPL3Ho`
+Diagram Tool (Syncfusion) - `https://ej2.syncfusion.com/vue/documentation/introduction/`
+
+## Folder Structure
