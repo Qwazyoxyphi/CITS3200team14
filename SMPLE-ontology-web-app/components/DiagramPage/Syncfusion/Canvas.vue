@@ -1,5 +1,5 @@
 <template>
-    <ejs-diagram id="diagram" :width="width" :height="height" :nodes="nodes"></ejs-diagram>
+    <ejs-diagram id="diagram" ref="diagramObj" :width="width" :height="height" :nodes="nodes"></ejs-diagram>
 </template>
 <script>
 import Vue from 'vue'

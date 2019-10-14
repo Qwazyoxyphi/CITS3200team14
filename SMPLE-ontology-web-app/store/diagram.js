@@ -2,15 +2,16 @@
 import axios from 'axios'
 
 export const state = () => ({
-    currDiag: {}
+    currDiag: ''
 })
 
 export const mutations = {
 
-    storeDiagDB(state, payload) {//Update diagram data in the document
+    saveDiagDB(state, payload) {//Update diagram data in the document
         const docIdx = this.state.documents.allDocuments.findIndex(
             document => document.id === payload.docid
         )
+        console.log(docIdx)
         if (docIdx != -1) {
             this.state.documents.allDocuments[docIdx].diagramData = payload.diagdata
         }
@@ -24,22 +25,27 @@ export const mutations = {
 
 export const actions = {
 
-    storeDiagram({ commit }, payload) {//store in database
+    saveDiagram({ commit }, payload) {//store in database
+        console.log("saving")
         return axios
             .put(
                 'https://team-14-ontologies.firebaseio.com/documents/' +
                 payload.docid + '/diagramData.json', payload.diagdata)
             .then(() => {
-                commit("storeDiagDB", payload);
+                commit("saveDiagDB", payload);
             }).catch(e => console.log(e))
-
     },
 
-    setDiagram({ commit }, payload) {//set state of current diagram
+    setDiagram({ commit }, docid) {//set state of current diagram
+        //console.log(docid)
         const thisDiag = this.state.documents.userDocs.find(//get the document for that diagram
-            ({ id }) => id === payload.docid
+            ({ id }) => id === docid
         )
+        //console.log("thisDiag")
+        //console.log(thisDiag)
         var retdiag = JSON.stringify(thisDiag.diagramData)
+        console.log("retdiag")
+        console.log(retdiag)
         commit("setCurrDiag", retdiag)
     },
 

@@ -1,6 +1,6 @@
 <template>
   <AppSection color="blue">
-    <div @click="importt()">CLICK HERE TO IMPORT ! - get JSON from DB to load in here</div>
+    <div @click="loadDiag()"></div>
     <div class="flex">
       <div class="smallitem">
         <div class="flexx">
@@ -35,7 +35,7 @@
       </div>
       <div class="bigitem">
         <div id="diagram-space" class="sb-mobile-diagram">
-          <Canvas />
+          <Canvas /> <!--thisn with diagramobj ref-->
         </div>
       </div>
     </div>
@@ -105,34 +105,10 @@ export default {
         this.route.params.documents
       )
     },
-    onSubmit() {//IGNORED
-      /*console.log("thissavedata");
-      console.log(this.saveData)
-      const docDelPL = {
-        folderid: this.$route.params.documents,
-        docid: this.$route.params.diagrampage2,
-        diagdata: this.saveData
-      } //combine into object payload
-      //this.$store.dispatch('documents/addDiagram',docDelPL)
-      axios
-        .put(
-          'https://team-14-ontologies.firebaseio.com/folders/' +
-            this.$route.params.documents +
-            '/folderDocs/' +
-            this.$route.params.diagrampage2 +
-            '/diagramData.json',
-          this.saveData
-        )
-
-        .then(res => {
-          console.log(res.data)
-        })*/
-    },
-    download() {
+    download() {//save
       console.log(this.$route.params)
 
       let diagramObj = document.getElementById('diagram')
-      //console.log(diagramObj)
       let diagramInstance = diagramObj.ej2_instances[0]
       //returns serialized string of the Diagram
       this.saveData = diagramInstance.saveDiagram()
@@ -141,42 +117,43 @@ export default {
         docid: this.$route.params.diagrampage2,
         diagdata: this.saveData
       } 
-      this.$store.dispatch('diagram/storeDiagram', docDelPL)//send to store
 
-      //console.log(this.saveData)
-      //this.onSubmit()
+      this.$store.dispatch('diagram/saveDiagram', docDelPL)//send to store
+      
     },
-    importt() {
+
+    loadDiag(){//auto load diag
       let diagramObj = document.getElementById('diagram')
+      //console.log("diagramObj")
+      //console.log(diagramObj)
       let diagramInstance = diagramObj.ej2_instances[0]
+      //console.log("diagramInstance")
+      //console.log(diagramInstance)
 
-      const diagPL = {
-        diagramObj: document.getElementById('diagram'),
-        docid: this.$route.params.diagrampage2
-      } //combine into object payload
+      this.$store.dispatch('diagram/setDiagram',this.$route.params.diagrampage2)
+      console.log("getters")
+      let getdiagdata = this.$store.getters['diagram/currDiag']
+      console.log(getdiagdata)
+     //if (getdiagdata != undefined){
+       // console.log(getdiagdata)
+      //  diagramInstance.loadDiagram(getdiagdata)
 
-////Code to store, to get diagram data from document, and show, refresh issues
-    this.$store.dispatch('diagram/setDiagram', diagPL)
-    let currDiag = this.$store.getters['diagram/currDiag']
-      diagramInstance.loadDiagram(currDiag)
-///
+    //  }
 
-     // axios
-     //   .get(
-      ////    'https://team-14-ontologies.firebaseio.com/folders/' +
-       //     this.$route.params.documents +
-       //     '/folderDocs/' +
-       //     this.$route.params.diagrampage2 +
-       //     '/diagramData.json'
-       // )
-       // .then(resp => {
-       //   var data=JSON.stringify(resp.data)
-       //   diagramInstance.loadDiagram(data)
-       // })
-      //let diag=loadData.data
-      //returns serialized string of the Diagram
-      //
+  axios
+        .get(
+          'https://team-14-ontologies.firebaseio.com/documents/' +
+            this.$route.params.diagrampage2 + '/diagramData.json')
+       .then(resp => {
+           console.log("resp.data")
+           console.log(resp.data)
+          var data=JSON.stringify(resp.data)
+          console.log("data")
+          console.log(data)
+          diagramInstance.loadDiagram(data)
+        })
     },
+
     exportPDF() {
       let diagramObj = document.getElementById('diagram')
       let diagramInstance = diagramObj.ej2_instances[0]
@@ -203,26 +180,16 @@ export default {
     }
   },
   mounted: function() {
+
+    this.loadDiag()//run when page loaded
     //For autosaving the diagram
     //Currently saves every 30 seconds
     window.setInterval(() => {
       this.download()
       console.log("Diagram auto-saved")
     }, 30000);
-  }, 
-  computed: {
-    loadDiag() {//work in progress
-      let diagramObj = document.getElementById('diagram')
-      let diagramInstance = diagramObj.ej2_instances[0]
-      const diagPL = {
-        diagramObj: document.getElementById('diagram'),
-        docid: this.$route.params.diagrampage2
-      } //combine into object payload
-      //let currDiag = this.$store.getters['diagram/currDiag']
-     // diagramInstance.loadDiagram(currDiag)
 
-    }
-  }
+  },
 }
 </script>
 
