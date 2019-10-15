@@ -98,7 +98,7 @@ async function testAFirefox() {
   driver.close();
 }
 
-async function demoChrome() {
+async function testAChrome() {
   let driver = await new Builder().forBrowser('chrome').build(); // Sets up the chrome browser for automation
   driver.get('http://localhost:3000/');                           // Tells the browser what domain to visit (localHost for dev)
 
@@ -126,4 +126,4 @@ async function demoChrome() {
 }
 
 testAFirefox();
-//demoChrome();
+//testAChrome();
