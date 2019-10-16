@@ -15,7 +15,6 @@
       :id="document.id"
       :title="document.documentName"
       :content="document.documentDesc"
-      :style="'background-color: #7FBFEC'"
       :link="'/'"
       />
     </vueper-slides>
@@ -70,3 +69,12 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.vueperslide.vueperslide--visible {
+    background-image: url("/_nuxt/assets/images/File.jpg");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+</style>
