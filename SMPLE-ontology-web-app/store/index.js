@@ -32,11 +32,9 @@ export const mutations = {
   },
 
   setAllFolders(state, folders) {
-    // init populate folder state
     this.state.folders.allFolders = folders
   },
   setAllDocuments(state, documents) {
-    // init populate folder state
     this.state.documents.allDocuments = documents
   }
 }
@@ -120,7 +118,7 @@ export const actions = {
         .split(';')
         .find(c => c.trim().startsWith('userEmail='))
         .split('=')[1]
-    } else {
+    } else if (process.client){
       token = localStorage.getItem('token')
       expirationDate = localStorage.getItem('tokenExpiration')
       userId = localStorage.getItem('userId')

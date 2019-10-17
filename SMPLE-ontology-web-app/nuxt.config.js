@@ -1,4 +1,5 @@
 const pkg = require('./package')
+const axios = require("axios");
 
 module.exports = {
   mode: 'universal',
@@ -111,6 +112,22 @@ module.exports = {
           exclude: /(node_modules)/
         })
       }*/
+    }
+  },
+  generate:{
+    routes: function(){
+      return axios
+      .get('https://team-14-ontologies.firebaseio.com/folders.json')
+      .then(res => {
+        const routes = [];
+        for (const key in res.data){
+          routes.push({
+            route: "/folders/" + key,
+            payload: {folderData: res.data[key]}
+          });
+        }
+        return routes;
+      })
     }
   }
 }

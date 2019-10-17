@@ -20,6 +20,13 @@ export default {
 	AppSection,
     DocList
   },
+  asyncData(context){
+    if (context.payload){
+      return {
+        getUserDocs: context.payload.folderData
+      }
+    }
+  },
   data() {
     return {
       documentFlag: false

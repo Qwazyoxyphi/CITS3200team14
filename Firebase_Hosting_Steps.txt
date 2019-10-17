@@ -1,0 +1,16 @@
+Firebase Connecting
+
+nuxt run generate
+npm install -g firebase-tools
+firebase login
+
+firebase init
+	ClI features
+		Hosting
+		Database
+	Public Directory
+		dist
+	Configure single page app
+		n
+	
+firebase deploy
