@@ -1,20 +1,23 @@
 <template>
   <div class="container">
-    <form @submit.prevent="onFolderSubmit" id="contact" action method="post">
+    <form @submit.prevent="onFolderSubmit" id="contact" action method="post" name="create_new_folder_form">
       <h3>Create a Folder.</h3>
       <AppControlInput 
           v-model="newFolder.folderName"
           placeholder="Folder Name"
+          name="create_new_folder_form_name_input"
       />
       <AppControlInput 
           controlType="textarea"
           v-model="newFolder.folderDesc"
           placeholder="Write a description..."
+          name="create_new_folder_form_description_input"
       />
 
       <AppButton 
           class="login-but" 
-          type="submit">Create</AppButton>
+          type="submit"
+          name="create_new_folder_form_submit">Create</AppButton>
         <AppButton 
           class="login-but" 
           type="button" 

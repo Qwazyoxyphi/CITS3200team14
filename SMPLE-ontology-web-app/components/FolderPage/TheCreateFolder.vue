@@ -1,6 +1,7 @@
 <template>
   <div 
     class="box"
+    name="create_new_folder"
     @click="$emit('createFolder')">
     <add />
   </div> 
