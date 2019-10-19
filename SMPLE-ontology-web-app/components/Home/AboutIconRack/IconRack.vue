@@ -4,7 +4,7 @@
       <Icon 
         v-scroll-to="'#products'"
         title="Creation"
-        message="Create your own ontology diagrams." 
+        message="" 
       >
         <img 
           class="aus"
@@ -14,7 +14,7 @@
       <Icon 
         v-scroll-to="'#team'"
         title="Collaboration"
-        message="Collectively work on projects." 
+        message="" 
       >
         <img 
           alt="Teamwork"
@@ -23,7 +23,7 @@
       <Icon 
         v-scroll-to="'#clients'"
         title="Community"
-        message="Participate in growing community." 
+        message="" 
       >
         <img 
           alt="Our Clients"
