@@ -397,7 +397,7 @@ async function testBFirefox() {
   for (var i = 0; i < invalidUserEmails.length; i++) {
 
     // Tells the driver to find the email input field
-    let emailElement = await driver.findElement(By.name('email'))
+    emailElement = await driver.findElement(By.name('email'))
       .catch(error => {
         console.log('Failed to find email input!');
         console.log(error);
@@ -408,7 +408,7 @@ async function testBFirefox() {
     console.log('Found the email input!');
 
     // Tells the driver to find the password input field
-    let passwordElement = await driver.findElement(By.name('password'))
+    passwordElement = await driver.findElement(By.name('password'))
       .catch(error => {
         console.log('Failed to find password input!');
         console.log(error);
@@ -419,7 +419,7 @@ async function testBFirefox() {
     console.log('Found the password input');
 
     // Tells the driver to find the submission button
-    let submitElement = await driver.findElement(By.id('contact-submit'))
+    submitElement = await driver.findElement(By.id('contact-submit'))
       .catch(error => {
         console.log('Failed to find the login submission button!');
         console.log(error);

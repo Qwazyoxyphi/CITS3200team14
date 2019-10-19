@@ -13,7 +13,7 @@
             aria-hidden="aria-hidden"
           >Invite</label>
         </li>
-        <li @click="$emit('toggleDelete')">
+        <li :name="'delete_' + folderId" @click="$emit('toggleDelete')">
           <label
             class="select-box__option"
             for="2"
@@ -44,6 +44,9 @@ export default {
   props: {
     object: {
       type: Array
+    },
+    folderId: {
+      type: String
     }
   }
 }

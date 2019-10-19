@@ -15,8 +15,8 @@
 const { Builder, By, until, Key, util } = require("selenium-webdriver"); // Pulls out functions from the selenium-websdriver module
 
 const websiteLoginDomain = 'http://localhost:3000/signin-signup';   // Url address of the website's login-page
-const websiteFolderDomain = 'http://localhost:3000/folders/';       // Url address of the website's folders page
-const substringStart = 13;  // Number value representing the start of the url (string) to be taken from the testCaseD folder's documents page
+const websiteFolderDomain = 'http://localhost:3000/folders';       // Url address of the website's folders page
+const substringStart = 30;  // Number value representing the start of the url (string) to be taken from the testCaseD folder's documents page
 
 const testEmail = 'tester@test.com';                // VALID Testing account email
 const testPassword = 'tester';                      // VALID Testing account password
@@ -89,7 +89,11 @@ async function testBFirefox() {
   console.log('Found the password input');
 
   // Tells driver to find the account input submission button
-  let submitElement = await driver.findElement(By.id('contact-submit'))
+  /**
+   * NOTE: typically you would need to assign the variable with 'let' first. For some reason,
+   * this particular value name is already initialized beforehand...
+   */
+  submitElement = await driver.findElement(By.id('contact-submit'))
     .catch(error => {
       console.log('Failed to find the login submission button!');
       console.log(error);
@@ -162,13 +166,20 @@ async function testBFirefox() {
     process.exit();
   }
 
+  /**
+   * This will give the website enough time to load the test account's details and the folders page
+   * for the account. It may need adjusting for slower computers.
+   */
+  await driver.sleep(1000);
+
   // Asks the driver what the url is after clicking the 'Home' link.
   await driver.getCurrentUrl()
     .then(url => { // If successful...
+      console.log('Url is: ' + url);
+      console.log('Folders page url should be: ' + websiteFolderDomain);
       if (url === websiteFolderDomain) console.log('Reached folders page successfully!');
       else { // If unsuccessful...
         console.log('Failed to reach folders page!');
-        console.log(error);
         driver.close();
         console.log('Test D has failed');
         process.exit();
@@ -230,7 +241,7 @@ async function testBFirefox() {
   console.log('Found the folder creation form!');
 
   // Tells driver to find the folder creation form's folder name input field
-  let folderNameInput = driver.findElement(By.name('create_new_folder_form_name_input'))
+  let folderNameInput = await driver.findElement(By.name('create_new_folder_form_name_input'))
     .catch(error => {
       console.log('Failed to find folder name input field!');
       console.log(error);
@@ -241,7 +252,7 @@ async function testBFirefox() {
   console.log('Found folder name input field!');
 
   // Tells driver to find the folder creation form's folder description input field
-  let folderDescField = await driver.findElement(By.name('create_new_folder_form_description_input'))
+  let folderDescInput = await driver.findElement(By.name('create_new_folder_form_description_input'))
     .catch(error => {
       console.log('Failed to find folder description input field!');
       console.log(error);
@@ -263,6 +274,18 @@ async function testBFirefox() {
   console.log('Found create form submission button!');
 
   // Tells driver to input a folder name into the form name field (provided by const 'testFolderName')
+  /**
+   * NOTE - for some reason, unlike other input fields, the framing of the creation forms input fields requires
+   * the Selenium driver to first click on the input frame before being allowed to send the input text.
+   */
+  await folderNameInput.click()
+    .catch(error => {
+      console.log('Failed to input folder name!');
+      console.log(error);
+      driver.close();
+      console.log('Test D has failed');
+      process.exit();
+    });
   await folderNameInput.sendKeys(testFolderName)
     .catch(error => {
       console.log('Failed to input folder name!');
@@ -274,7 +297,19 @@ async function testBFirefox() {
   console.log('Inputting folder name: ' + testFolderName);
 
   // Tells driver to input a folder description into the form description field (provided by const 'testFolderDesc')
-  await passwordElement.sendKeys(testFolderDesc)
+  /**
+   * NOTE - similarly to the name input field, Selenium first needs to click on the description input field before
+   * it can send the input text.
+   */
+  await folderDescInput.click()
+    .catch(error => {
+      console.log('Failed to input folder description!');
+      console.log(error);
+      driver.close();
+      console.log('Test D has failed');
+      process.exit();
+    });
+  await folderDescInput.sendKeys(testFolderDesc)
     .catch(error => {
       console.log('Failed to input folder description!');
       console.log(error);
@@ -293,15 +328,29 @@ async function testBFirefox() {
       console.log('Test D has failed');
       process.exit();
     });
-  console.log('Now checking if folder exists...');
+  console.log('Now beginning process of checking if folder exists...');
+
+  // Tell the driver to wait until the page url has changed, inferring the documents has loaded
+  await driver.wait(until.urlContains(websiteFolderDomain + '/'))
+    .catch(error => {
+      console.log('> Failed to load new page!');
+      console.log(error);
+      driver.close();
+      console.log('Test D has failed');
+      process.exit();
+    });
+  console.log('> New page was loaded...');
+
 
   // Tells the driver to find the url of the new folder's page which will be used for finding the folder element on the folders page...
-  let testFolderUrl = await driver.getCurrentUrl()
+  let testFolderUrl;
+  await driver.getCurrentUrl()
     .then(url => { // If successful...
-      console.log('Retrieved new folder url successfully: ' + url);
+      testFolderUrl = url;
+      console.log('> Retrieved new folder url successfully: ' + testFolderUrl);
     })
     .catch(error => { // If unsuccessful
-      console.log('Failed to retrieve URL');
+      console.log('> Failed to retrieve URL');
       console.log(error);
       driver.close();
       console.log('Program has stopped working...');
@@ -311,31 +360,31 @@ async function testBFirefox() {
   // Tells the driver to find 'Folders' link to go back to the folders page
   let folderPageLink = await driver.findElement(By.linkText('Folders'))
     .catch(error => {
-      console.log('Failed to find Folders page link!');
+      console.log('> Failed to find Folders page link!');
       console.log(error);
       driver.close();
       console.log('Test D has failed');
       process.exit();
     });
-  console.log('Found folders page link...');
+  console.log('> Found folders page link...');
 
   // Tells the driver to click on folders page link
   await folderPageLink.click()
     .catch(error => {
-      console.log('Failed to click on folders page link!');
+      console.log('> Failed to click on folders page link!');
       console.log(error);
       driver.close();
       console.log('Test D has failed');
       process.exit();
     });
-  console.log('Navigating back to folders page...');
+  console.log('> Navigating back to folders page...');
 
   // Tells the driver to check the page url for the folders page domain
   await driver.getCurrentUrl()
     .then(url => { // If successful...
-      if (url === websiteFolderDomain) console.log('Reached folders page successfully!');
+      if (url === websiteFolderDomain) console.log('> Reached folders page successfully!');
       else { // If unsuccessful...
-        console.log('Failed to reach folders page!');
+        console.log('> Failed to reach folders page!');
         console.log(error);
         driver.close();
         console.log('Test D has failed');
@@ -343,17 +392,17 @@ async function testBFirefox() {
       }
     })
     .catch(error => {   // If another failure has occurred...
-      console.log('Failed to retrieve URL');
+      console.log('> Failed to retrieve URL');
       console.log(error);
       driver.close();
       console.log('Program has stopped working...');
       process.exit();
     });
 
-    // Tells driver to check for any elements with a href equivalent to the documents page of the test case folder
-    testFolderUrl = testFolderUrl.substr(substringStart); // Takes the url from earlier and modifies it into something we can compare with...
-    console.log('Looking for elements with href to: ' + testFolderUrl);
-    let testFolderElement = await driver.findElement(By.xpath('//a[@href="' + testFolderUrl + '"]'))
+  // Tells driver to check for any elements with a name equivalent to the id extracted from the documents page of the test case folder
+  testFolderId = testFolderUrl.substr(substringStart); // Takes the url from earlier and extracts the unique folder id...
+  console.log('Looking for elements with name of folder id: ' + testFolderId);
+  await driver.findElement(By.name(testFolderId))
     .catch(error => {
       console.log('Failed to find new folder element');
       console.log(error);
@@ -362,8 +411,8 @@ async function testBFirefox() {
       console.log('***Folder may still exist. Please check manually for its existence and delete it if it does exist...')
       process.exit();
     });
-    console.log('New folder found! Creation successful')
-    console.log('---------------------------------------------')
+  console.log('New folder found! Creation successful')
+  console.log('---------------------------------------------')
 
 
   //---------------------------------------------------------------------------------------------------------------------------------------
@@ -380,213 +429,83 @@ async function testBFirefox() {
   console.log("Now testing folder deletion capability");
   console.log("---------------------------------------------");
 
-  // Tells the driver to find the submission button
-  let submitElement = await driver.findElement(By.id('contact-submit'))
+  let testFolderDelete = await driver.findElement(By.name('delete_' + testFolderId))
     .catch(error => {
-      console.log('Failed to find the login submission button!');
+      console.log('Failed to find folder delete button/element');
       console.log(error);
       driver.close();
-      console.log('Test B has failed');
+      console.log('Test D has failed');
+      console.log('***Folder may still exist. Please check manually for its existence and delete it if it does exist...')
       process.exit();
     });
-  console.log('Found the login submission button!');
 
-  // Tells the driver to click the submission button (input fields should be empty)
-  await submitElement.click()
-    .catch(error => {
-      console.log('Failed to click on the login submission button!');
-      console.log(error);
-      driver.close();
-      console.log('Test B has failed');
-      process.exit();
-    });
-  console.log('Logging in...');
+  await testFolderDelete.click()
+  .catch(error => {
+    console.log('Failed to click on folder delete button/element');
+    console.log(error);
+    driver.close();
+    console.log('Test D has failed');
+    console.log('***Folder may still exist. Please check manually for its existence and delete it if it does exist...')
+    process.exit();
+  });
+  console.log('Clicked on the delete button');
 
-  /**
-  * This tells the driver to wait for a moment. This gives any potential alert/notification time
-  * to be rendered onto the page. Without it, the alert may go unnoticed and cause the program
-  * to fail.
-  */
-  await driver.sleep(2000);
-  let isAlert = false;
-  let loginAlert;
+  await driver.sleep(1000);
+
+  isAlert = false;
+  let deleteAlert;
 
   // Tells the driver to switch to the alert if it pops up       
   await driver.switchTo().alert()
     .then(alert => {  // If there is an alert...
-      console.log('Login failure alert detected! Login failed...');
+      console.log('Delete confirmation alert detected!');
+      console.log(alert.getText());
       isAlert = true;
-      loginAlert = alert;
+      deleteAlert = alert;
     })
     .catch(() => {  // If there isn't an alert...
-      console.log('No alert detected...');
+      console.log('No delete confirmation alert detected...');
     });
 
-  // If there was an alert, the empty input details were rejected
+  // If there was an alert, then we can accept it to delete the folder
   if (isAlert) {
-    console.log(loginAlert.getText());
-    await loginAlert.accept();
-    console.log('Empty input details rejected!');
+    await deleteAlert.accept();
+    console.log('> alert accepted...');
   }
-  else {  // If there isn't an alert, the details were probably accepted, failing the test
-    console.log('Empty input details were not invalidated!');
+  else {  // If there isn't an alert, then the program fails to delete the folder
+    console.log('Cannot delete folder!');
     await driver.close();
     console.log('Test B has failed');
     process.exit();
   }
 
-  console.log('Empty input invalidated - Success!');
-  console.log('---------------------------------------------');
+  await driver.sleep(1000);
 
-  //---------------------------------------------------------------------------------------------------------------------------------------
-
-  /**
-   * The last test is to make sure that invalid account details do not lead to a successful
-   * login. I.e. the login failure alert should appear, indicating a login prevention.
-   * 
-   * Here we can assume that the input fields are initially empty from the last test.
-   */
-  console.log("---------------------------------------------");
-  console.log("Now testing invalid account login information");
-  console.log("---------------------------------------------");
-
-
-  for (var i = 0; i < invalidUserEmails.length; i++) {
-
-    // Tells the driver to find the email input field
-    let emailElement = await driver.findElement(By.name('email'))
-      .catch(error => {
-        console.log('Failed to find email input!');
-        console.log(error);
-        driver.close();
-        console.log('Test B has failed');
-        process.exit();
-      });
-    console.log('Found the email input!');
-
-    // Tells the driver to find the password input field
-    let passwordElement = await driver.findElement(By.name('password'))
-      .catch(error => {
-        console.log('Failed to find password input!');
-        console.log(error);
-        driver.close();
-        console.log('Test B has failed');
-        process.exit();
-      });
-    console.log('Found the password input');
-
-    // Tells the driver to find the submission button
-    let submitElement = await driver.findElement(By.id('contact-submit'))
-      .catch(error => {
-        console.log('Failed to find the login submission button!');
-        console.log(error);
-        driver.close();
-        console.log('Test B has failed');
-        process.exit();
-      });
-    console.log('Found the login submission button!');
-
-    // Tells the driver to input the (invalid) account email
-    await emailElement.sendKeys(invalidUserEmails[i])
-      .catch(error => {
-        console.log('Failed to input email!');
-        console.log(error);
-        driver.close();
-        console.log('Test B has failed');
-        process.exit();
-      });
-    console.log('Inputting email: ' + invalidUserEmails[i]);
-
-    // Tells the driver to input the (invalid) account password
-    await passwordElement.sendKeys(invalidUserPasswords[i])
-      .catch(error => {
-        console.log('Failed to input password!');
-        console.log(error);
-        driver.close();
-        console.log('Test B has failed');
-        process.exit();
-      });
-    console.log('Inputting password: ' + invalidUserPasswords[i]);
-
-    // Tells the driver to click on the form submission button
-    await submitElement.click()
-      .catch(error => {
-        console.log('Failed to click on the login submission button!');
-        console.log(error);
-        driver.close();
-        console.log('Test B has failed');
-        process.exit();
-      });
-    console.log('Logging in...');
-
-    /**
-    * This tells the driver to wait for a moment. This gives any potential alert/notification time
-    * to be rendered onto the page. Without it, the alert may go unnoticed and cause the program
-    * to fail.
-    */
-    await driver.sleep(2000);
-
-
-    isAlert = false;
-
-    // Tells the driver to switch to the alert if it occurrs    
-    await driver.switchTo().alert()
-      .then(alert => {  // If the alert occurs...
-        console.log('Login failure alert detected! Login failed...');
-        isAlert = true;
-        loginAlert = alert;
-      })
-      .catch(() => {  // If no alert occurs...
-        console.log('No alert detected...');
-      });
-
-    // If an alert occurs, the invalid account details have been rejected
-    if (isAlert) {
-      console.log(loginAlert.getText());
-      await loginAlert.accept();
-      console.log('Input details rejected!');
-    }
-    else {  // Otherwise the account was accepted and the test has failed
-      console.log('Input details were not invalidated!');
-      await driver.close();
-      console.log('Test B has failed');
+  // Tells the driver to try to find the folder element again. If it fails, we can assume the folder no longer exists
+  await driver.findElement(By.name(testFolderId))
+    .then(() => {
+      console.log('Program was able to find folder again. Deletion failed!');
+      driver.close();
+      console.log('Test D has failed');
+      console.log('***Folder may still exist. Please check manually for its existence and delete it if it does exist...')
       process.exit();
-    }
+    })
+    .catch(() => {
+      console.log('No folder element exists. Deletion was a success!');
+    });
 
-    // Tells the driver to clear the input field for emails
-    await emailElement.clear()
-      .catch(error => {
-        console.log('Failed to clear email input!');
-        console.log(error);
-        driver.close();
-        console.log('Program has stopped working...');
-        process.exit();
-      });
-    console.log('Email input cleared...');
-
-    // Tells the driver to clear the input field for passwords
-    await passwordElement.clear()
-      .catch(error => {
-        console.log('Failed to clear password input!');
-        console.log(error);
-        driver.close();
-        console.log('Program has stopped working...');
-        process.exit();
-      });
-    console.log('Password input cleared...');
-
-    console.log('Input invalidated - success!');
-    console.log('Ready for next input...');
-    console.log('---------------------------------------------');
-  }
+  console.log('New folder deletion successful')
+  console.log('---------------------------------------------')
 
   //---------------------------------------------------------------------------------------------------------------------------------------
 
   // If the test was successful, then it is logged and the driver is closed.
-  console.log('Test B successful!');
+  console.log('Test D successful!');
   await driver.close();
 
   //---------------------------------------------------------------------------------------------------------------------------------------
 }
+
+
 
 testBFirefox();

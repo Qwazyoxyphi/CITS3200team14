@@ -31,6 +31,7 @@
         @input="$emit('input', $event.target.value)"
         class="input1"
         :placeholder="placeholder"
+        :name="name"
         tabindex="2"
         required
       ></textarea>

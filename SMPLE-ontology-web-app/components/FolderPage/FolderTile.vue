@@ -1,5 +1,5 @@
 <template>
-  <div class="box" @click="$emit('openModal')">
+  <div class="box" :name="id" @click="$emit('openModal')">
     <svg id="Capa_1" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 58 58">
       <nuxt-link :to="'/folders/' + id">
         <defs />
@@ -45,7 +45,7 @@
     </svg>
     <div class>
       <div class="name">{{ folderName }}</div>
-      <AppSelect @toggleDelete="more(id,userIds)" @toggleInvite="toggleInviteFlag()" />
+      <AppSelect :folderId="id" @toggleDelete="more(id,userIds)" @toggleInvite="toggleInviteFlag()" />
       <AppModal v-if="inviteFlag" @exitModal="toggleInviteFlag()">
         <TheInviteForm @submit="onSubmitted" @exitModal="toggleInviteFlag()" />
       </AppModal>
