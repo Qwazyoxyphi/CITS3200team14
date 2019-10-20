@@ -13,6 +13,11 @@
         <AppModal :mini-player="true">
           <AppVideo video-id="jfUPLuPL3Ho" />
         </AppModal>
+        <div class="attribution">
+            <p> What is an Ontology <br>
+             Author: SpryKnowledge <br>
+             Upload Date: Apr 4, 2011 </p>
+        </div>
       </div>
     </div>
 
@@ -88,5 +93,9 @@ h1 {
   letter-spacing: -1px;
   line-height: 1;
   text-align: center;
+}
+
+.attribution p {
+  font-size: 0.8rem;
 }
 </style>
