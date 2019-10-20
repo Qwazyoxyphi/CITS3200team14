@@ -1,18 +1,16 @@
 /**
- * This script will login to a valid test account and attempt to perform actions on its respective folders and documents. It will attempt to
- * interact with other people's documents as well (via the document slider on the folders page) and try to modify them, with failure expected.
+ * This script will login to a valid test account and attempt to perform actions on its respective folders.
  * It is assumed that there are (test) folders and documents available that can be safely modified whether or not they belong to, or a shared with, the
  * testing account.
  * 
- * The test will involve attempting to create folders with valid and invalid names. It will also involve attempts to access public documents and
- * modify them (hopefully) unsuccessfully. If a prompt appears allowing the test account to delete a document/folder without proper permission,
- * it will dismiss the alert for deletion (it will not accept the prompt to delete the file) and end the test.
+ * The test will involve an attempt to create a folder under the test account's name, and delete it shortly afterwards by responding to a
+ * deletion confirmation alert.
  * 
- * The test also looks into the effectiveness of the slider component's arrows, and then check to see if it is able to access the documents page
- * of a specific folder.
+ * This is simply a automatable extract of the full test case for D. Logs containing information with respect to the remaining aspects 
+ * to the test case can be found in the testing logs within the testing documentation.
  */
 
-const { Builder, By, until, Key, util } = require("selenium-webdriver"); // Pulls out functions from the selenium-websdriver module
+const { Builder, By, until, Key, util } = require("selenium-webdriver"); // Pulls out functions from the selenium-webdriver module
 
 const websiteLoginDomain = 'http://localhost:3000/signin-signup';   // Url address of the website's login-page
 const websiteFolderDomain = 'http://localhost:3000/folders';       // Url address of the website's folders page
@@ -23,14 +21,10 @@ const testPassword = 'tester';                      // VALID Testing account pas
 const testFolderName = 'testCaseD';                 // Example name to be given to created/deleted folder (for testing)
 const testFolderDesc = 'This is a test desciption'; // Example description to be given to created/deleted folder (for testing)
 
-/**
- * The id associated with the test file to be opened to check for documents access. Note that the id is necessary for checking
- * if the documents page is accessed. This id is based on the 'test' folder in the tester@test.com account, not to be confused
- * with the 'testCaseD' testing folder, which should be deleted after creation in a successful test.
- */
-const testFolderAccessId = '-LrSUX4c1P8o5I1Erxn_';
-
-async function testBFirefox() {
+async function testDFirefox() {
+  console.log("---------------------------------------------");
+  console.log("Commencing automatic testing");
+  console.log("---------------------------------------------");
   //---------------------------------------------------------------------------------------------------------------------------------------
 
   // Sets up the firefox browser for automation
@@ -172,7 +166,7 @@ async function testBFirefox() {
    */
   await driver.sleep(1000);
 
-  // Asks the driver what the url is after clicking the 'Home' link.
+  // Asks the driver what the url is to check if it's been redirected to the folders page.
   await driver.getCurrentUrl()
     .then(url => { // If successful...
       console.log('Url is: ' + url);
@@ -192,6 +186,9 @@ async function testBFirefox() {
       console.log('Program has stopped working...');
       process.exit();
     });
+
+    console.log('Set up complete!')
+    console.log('---------------------------------------------')
 
   //---------------------------------------------------------------------------------------------------------------------------------------
 
@@ -274,18 +271,6 @@ async function testBFirefox() {
   console.log('Found create form submission button!');
 
   // Tells driver to input a folder name into the form name field (provided by const 'testFolderName')
-  /**
-   * NOTE - for some reason, unlike other input fields, the framing of the creation forms input fields requires
-   * the Selenium driver to first click on the input frame before being allowed to send the input text.
-   */
-  await folderNameInput.click()
-    .catch(error => {
-      console.log('Failed to input folder name!');
-      console.log(error);
-      driver.close();
-      console.log('Test D has failed');
-      process.exit();
-    });
   await folderNameInput.sendKeys(testFolderName)
     .catch(error => {
       console.log('Failed to input folder name!');
@@ -297,18 +282,6 @@ async function testBFirefox() {
   console.log('Inputting folder name: ' + testFolderName);
 
   // Tells driver to input a folder description into the form description field (provided by const 'testFolderDesc')
-  /**
-   * NOTE - similarly to the name input field, Selenium first needs to click on the description input field before
-   * it can send the input text.
-   */
-  await folderDescInput.click()
-    .catch(error => {
-      console.log('Failed to input folder description!');
-      console.log(error);
-      driver.close();
-      console.log('Test D has failed');
-      process.exit();
-    });
   await folderDescInput.sendKeys(testFolderDesc)
     .catch(error => {
       console.log('Failed to input folder description!');
@@ -475,13 +448,13 @@ async function testBFirefox() {
   else {  // If there isn't an alert, then the program fails to delete the folder
     console.log('Cannot delete folder!');
     await driver.close();
-    console.log('Test B has failed');
+    console.log('Test E has failed');
     process.exit();
   }
 
   await driver.sleep(1000);
 
-  // Tells the driver to try to find the folder element again. If it fails, we can assume the folder no longer exists
+  // Tells the driver to try to find the folder element again. If it fails, we can infer the folder no longer exists
   await driver.findElement(By.name(testFolderId))
     .then(() => {
       console.log('Program was able to find folder again. Deletion failed!');
@@ -491,7 +464,7 @@ async function testBFirefox() {
       process.exit();
     })
     .catch(() => {
-      console.log('No folder element exists. Deletion was a success!');
+      console.log('No folder element exists');
     });
 
   console.log('New folder deletion successful')
@@ -506,6 +479,4 @@ async function testBFirefox() {
   //---------------------------------------------------------------------------------------------------------------------------------------
 }
 
-
-
-testBFirefox();
+testDFirefox();

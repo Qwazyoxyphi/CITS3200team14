@@ -1,15 +1,16 @@
 <template>
   <div class="container">
-    <form @submit.prevent="onDocumentSubmit" id="contact" action method="post">
+    <form @submit.prevent="onDocumentSubmit" id="contact" action method="post" name="create_new_document_form">
       <h3>Create a Document.</h3>
-      <AppControlInput v-model="newDocument.documentName" placeholder="Document Name" />
+      <AppControlInput v-model="newDocument.documentName" placeholder="Document Name" name="create_new_document_form_name_input"/>
       <AppControlInput
         controlType="textarea"
         v-model="newDocument.documentDesc"
         placeholder="Write a description..."
+        name="create_new_document_form_description_input"
       />
 
-      <AppButton class="login-but" type="submit">Create</AppButton>
+      <AppButton class="login-but" type="submit" name="create_new_document_form_submit">Create</AppButton>
       <AppButton class="login-but" type="button" @click="onCancel">Cancel</AppButton>
       <p class="copyright">We are UWA.</p>
     </form>

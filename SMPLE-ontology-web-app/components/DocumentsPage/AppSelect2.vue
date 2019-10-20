@@ -6,7 +6,7 @@
         <DownIcon class="select-box__icon" />
       </div>
       <ul class="select-box__list">
-        <li @click="$emit('toggleDelete')">
+        <li :name="'delete_' + documentId" @click="$emit('toggleDelete')">
           <label
             class="select-box__option"
             for="1"
@@ -30,6 +30,9 @@ export default {
   props: {
     object: {
       type: Array
+    },
+    documentId: {
+      type: String
     }
   }
 }

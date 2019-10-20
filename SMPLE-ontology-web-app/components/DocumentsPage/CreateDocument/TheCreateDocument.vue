@@ -1,6 +1,7 @@
 <template>
   <div 
     class="box"
+    name="create_new_document"
     @click="$emit('createDocument')">
     <add />
   </div> 

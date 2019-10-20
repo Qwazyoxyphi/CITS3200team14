@@ -8,7 +8,7 @@
  * user information.
  */
 
-const { Builder, By, until, Key, util } = require("selenium-webdriver"); // Pulls out functions from the selenium-websdriver module
+const { Builder, By, until, Key, util } = require("selenium-webdriver"); // Pulls out functions from the selenium-webdriver module
 
 const websiteHomeDomain = 'http://localhost:3000/';                 // Url address of the website's homepage
 const websiteLoginDomain = 'http://localhost:3000/signin-signup';   // Url address of the website's login-page
@@ -22,6 +22,9 @@ const invalidUserEmails = ['tester@test.com', 'test6@test.com', 'test4@test.com'
 const invalidUserPasswords = ['test', 'tester2', 'tester', '', 'tester2', 'tester', 'tester'];
 
 async function testBFirefox() {
+  console.log("---------------------------------------------");
+  console.log("Commencing automatic testing");
+  console.log("---------------------------------------------");
   //---------------------------------------------------------------------------------------------------------------------------------------
 
   // Sets up the firefox browser for automation
@@ -43,6 +46,9 @@ async function testBFirefox() {
       process.exit();
     });
   console.log('Found website login domain!');
+
+  console.log('Set up complete!')
+  console.log('---------------------------------------------')
 
   //---------------------------------------------------------------------------------------------------------------------------------------
 

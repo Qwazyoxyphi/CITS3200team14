@@ -2,7 +2,7 @@
   <div class="box" @click="$emit('openModal')">
     <nuxt-link :to="'/folders/' + this.$route.params.documents + '/' + id">
       <!--defaul redirect-->
-      <div class="box" @click="$emit('openModal')">
+      <div class="box" :name="id" @click="$emit('openModal')">
         <svg
           id="Capa_1"
           data-name="Capa 1"
@@ -52,7 +52,7 @@
     </nuxt-link>
     <div class>
       <div class="name">{{ documentName }}</div>
-      <AppSelect2 @toggleDelete="moree(id)" />
+      <AppSelect2 :documentId="id" @toggleDelete="moree(id)" />
     </div>
   </div>
 </template>

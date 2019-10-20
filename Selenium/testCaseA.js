@@ -4,11 +4,14 @@
  * Any errors will end the program and log the failed attempt.
  */
 
-const { Builder, By, until, Key, util } = require("selenium-webdriver"); // Pulls out functions from the selenium-websdriver module
+const { Builder, By, until, Key, util } = require("selenium-webdriver"); // Pulls out functions from the selenium-webdriver module
 
 const websiteHomeDomain = 'http://localhost:3000/';
 
 async function testAFirefox() {
+  console.log("---------------------------------------------");
+  console.log("Commencing automatic testing");
+  console.log("---------------------------------------------");
   //---------------------------------------------------------------------------------------------------------------------------------------
 
   // Sets up the firefox browser for automation
@@ -30,6 +33,9 @@ async function testAFirefox() {
       process.exit();
     });
   console.log('Found website domain!');
+
+  console.log('Set up complete!')
+  console.log('---------------------------------------------')
 
   //---------------------------------------------------------------------------------------------------------------------------------------
 

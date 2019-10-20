@@ -17,7 +17,7 @@ async function demoFirefox() {
   });
 
   let emailElement = await driver.findElement(By.name('email'));            // Finds the email input
-  await emailElement.sendKeys('test@test.com');                             // Inputs the test account email
+  await emailElement.sendKeys('tester@test.com');                           // Inputs the test account email
   let passwordElement = await driver.findElement(By.name('password'));      // Finds the password input
   await passwordElement.sendKeys('tester');                                 // Inputs the test account password
   let submitElement = await driver.findElement(By.id('contact-submit'));    // Finds the submission button
@@ -44,7 +44,7 @@ async function demoChrome() {
 
   await driver.wait(until.elementLocated(By.name("email")));                // Waits until the page has loaded and the email element exists
   let emailElement = await driver.findElement(By.name("email"));            // Finds the email input
-  await emailElement.sendKeys('test@test.com');                             // Inputs the test account email
+  await emailElement.sendKeys('tester@test.com');                           // Inputs the test account email
 
   let passwordElement = await driver.findElement(By.name("password"));      // Finds the password input. We can assume it exists if the email element exists
   await passwordElement.sendKeys('tester');                                 // Inputs the test account password
