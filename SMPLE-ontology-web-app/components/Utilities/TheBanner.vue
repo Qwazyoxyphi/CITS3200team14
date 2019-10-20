@@ -2,10 +2,6 @@
   <div class="fullscreen-banner flexbox">
     <div class="flexbox container">
       <div class="flexbox box">
-        <img 
-          src="@/static/ontVisBetter.png"
-          alt="safeco">
-        
       </div>
     </div>
   </div>
