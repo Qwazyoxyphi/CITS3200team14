@@ -118,7 +118,7 @@ export const actions = {
         .split(';')
         .find(c => c.trim().startsWith('userEmail='))
         .split('=')[1]
-    } else if (process.client){
+    } else if (process.client) {
       token = localStorage.getItem('token')
       expirationDate = localStorage.getItem('tokenExpiration')
       userId = localStorage.getItem('userId')

@@ -75,6 +75,8 @@ Vue.use(UploaderPlugin)
 Vue.use(ToolbarPlugin)
 
 export default {
+  middleware: ['check-auth', 'auth','diag-auth'],
+  
   components: {
     Canvas,
     Palette,
@@ -128,10 +130,10 @@ export default {
       let diagramObj = document.getElementById('diagram')
       let diagramInstance = diagramObj.ej2_instances[0]
 
-      this.$store.dispatch(
+      /*this.$store.dispatch(
         'diagram/setDiagram',
-        this.$route.params.diagrampage2
-      )
+        this.$route.params.diagrampage2, context.req
+      )*/
       let getdiagdata = this.$store.getters['diagram/currDiag']
       //console.log(getdiagdata)
       // diagramInstance.loadDiagram(JSON.stringify(getdiagdata))
