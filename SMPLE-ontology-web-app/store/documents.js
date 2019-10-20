@@ -4,7 +4,7 @@ import axios from 'axios'
 //work backwards, with code
 export const state = () => ({
   allDocuments: [], //all documents
-  userDocs: [], //documents inside that folder.
+  userDocs: [] //documents inside that folder.
 })
 
 export const mutations = {
@@ -26,10 +26,10 @@ export const mutations = {
       // if in store remove it
       state.allDocuments.splice(allDocidx, 1)
     }
-  }, 
+  },
   setCurrDiag(state, diagram) {
     state.currDiag = diagram
-  },
+  }
 }
 
 export const actions = {
@@ -96,7 +96,7 @@ export const actions = {
           .then(() => {
             commit('addDocument', { ...document, id: res.data.name })
             this.$router.push(
-              '/folders/' + document.docFolderId+ '/' + res.data.name
+              '/folders/' + document.docFolderId + '/' + res.data.name
             )
           })
       })
@@ -139,7 +139,7 @@ export const actions = {
           })
       })
       .catch(e => console.log(e))
-  },
+  }
 }
 
 export const getters = {
@@ -148,6 +148,5 @@ export const getters = {
   },
   allDocuments(state) {
     return state.allDocuments
-  },
-  
+  }
 }

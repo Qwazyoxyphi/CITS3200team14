@@ -1,5 +1,5 @@
 const pkg = require('./package')
-const axios = require("axios");
+const axios = require('axios')
 
 module.exports = {
   mode: 'universal',
@@ -56,7 +56,11 @@ module.exports = {
         href:
           'https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/1.3.5/jsxgraph.css'
       },
-      { rel: 'stylesheet', https: 'https://fonts.googleapis.com/css?family=Roboto:400,300,600,400italic' }
+      {
+        rel: 'stylesheet',
+        https:
+          'https://fonts.googleapis.com/css?family=Roboto:400,300,600,400italic'
+      }
     ]
   },
 
@@ -76,18 +80,15 @@ module.exports = {
   plugins: [
     '~plugins/vue-scrollto.js',
     { src: '~plugins/vee-validate.js', ssr: true },
-    { src: '~/plugins/vueperslides', ssr: false },
+    { src: '~/plugins/vueperslides', ssr: false }
     //{ src: '~/plugins/diagram-tool.js', ssr: false}
   ],
 
   /*
   ** Nuxt.js modules
   */
- 
-  modules: [
-    '@nuxtjs/axios'
-  ],
 
+  modules: ['@nuxtjs/axios'],
 
   axios: {
     baseURL:
@@ -114,20 +115,20 @@ module.exports = {
       }*/
     }
   },
-  generate:{
-    routes: function(){
+  generate: {
+    routes: function() {
       return axios
-      .get('https://team-14-ontologies.firebaseio.com/folders.json')
-      .then(res => {
-        const routes = [];
-        for (const key in res.data){
-          routes.push({
-            route: "/folders/" + key,
-            payload: {folderData: res.data[key]}
-          });
-        }
-        return routes;
-      })
+        .get('https://team-14-ontologies.firebaseio.com/folders.json')
+        .then(res => {
+          const routes = []
+          for (const key in res.data) {
+            routes.push({
+              route: '/folders/' + key,
+              payload: { folderData: res.data[key] }
+            })
+          }
+          return routes
+        })
     }
   }
 }
