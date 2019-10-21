@@ -26,7 +26,7 @@ const substringStart = 51;  // Number value representing the start point of the 
  * The id associated with the test folder to be opened for document manipulation. Note that the id is necessary for checking
  * if the documents page is accessed. This id is based on the test folder (aptly named 'test') in the tester@test.com account.
  */
-const testFolderAccessId = '-LrSUX4c1P8o5I1Erxn_';
+const testFolderAccessId = '-LrgNduF7QsEu46NBogM';
 
 async function testEFirefox() {
   console.log("---------------------------------------------");

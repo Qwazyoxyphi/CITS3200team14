@@ -106,4 +106,13 @@ Due to the nature of test case C, it is difficult to approach it using Selenium 
 
 
 
+### Folders Page
+
+- A bug resulting from having less than 10 documents on the database causes the page to crash.
+  - This is likely a result of the vueperslides component.
+  - It takes the 10 most recent documents uploaded to the database and displays them publicly. When it doesn't find 10 or more documents, it crashes causing the page to also crash. 
+  - A recommended fix for this is to look into a method of retrieving only the documents that exist when there are less than 10 of them, instead of trying to take 10 documents exactly.
+
+
+
 ## Recommendations
