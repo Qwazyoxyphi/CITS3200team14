@@ -94,8 +94,8 @@ export default {
   methods: {
     //data to load diagram + set needs to be different. conflicts.
     load() {
-      axios.get(
-        'https://team-14-ontologies.firebaseio.com/folders/' +
+      this.$axios.$get(
+        'folders/' +
           this.$route.params.documents +
           '/folderDocs/' +
           this.$route.params.diagrampage2 +
@@ -138,9 +138,9 @@ export default {
       //console.log(getdiagdata)
       // diagramInstance.loadDiagram(JSON.stringify(getdiagdata))
 
-      axios
-        .get(
-          'https://team-14-ontologies.firebaseio.com/documents/' +
+      this.$axios
+        .$get(
+          'documents/' +
             this.$route.params.diagrampage2 +
             '/diagramData.json'
         )

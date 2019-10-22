@@ -38,8 +38,8 @@ export default {
         )
         .then(result => {
           this.flag = !this.flag
-        axios
-        .post('https://team-14-ontologies.firebaseio.com/users.json',{
+        this.$axios
+        .$post('users.json',{
           userId: result.localId,
           userEmail: result.email
         })

@@ -28,9 +28,9 @@ export const actions = {
     let diagram
     //store in database
     console.log('saving')
-    return axios
+    return this.$axios
       .put(
-        'https://team-14-ontologies.firebaseio.com/documents/' +
+        'documents/' +
           payload.docid +
           '/diagramData.json',
         payload.diagdata

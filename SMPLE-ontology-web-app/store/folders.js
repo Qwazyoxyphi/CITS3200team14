@@ -46,8 +46,8 @@ export const actions = {
     //console.log(inviteData.userId)
     //const userFold = state.users
     let grabbedUserid
-    axios
-      .get('https://team-14-ontologies.firebaseio.com/users.json')
+    this.$axios
+      .$get('users.json')
       .then(resp => {
         //  userFold.push(resp.data)
         for (const key in resp.data) {
@@ -55,9 +55,9 @@ export const actions = {
             grabbedUserid = resp.data[key].userId
           }
         }
-        axios
-          .patch(
-            'https://team-14-ontologies.firebaseio.com/folders/' +
+        this.$axios
+          .$patch(
+            'folders/' +
               inviteData.folderId +
               '/userIds.json',
             { [grabbedUserid]: grabbedUserid }
@@ -91,8 +91,8 @@ export const actions = {
   //use axios.patch when adding more userids or will break it
   addFolder(vuexContext, folder) {
     folder.userIds = { [this.state.getUserId]: this.state.getUserId } //add userId as Object
-    return axios
-      .post('https://team-14-ontologies.firebaseio.com/folders.json', folder)
+    return this.$axios
+      .$post('folders.json', folder)
       .then(res => {
         vuexContext.commit('addFolder', { ...folder, id: res.data.name })
         this.$router.push('/folders/' + res.data.name) //route into folder

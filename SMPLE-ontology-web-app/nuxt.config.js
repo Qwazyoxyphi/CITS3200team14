@@ -117,8 +117,8 @@ module.exports = {
   },
   generate: {
     routes: function() {
-      return axios
-        .get('https://team-14-ontologies.firebaseio.com/folders.json')
+      return this.$axios
+        .$get('/folders.json')
         .then(res => {
           const routes = []
           for (const key in res.data) {

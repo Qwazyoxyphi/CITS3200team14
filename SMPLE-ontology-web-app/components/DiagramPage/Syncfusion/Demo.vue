@@ -70,8 +70,8 @@ export default {
   methods: {
     //data to load diagram + set needs to be different. conflicts. 
     load() {
-      axios.get(
-        'https://team-14-ontologies.firebaseio.com/folders/' +
+      this.$axios.$get(
+        'folders/' +
           this.$route.params.documents +
           '/folderDocs/' +
           this.$route.params.diagrampage2 +
@@ -85,45 +85,20 @@ export default {
       )
     },
     onSubmit() {//IGNORED
-      /*console.log("thissavedata");
-      console.log(this.saveData)
-      const docDelPL = {
-        folderid: this.$route.params.documents,
-        docid: this.$route.params.diagrampage2,
-        diagdata: this.saveData
-      } //combine into object payload
-      //this.$store.dispatch('documents/addDiagram',docDelPL)
-      axios
-        .put(
-          'https://team-14-ontologies.firebaseio.com/folders/' +
-            this.$route.params.documents +
-            '/folderDocs/' +
-            this.$route.params.diagrampage2 +
-            '/diagramData.json',
-          this.saveData
-        )
-
-        .then(res => {
-          console.log(res.data)
-        })*/
     },
     download() {
       console.log(this.$route.params)
-
       let diagramObj = document.getElementById('diagram')
-      //console.log(diagramObj)
       let diagramInstance = diagramObj.ej2_instances[0]
       //returns serialized string of the Diagram
       this.saveData = diagramInstance.saveDiagram()
-      
       const docDelPL = {
         docid: this.$route.params.diagrampage2,
         diagdata: this.saveData
       } 
       this.$store.dispatch('diagram/storeDiagram', docDelPL)//send to store
 
-      //console.log(this.saveData)
-      //this.onSubmit()
+    
     },
     importt() {
       let diagramObj = document.getElementById('diagram')
@@ -138,23 +113,6 @@ export default {
     this.$store.dispatch('diagram/setDiagram', diagPL)
     let currDiag = this.$store.getters['diagram/currDiag']
       diagramInstance.loadDiagram(currDiag)
-///
-
-     // axios
-     //   .get(
-      ////    'https://team-14-ontologies.firebaseio.com/folders/' +
-       //     this.$route.params.documents +
-       //     '/folderDocs/' +
-       //     this.$route.params.diagrampage2 +
-       //     '/diagramData.json'
-       // )
-       // .then(resp => {
-       //   var data=JSON.stringify(resp.data)
-       //   diagramInstance.loadDiagram(data)
-       // })
-      //let diag=loadData.data
-      //returns serialized string of the Diagram
-      //
     },
     exportPDF() {
       let diagramObj = document.getElementById('diagram')
@@ -184,23 +142,10 @@ export default {
   mounted: function() {
     //For autosaving the diagram
     //Currently saves every 30 seconds
-    window.setInterval(() => {
-      this.download()
-      console.log("Diagram auto-saved")
-    }, 30000);
-  }, 
-  computed: {
-    loadDiag() {//work in progress
-      let diagramObj = document.getElementById('diagram')
-      let diagramInstance = diagramObj.ej2_instances[0]
-      const diagPL = {
-        diagramObj: document.getElementById('diagram'),
-        docid: this.$route.params.diagrampage2
-      } //combine into object payload
-      //let currDiag = this.$store.getters['diagram/currDiag']
-     // diagramInstance.loadDiagram(currDiag)
-
-    }
+    //window.setInterval(() => {
+    //  this.download()
+    //  console.log("Diagram auto-saved")
+    //}, 30000);
   }
 }
 </script>

@@ -148,11 +148,11 @@ export const actions = {
   /* Populate Folders & Documents when Server Starts */
   async nuxtServerInit({ commit }) {
     //nuxtserverinit only in here.
-    const foldersdata = await axios.get(
-      'https://team-14-ontologies.firebaseio.com/folders.json'
+    const foldersdata = await this.$axios.$get(
+      '/folders.json'
     )
-    const documentdata = await axios.get(
-      'https://team-14-ontologies.firebaseio.com/documents.json'
+    const documentdata = await this.$axios.$get(
+      '/documents.json'
     )
     const foldersArray = []
     const docsArray = []
