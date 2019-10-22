@@ -16,3 +16,4 @@ This component uses the **signInForm** and **signUpForm** components to toggle i
   </div>
 </template>
 ```
+
