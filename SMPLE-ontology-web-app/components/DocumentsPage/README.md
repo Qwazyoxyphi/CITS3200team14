@@ -39,7 +39,7 @@ export default {
   },
   methods: {
     clicm(){
-      this.$axios.$get('folders/'+this.$route.params.documents+'/-Lq1P9l0cOuydz6RRfYa/diagramData/-LqPDHXGDPA_vi3WhpKy.json')
+      axios.get('https://team-14-ontologies.firebaseio.com/folders/'+this.$route.params.documents+'/-Lq1P9l0cOuydz6RRfYa/diagramData/-LqPDHXGDPA_vi3WhpKy.json')
       this.$emit('loadDiagram',data)
     }
   },

@@ -68,8 +68,8 @@ export const actions = {
     commit('setUserDocs', uDocsArr)
   },
   addDiagram(data) {
-    this.$axios.$post(
-      'folders/' +
+    axios.post(
+      'https://team-14-ontologies.firebaseio.com/folders/' +
         data.folder_id +
         '/folderDocs/' +
         data.id +
@@ -78,17 +78,17 @@ export const actions = {
     )
   },
   addDocument({ commit }, document) {
-    return this.$axios
-      .$post(
+    return axios
+      .post(
         //add to doc-table
-        '/documents.json',
+        'https://team-14-ontologies.firebaseio.com/documents.json',
         document
       )
       .then(res => {
-        this.$axios
-          .$patch(
+        axios
+          .patch(
             //add to folder, use patch to not override data
-            'folders/' +
+            'https://team-14-ontologies.firebaseio.com/folders/' +
               document.docFolderId +
               '/folderDocs.json',
             { [res.data.name]: res.data.name }
@@ -103,9 +103,10 @@ export const actions = {
       .catch(e => console.log(e))
   },
   addDiagram({ commit }, payload) {
-    this.$axios
-      .$post(
-        'folders/' +
+    let diagramData = ''
+    axios
+      .post(
+        'https://team-14-ontologies.firebaseio.com/folders/' +
           payload.folderid +
           '/folderDocs/' +
           payload.docid +
@@ -118,16 +119,16 @@ export const actions = {
   },
 
   deleteDocument({ commit }, payload) {
-    this.$axios //delete from doc-table
-      .$delete(
-        'documents/' +
+    axios //delete from doc-table
+      .delete(
+        'https://team-14-ontologies.firebaseio.com/documents/' +
           payload.docid +
           '.json'
       )
       .then(() => {
-        this.$axios //delete from folders-Docs
-          .$delete(
-            'folders/' +
+        axios //delete from folders-Docs
+          .delete(
+            'https://team-14-ontologies.firebaseio.com/folders/' +
               payload.folderid +
               '/folderDocs/' +
               payload.docid +
