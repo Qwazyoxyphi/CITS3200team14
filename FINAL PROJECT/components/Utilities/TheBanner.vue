@@ -1,8 +1,6 @@
 <template>
-  <div class="fullscreen-banner flexbox">
-    <div class="flexbox container">
-      <div class="flexbox box">
-      </div>
+  <div class="flexbox container">
+    <div class="flexbox box">
     </div>
   </div>
 </template>
@@ -49,23 +47,6 @@ margin-top: -70px;
 
 display: flex;
 justify-content: center;
-
-
-/* Location of the image */
-  background-image: url("../../assets/images/The-Benefits-of-Using-Ontologies.png");
-  
-  /* Image is centered vertically and horizontally at all times */
-  background-position: center center;
-  
-  /* Image doesn't repeat */
-  background-repeat: no-repeat;
-  
-  /* Makes the image fixed in the viewport so that it doesn't move when 
-     the content height is greater than the image height */
-  background-attachment: fixed;
-  
-  /* This is what makes the background image rescale based on its container's size */
-  background-size: cover;
 }
 
 
